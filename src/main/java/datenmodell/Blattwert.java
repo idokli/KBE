@@ -5,7 +5,7 @@ public enum Blattwert {
 	/**
 	 * 
 	 */
-	Eins(1),
+	Ass(1),
 	/**
 	 * 
 	 */
@@ -53,14 +53,11 @@ public enum Blattwert {
 	/**
 	 * 
 	 */
-	Koenig(13),
+	Koenig(13);
 	/**
 	 * 
 	 */
-	Ass(14);
-	/**
-	 * 
-	 */
+
 	
 	private final int blattWertZahl;
 	

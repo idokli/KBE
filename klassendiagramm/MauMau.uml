@@ -23,7 +23,7 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_czBm4csPEeiIdJYjtZ9chg" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_czCN8MsPEeiIdJYjtZ9chg" value="*"/>
     </ownedAttribute>
-    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_VNDJcMsOEeiIdJYjtZ9chg" name="1"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_VNDJcMsOEeiIdJYjtZ9chg" name="A"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_VtEtUMsOEeiIdJYjtZ9chg" name="2"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_WHTyQMsOEeiIdJYjtZ9chg" name="3"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_WlGhgMsOEeiIdJYjtZ9chg" name="4"/>
@@ -36,7 +36,6 @@
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Zwv-IMsOEeiIdJYjtZ9chg" name="J"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_aWcFIMsOEeiIdJYjtZ9chg" name="Q"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_a8oicMsOEeiIdJYjtZ9chg" name="K"/>
-    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_6SxM0M8JEeiT9ZJ6Rc85vQ" name="A"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_s1pLYMsOEeiIdJYjtZ9chg" name="Blatttyp">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_ll0SM8sPEeiIdJYjtZ9chg" name="spielkarte" type="_kLvy0MsNEeiIdJYjtZ9chg" association="_ll0SMMsPEeiIdJYjtZ9chg">
