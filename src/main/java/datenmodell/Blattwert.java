@@ -45,15 +45,19 @@ public enum Blattwert {
 	/**
 	 * 
 	 */
-	Joker(11),
+	Bube(11),
 	/**
 	 * 
 	 */
-	Queen(12),
+	Dame(12),
 	/**
 	 * 
 	 */
-	King(13);
+	Koenig(13),
+	/**
+	 * 
+	 */
+	Ass(14);
 	/**
 	 * 
 	 */

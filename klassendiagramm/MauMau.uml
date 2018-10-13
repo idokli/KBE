@@ -36,16 +36,17 @@
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_Zwv-IMsOEeiIdJYjtZ9chg" name="J"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_aWcFIMsOEeiIdJYjtZ9chg" name="Q"/>
     <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_a8oicMsOEeiIdJYjtZ9chg" name="K"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_6SxM0M8JEeiT9ZJ6Rc85vQ" name="A"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_s1pLYMsOEeiIdJYjtZ9chg" name="Blatttyp">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_ll0SM8sPEeiIdJYjtZ9chg" name="spielkarte" type="_kLvy0MsNEeiIdJYjtZ9chg" association="_ll0SMMsPEeiIdJYjtZ9chg">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ll05QMsPEeiIdJYjtZ9chg" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ll05QcsPEeiIdJYjtZ9chg" value="*"/>
     </ownedAttribute>
-    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_4mtlsMsOEeiIdJYjtZ9chg" name="Spades"/>
-    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_5PhSIMsOEeiIdJYjtZ9chg" name="Hearts"/>
-    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_52J0UMsOEeiIdJYjtZ9chg" name="Diamonds"/>
-    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_8UEoQMsOEeiIdJYjtZ9chg" name="Clubs"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_4mtlsMsOEeiIdJYjtZ9chg" name="Pik"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_5PhSIMsOEeiIdJYjtZ9chg" name="Herz"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_52J0UMsOEeiIdJYjtZ9chg" name="Karo"/>
+    <ownedLiteral xmi:type="uml:EnumerationLiteral" xmi:id="_8UEoQMsOEeiIdJYjtZ9chg" name="Kreuz"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_DeFX4MsPEeiIdJYjtZ9chg" name="Regel">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_G6zWYMsPEeiIdJYjtZ9chg" name="id">

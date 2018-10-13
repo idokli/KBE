@@ -12,19 +12,19 @@ public enum Blatttyp {
 	/**
 	 * 
 	 */
-	Spades,
+	Pik,
 	/**
 	 * 
 	 */
-	Hearts,
+	Herz,
 	/**
 	 * 
 	 */
-	Diamonds,
+	Karo,
 	/**
 	 * 
 	 */
-	Clubs;
+	Kreuz;
 	/**
 	 * 
 	 */
