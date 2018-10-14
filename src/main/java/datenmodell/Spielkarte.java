@@ -4,10 +4,16 @@
 
 package datenmodell;
 
+
+import lombok.Getter;
+import lombok.Setter;
+
 /************************************************************/
 /**
  * 
  */
+@Getter
+@Setter
 public class Spielkarte {
 	/**
 	 * 
@@ -29,4 +35,12 @@ public class Spielkarte {
 	 * 
 	 */
 	public Spieler spieler;
+	
+
+	public Spielkarte(Blatttyp blatttyp, Blattwert blattwert) {
+		this.Blatttyp = blatttyp;
+		this.Blattwert = blattwert;
+	}
+	
+
 };

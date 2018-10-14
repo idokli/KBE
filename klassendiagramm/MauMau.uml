@@ -17,6 +17,8 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_p2LiwM8CEeixNoJremiUcw"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_p2Liwc8CEeixNoJremiUcw" value="1"/>
     </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_bBqVYM-NEeio47IMV5iKuA" name="bestimmeErlaubteNaechsteKarten"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_wk_7AM-NEeio47IMV5iKuA" name="baueStapel"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_IY0pAMsOEeiIdJYjtZ9chg" name="Blattwert">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_czBm4MsPEeiIdJYjtZ9chg" name="spielkarte" type="_kLvy0MsNEeiIdJYjtZ9chg" association="_cy9VcMsPEeiIdJYjtZ9chg">
@@ -97,6 +99,8 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="__yuvEM8BEeixNoJremiUcw"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="__ywkQM8BEeixNoJremiUcw" value="*"/>
     </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_IHR5kM-OEeio47IMV5iKuA" name="addiereGewinn"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_KSFkQM-OEeio47IMV5iKuA" name="addiereVerlust"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_mf44UMsQEeiIdJYjtZ9chg" name="Spiel">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_qoP00MsQEeiIdJYjtZ9chg" name="id">
@@ -112,6 +116,7 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_IStzIM8CEeixNoJremiUcw" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ISxdgM8CEeixNoJremiUcw" value="*"/>
     </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_B3CqkM-OEeio47IMV5iKuA" name="berechneDauer"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_McMhMM1mEeir6pJ82y62tw" name="Spielrunde">
     <ownedAttribute xmi:type="uml:Property" xmi:id="_O3dpwM1mEeir6pJ82y62tw" name="nummer">
@@ -137,6 +142,8 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_5kvkoM7GEeidr9WJ0og-2w" value="*"/>
     </ownedAttribute>
     <ownedOperation xmi:type="uml:Operation" xmi:id="_LZTLYM7HEeidr9WJ0og-2w" name="mischeGespielteKarte"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_dCg9YM-OEeio47IMV5iKuA" name="addiereGespielteKarte"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_oWB5AM-OEeio47IMV5iKuA" name="bestimmeGewinner"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_oRemAM1mEeir6pJ82y62tw" memberEnd="_oRhCQM1mEeir6pJ82y62tw _oRiQYc1mEeir6pJ82y62tw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_oRf0IM1mEeir6pJ82y62tw" source="org.eclipse.papyrus">
@@ -155,6 +162,7 @@
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_3HqowM7HEeidr9WJ0og-2w" value="*"/>
     </ownedAttribute>
     <ownedAttribute xmi:type="uml:Property" xmi:id="_cYxHwc7IEeidr9WJ0og-2w" name="richtung" type="_OegzYM7IEeidr9WJ0og-2w" aggregation="composite" association="_cYv5oM7IEeidr9WJ0og-2w"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_6Ybj8M-NEeio47IMV5iKuA" name="wendeRegelAn"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Enumeration" xmi:id="_e-kzwM7FEeidr9WJ0og-2w" name="Regelfunktionen"/>
   <packagedElement xmi:type="uml:Association" xmi:id="_tamjAM7GEeidr9WJ0og-2w" memberEnd="_tapmUM7GEeidr9WJ0og-2w _taxiIM7GEeidr9WJ0og-2w">
@@ -197,6 +205,7 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_XpZpQM8CEeixNoJremiUcw" value="1"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_XpZpQc8CEeixNoJremiUcw" value="1"/>
     </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_hR5kYM-NEeio47IMV5iKuA" name="berechnePunkte"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="_CKhcwM7JEeidr9WJ0og-2w" memberEnd="_CKiD0s7JEeidr9WJ0og-2w _CKiq4s7JEeidr9WJ0og-2w">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_CKiD0M7JEeidr9WJ0og-2w" source="org.eclipse.papyrus">
@@ -216,6 +225,8 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_py8eAM8BEeixNoJremiUcw"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_pzDywM8BEeixNoJremiUcw" value="*"/>
     </ownedAttribute>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_nHamQM-NEeio47IMV5iKuA" name="zieheSpielkarte"/>
+    <ownedOperation xmi:type="uml:Operation" xmi:id="_rELWwM-NEeio47IMV5iKuA" name="legeKarteAuf"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Association" xmi:id="__yrEsM8BEeixNoJremiUcw" memberEnd="__yrrwM8BEeixNoJremiUcw __yyZcM8BEeixNoJremiUcw">
     <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="__yrEsc8BEeixNoJremiUcw" source="org.eclipse.papyrus">

@@ -4,10 +4,17 @@
 
 package datenmodell;
 
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /************************************************************/
 /**
  * 
- */
+ */	
+@Getter
+@Setter
 public class Zug {
 	/**
 	 * 
@@ -20,6 +27,17 @@ public class Zug {
 	/**
 	 * 
 	 */
-	public Spielkarte[] erlaubteNaechsteKarten;
+	public List<Spielkarte> erlaubteNaechsteKarten;
+	
+	
+	public void bestimmeErlaubteNaechsteKarten() {
+		
+		// Normale erlaubte Karten
+		
+		
+		
+		// Sonderregel-Karten
+	}
+	
 
 };

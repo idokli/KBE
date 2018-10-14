@@ -4,10 +4,18 @@
 
 package datenmodell;
 
+import java.util.Collections;
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+
 /************************************************************/
 /**
  * 
  */
+@Getter
+@Setter
 public class Spielrunde {
 	/**
 	 * 
@@ -20,11 +28,11 @@ public class Spielrunde {
 	/**
 	 * 
 	 */
-	public Spielkarte[] gespielteKarteListe;
+	public List<Spielkarte> gespielteKarteListe;
 	/**
 	 * 
 	 */
-	public Spielkarte[] stapelKarteListe;
+	public List<Spielkarte> stapel;
 	/**
 	 * 
 	 */
@@ -32,11 +40,26 @@ public class Spielrunde {
 	/**
 	 * 
 	 */
-	public Zug[] zug;
+	public List<Zug> zuege;
 
 	/**
 	 * 
 	 */
 	public void mischeGespielteKarte() {
+		
+		if(this.stapel.size() == 0) {
+			Collections.shuffle(this.gespielteKarteListe);
+			this.stapel.addAll(this.gespielteKarteListe);
+		}
+	}
+	
+	
+	public void baueStapel() {
+		
+		for(Blatttyp blatttyp: datenmodell.Blatttyp.values()) {
+			for(Blattwert blattwert: datenmodell.Blattwert.values()) {
+				stapel.add(new Spielkarte(blatttyp, blattwert));
+			}
+		}
 	}
 };
