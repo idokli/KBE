@@ -4,21 +4,16 @@
 
 package datenmodell;
 
-/************************************************************/
-/**
- * 
- */
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Regel {
-	/**
-	 * 
-	 */
-	public int id;
-	/**
-	 * 
-	 */
-	public String Beschreibung;
-	/**
-	 * 
-	 */
-	public Spielkarte spielkarte;
+
+	private int id;
+
+	private String Beschreibung;
+
+	private Spielkarte spielkarte;
 };

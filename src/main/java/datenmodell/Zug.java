@@ -16,26 +16,20 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Zug {
-	/**
-	 * 
-	 */
-	public Richtung richtung;
-	/**
-	 * 
-	 */
-	public Spielkarte aufgelegteKarte;
-	/**
-	 * 
-	 */
-	public List<Spielkarte> erlaubteNaechsteKarten;
+
+	private Richtung richtung;
+
+	private Spielkarte aufgelegteKarte;
+
+	private List<Spielkarte> erlaubteNaechsteKarten;
 	
-	
+
 	public void bestimmeErlaubteNaechsteKarten() {
 		
 		// Normale erlaubte Karten
 		
 		
-		
+	
 		// Sonderregel-Karten
 	}
 	

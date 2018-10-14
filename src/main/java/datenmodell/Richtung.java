@@ -4,21 +4,12 @@
 
 package datenmodell;
 
-/************************************************************/
-/**
- * 
- */
+
 public enum Richtung {
-	/**
-	 * 
-	 */
+
 	rechts,
-	/**
-	 * 
-	 */
+
 	links;
-	/**
-	 * 
-	 */
-	public Zug zug;
+
+
 };

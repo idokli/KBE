@@ -4,17 +4,26 @@
 
 package datenmodell;
 
-/************************************************************/
-/**
- * 
- */
+import java.util.ArrayList;
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Spieler {
-	/**
-	 * 
-	 */
-	public Spiel spiel;
-	/**
-	 * 
-	 */
-	public Spielkarte[] HandKarten;
+
+	
+	private Spiel spiel;
+
+	private List<Spielkarte> handKarten;
+	
+	public void zieheSpielkarte(Spielkarte spielkarte) {
+		if(this.handKarten == null) {
+			this.handKarten = new ArrayList<Spielkarte>();
+		}
+		this.handKarten.add(spielkarte);
+	}
+	
 };

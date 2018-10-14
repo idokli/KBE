@@ -4,21 +4,16 @@
 
 package datenmodell;
 
-/************************************************************/
-/**
- * 
- */
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Ergebnis {
-	/**
-	 * 
-	 */
-	public int Punkte;
-	/**
-	 * 
-	 */
-	public Spielrunde spielrunde;
-	/**
-	 * 
-	 */
-	public Spieler spieler;
+
+	private int Punkte;
+
+	private Spielrunde spielrunde;
+
+	private Spieler spieler;
 };

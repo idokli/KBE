@@ -4,29 +4,22 @@
 
 package datenmodell;
 
-/************************************************************/
-/**
- * 
- */
+import java.util.List;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Person {
-	/**
-	 * 
-	 */
-	public int id;
-	/**
-	 * 
-	 */
-	public int Gewinne;
-	/**
-	 * 
-	 */
-	public int Verluste;
-	/**
-	 * 
-	 */
-	public String Name;
-	/**
-	 * 
-	 */
-	public Spieler[] spieler;
+
+	private int id;
+
+	private int Gewinne;
+
+	private int Verluste;
+
+	private String Name;
+
+	private List<Spieler> spielerListe;
 };

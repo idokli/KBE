@@ -4,8 +4,11 @@
 
 package datenmodell;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import javax.persistence.Entity;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,37 +17,22 @@ import lombok.Setter;
 /**
  * 
  */
-@Getter
-@Setter
-public class Spielrunde {
-	/**
-	 * 
-	 */
-	public int nummer;
-	/**
-	 * 
-	 */
-	public int gewinnerId;
-	/**
-	 * 
-	 */
-	public List<Spielkarte> gespielteKarteListe;
-	/**
-	 * 
-	 */
-	public List<Spielkarte> stapel;
-	/**
-	 * 
-	 */
-	public Spiel spiel;
-	/**
-	 * 
-	 */
-	public List<Zug> zuege;
 
-	/**
-	 * 
-	 */
+@Setter
+@Getter
+@Entity
+public class Spielrunde {
+	
+
+	private int nummer;
+
+	private int gewinnerId;
+
+	private List<Spielkarte> gespielteKarteListe;
+
+
+	private List<Spielkarte> stapel;
+
 	public void mischeGespielteKarte() {
 		
 		if(this.stapel.size() == 0) {
@@ -55,9 +43,9 @@ public class Spielrunde {
 	
 	
 	public void baueStapel() {
-		
-		for(Blatttyp blatttyp: datenmodell.Blatttyp.values()) {
-			for(Blattwert blattwert: datenmodell.Blattwert.values()) {
+		this.stapel = new ArrayList<Spielkarte>();
+		for(Blatttyp blatttyp: Blatttyp.values()) {
+			for(Blattwert blattwert: Blattwert.values()) {
 				stapel.add(new Spielkarte(blatttyp, blattwert));
 			}
 		}

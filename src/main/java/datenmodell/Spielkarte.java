@@ -15,26 +15,16 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Spielkarte {
-	/**
-	 * 
-	 */
-	public int id;
-	/**
-	 * 
-	 */
-	public Blattwert Blattwert;
-	/**
-	 * 
-	 */
-	public Blatttyp Blatttyp;
-	/**
-	 * 
-	 */
-	public Zug zug;
-	/**
-	 * 
-	 */
-	public Spieler spieler;
+
+	private int id;
+
+	private Blattwert Blattwert;
+
+	private Blatttyp Blatttyp;
+
+	private Zug zug;
+
+	private Spieler spieler;
 	
 
 	public Spielkarte(Blatttyp blatttyp, Blattwert blattwert) {
