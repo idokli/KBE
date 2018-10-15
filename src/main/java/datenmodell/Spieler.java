@@ -14,16 +14,25 @@ import lombok.Setter;
 @Setter
 public class Spieler {
 
+	private int id;
 	
 	private Spiel spiel;
 
 	private List<Spielkarte> handKarten;
+	
+	public Spieler(int id) {
+		this.id = id;
+	}
 	
 	public void zieheSpielkarte(Spielkarte spielkarte) {
 		if(this.handKarten == null) {
 			this.handKarten = new ArrayList<Spielkarte>();
 		}
 		this.handKarten.add(spielkarte);
+	}
+	
+	public void legeKarteAuf(Spielkarte spielkarte, Spielrunde spielrunde) {
+		spielrunde.getGespielteKarteListe().add(spielkarte);
 	}
 	
 };

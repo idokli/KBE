@@ -2,6 +2,7 @@ package datenmodell;
 
 public enum Blattwert {
 
+	Joker(0),
 
 	Ass(1),
 
@@ -30,14 +31,13 @@ public enum Blattwert {
 	Koenig(13);
 
 	private final int blattWertZahl;
-	
-	Blattwert (int blattWertZahl) {
+
+	Blattwert(int blattWertZahl) {
 		this.blattWertZahl = blattWertZahl;
 	}
-	
+
 	public int getIntWert(Blattwert blattwert) {
 		return blattwert.blattWertZahl;
 	}
-	
 
 };

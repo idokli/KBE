@@ -22,7 +22,6 @@ import lombok.Setter;
 @Getter
 @Entity
 public class Spielrunde {
-	
 
 	private int nummer;
 
@@ -30,24 +29,26 @@ public class Spielrunde {
 
 	private List<Spielkarte> gespielteKarteListe;
 
-
 	private List<Spielkarte> stapel;
 
 	public void mischeGespielteKarte() {
-		
-		if(this.stapel.size() == 0) {
+
+		if (this.stapel.size() == 0) {
 			Collections.shuffle(this.gespielteKarteListe);
 			this.stapel.addAll(this.gespielteKarteListe);
 		}
 	}
-	
-	
-	public void baueStapel() {
+
+	public void baueStapel(boolean includeJokers) {
 		this.stapel = new ArrayList<Spielkarte>();
-		for(Blatttyp blatttyp: Blatttyp.values()) {
-			for(Blattwert blattwert: Blattwert.values()) {
+		for (Blatttyp blatttyp : Blatttyp.values()) {
+			for (Blattwert blattwert : Blattwert.values()) {
+				if (blattwert == Blattwert.Joker && !includeJokers) {
+					continue;
+				}
 				stapel.add(new Spielkarte(blatttyp, blattwert));
 			}
 		}
+
 	}
 };

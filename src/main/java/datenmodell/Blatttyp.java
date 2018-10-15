@@ -14,5 +14,4 @@ public enum Blatttyp {
 	Karo,
 
 	Kreuz;
-
 };

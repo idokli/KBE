@@ -18,11 +18,19 @@ public class Spiel {
 	private int id;
 
 	private Date Datum;
+	
+	private long beginn;
 
-	private long Dauer;
+	private long ende;
+	
+	private long dauer;
 
 	private List<Spieler> spielerListe;
 	
+	
+	public Spiel() {
+		this.Datum = new Date();
+	}
 	
 	public void registriereSpieler(Spieler spieler) {
 		if (this.spielerListe == null) {
