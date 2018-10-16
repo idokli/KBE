@@ -4,16 +4,19 @@
 
 package datenmodell;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Regel {
-
-	private int id;
+@Entity
+public class Regel extends BaseEntity{
 
 	private String Beschreibung;
 
+	@OneToOne
 	private Spielkarte spielkarte;
 };

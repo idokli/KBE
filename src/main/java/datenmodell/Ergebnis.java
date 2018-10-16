@@ -4,16 +4,23 @@
 
 package datenmodell;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Ergebnis {
+@Entity
+public class Ergebnis extends BaseEntity{
 
 	private int Punkte;
 
+	@ManyToOne
 	private Spielrunde spielrunde;
 
+	@ManyToMany
 	private Spieler spieler;
 };

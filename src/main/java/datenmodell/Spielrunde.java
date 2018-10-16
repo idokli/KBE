@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @Entity
-public class Spielrunde {
+public class Spielrunde extends BaseEntity{
 
 	private int nummer;
 

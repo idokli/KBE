@@ -6,14 +6,16 @@ package datenmodell;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Person {
-
-	private int id;
+@Entity
+public class Person extends BaseEntity{
 
 	private int Gewinne;
 
@@ -21,5 +23,6 @@ public class Person {
 
 	private String Name;
 
+	@OneToMany
 	private List<Spieler> spielerListe;
 };

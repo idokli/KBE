@@ -6,6 +6,10 @@ package datenmodell;
 
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,12 +19,15 @@ import lombok.Setter;
  */	
 @Getter
 @Setter
-public class Zug {
+@Entity
+public class Zug extends BaseEntity{
 
 	private Richtung richtung;
 
+	@OneToOne
 	private Spielkarte aufgelegteKarte;
 
+	@OneToMany
 	private List<Spielkarte> erlaubteNaechsteKarten;
 	
 

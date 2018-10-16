@@ -32,8 +32,6 @@ public class Spielkarte extends BaseEntity {
     public final static int QUEEN = 12;   //   numerical values for their codes.
     public final static int KING = 13;
 
-	private int id;
-
 	private Blattwert Blattwert;
 
 	private Blatttyp Blatttyp;

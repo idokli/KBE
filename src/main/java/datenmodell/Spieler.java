@@ -7,23 +7,25 @@ package datenmodell;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Spieler {
+@Entity
+public class Spieler extends BaseEntity{
 
-	private int id;
-	
+	@ManyToOne
 	private Spiel spiel;
 
+	@OneToMany
 	private List<Spielkarte> handKarten;
 	
-	public Spieler(int id) {
-		this.id = id;
-	}
-	
+
 	public void zieheSpielkarte(Spielkarte spielkarte) {
 		if(this.handKarten == null) {
 			this.handKarten = new ArrayList<Spielkarte>();
