@@ -35,10 +35,10 @@ public class MauMauImpl implements MauMau {
 
 	public void registriereSpieler() {
 
-		Spieler spielerIdo = new Spieler(1);
+		Spieler spielerIdo = new Spieler();
 		neuesSpiel.registriereSpieler(spielerIdo);
 
-		Spieler spielerVictor = new Spieler(2);
+		Spieler spielerVictor = new Spieler();
 		neuesSpiel.registriereSpieler(spielerVictor);
 		
 		

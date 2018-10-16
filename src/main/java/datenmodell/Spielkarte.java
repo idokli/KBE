@@ -6,7 +6,8 @@ package datenmodell;
 
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 import lombok.Getter;
@@ -36,10 +37,13 @@ public class Spielkarte extends BaseEntity {
 
 	private Blatttyp Blatttyp;
 
+	@Id
+	private long id;
+	
 	@OneToOne
 	private Zug zug;
 
-	@OneToMany
+	@ManyToOne
 	private Spieler spieler;
 	
 
