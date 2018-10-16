@@ -6,6 +6,7 @@ import org.hibernate.SessionFactory;
 import datenmodell.Blatttyp;
 import datenmodell.Blattwert;
 import datenmodell.Spielkarte;
+import datenmodell.defaultData.createDefaultData;
 import util.HibernateUtil;
 
 public class Starter 
@@ -19,9 +20,11 @@ public class Starter
         Session session = sessionFactory.openSession();
         session.beginTransaction();
          
-        Spielkarte spielkarte = new Spielkarte(Blatttyp.Herz, Blattwert.Bube);
+        
+        for(Spielkarte spielkarte : createDefaultData.createDefaultSpielkarten()) {
+        	session.save(spielkarte);
+        }
          
-        session.save(spielkarte);
         session.getTransaction().commit();
          
         session.close();

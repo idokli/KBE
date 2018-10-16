@@ -19,6 +19,12 @@ import lombok.Setter;
 @Entity
 public class Spieler extends BaseEntity{
 
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@ManyToOne
 	private Spiel spiel;
 

@@ -6,6 +6,7 @@ package datenmodell;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -17,10 +18,13 @@ import lombok.Setter;
 @Entity
 public class Person extends BaseEntity{
 
+	@Column
 	private int Gewinne;
 
+	@Column
 	private int Verluste;
 
+	@Column
 	private String Name;
 
 	@OneToMany

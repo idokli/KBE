@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 
@@ -19,12 +20,21 @@ import lombok.Setter;
 @Entity
 public class Spiel extends BaseEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column
 	private Date Datum;
 	
+	@Column
 	private long beginn;
 
+	@Column
 	private long ende;
 	
+	@Column
 	private long dauer;
 
 	@OneToMany

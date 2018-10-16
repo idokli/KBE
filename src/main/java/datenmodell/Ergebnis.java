@@ -4,6 +4,9 @@
 
 package datenmodell;
 
+import java.util.List;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -16,11 +19,17 @@ import lombok.Setter;
 @Entity
 public class Ergebnis extends BaseEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column
 	private int Punkte;
 
 	@ManyToOne
 	private Spielrunde spielrunde;
 
 	@ManyToMany
-	private Spieler spieler;
+	private List<Spieler> spieler;
 };

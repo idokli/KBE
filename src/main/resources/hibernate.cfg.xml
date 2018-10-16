@@ -6,14 +6,21 @@
     <session-factory>
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="hibernate.connection.username">root</property>
-        <property name="hibernate.connection.password">root</property>
+        <property name="hibernate.connection.password">Tzq6KJVTY160VOzX</property>
         <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/maumauDB</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
         <property name="show_sql">true</property> 
         <property name="connection.pool_size">1</property>
+        <property name="hibernate.hbm2ddl.auto">create</property>
          
         <mapping class="datenmodell.Spielkarte"></mapping>
         <mapping class="datenmodell.Spieler"></mapping>
+ 		<mapping class="datenmodell.Spiel"></mapping>
+ 		<mapping class="datenmodell.Spielrunde"></mapping>
+ 		<mapping class="datenmodell.Ergebnis"></mapping>
+ 		<mapping class="datenmodell.Person"></mapping>
+ 		<mapping class="datenmodell.Regel"></mapping>
  		<mapping class="datenmodell.Zug"></mapping>
+ 	
     </session-factory>
 </hibernate-configuration>

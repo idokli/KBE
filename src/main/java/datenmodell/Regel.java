@@ -4,6 +4,7 @@
 
 package datenmodell;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 
@@ -15,6 +16,12 @@ import lombok.Setter;
 @Entity
 public class Regel extends BaseEntity{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	@Column
 	private String Beschreibung;
 
 	@OneToOne
