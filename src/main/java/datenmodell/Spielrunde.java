@@ -9,6 +9,7 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -27,8 +28,10 @@ public class Spielrunde {
 
 	private int gewinnerId;
 
+	@OneToMany
 	private List<Spielkarte> gespielteKarteListe;
 
+	@OneToMany
 	private List<Spielkarte> stapel;
 
 	public void mischeGespielteKarte() {

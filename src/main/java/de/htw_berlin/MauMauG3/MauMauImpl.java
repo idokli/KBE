@@ -17,17 +17,19 @@ public class MauMauImpl implements MauMau {
 	private static StopWatch stopwatch = new StopWatch();
 	private static Spielrunde runde;
 	private static List<Spielkarte> stapel;
-
 	public void beginneSpiel() {
 
 		neuesSpiel = new Spiel();
 
 		stopwatch.start();
 		log.info("Stopwatch started");
-
 		neuesSpiel.setBeginn(stopwatch.getTime());
 		
 		this.registriereSpieler();
+		this.starteRunde();
+		this.baueStapel();
+		this.verteileInitialeKarten();
+		this.beendeSpiel();
 
 	}
 
@@ -39,14 +41,14 @@ public class MauMauImpl implements MauMau {
 		Spieler spielerVictor = new Spieler(2);
 		neuesSpiel.registriereSpieler(spielerVictor);
 		
-		this.starteRunde();
+		
 
 	}
 
 	public void starteRunde() {
 		runde = neuesSpiel.erstelleRunde();
 		
-		this.baueStapel();
+		
 
 	}
 
@@ -55,7 +57,7 @@ public class MauMauImpl implements MauMau {
 		 runde.baueStapel(true);
 		 stapel = runde.getStapel();
 		 
-		 this.verteileInitialeKarten();
+		
 
 	}
 
@@ -78,7 +80,7 @@ public class MauMauImpl implements MauMau {
 			}
 		}
 		
-		this.beendeSpiel();
+		
 
 	}
 

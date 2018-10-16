@@ -5,6 +5,10 @@
 package datenmodell;
 
 
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +18,8 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Spielkarte {
+@Entity
+public class Spielkarte extends BaseEntity {
 	
     public final static int SPADES = 0;   // Codes for the 4 suits, plus Joker.
     public final static int HEARTS = 1;
@@ -33,8 +38,10 @@ public class Spielkarte {
 
 	private Blatttyp Blatttyp;
 
+	@OneToOne
 	private Zug zug;
 
+	@OneToMany
 	private Spieler spieler;
 	
 
