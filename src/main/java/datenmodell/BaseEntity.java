@@ -13,9 +13,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
-
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,32 +28,37 @@ public abstract class BaseEntity implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Setter(value = AccessLevel.NONE)
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 	
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created")
-//	@Column(name = "created", nullable = false, insertable = false)
-	@Generated(GenerationTime.INSERT)
 	private Date createdOn;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated")
-	//@Column(name = "updated", nullable = false, updatable = false, insertable = false)
-	@Generated(GenerationTime.ALWAYS)
 	private Date lastModifiedOn;
+	public final boolean isNew() {
+        return this.id == null;
+    }
 
-	@PrePersist
-	public void initTimeStamps() {
-		if (createdOn == null) {
-			createdOn = new Date();
-		}
-		lastModifiedOn = createdOn;
-	}
-	
-	@PreUpdate
-	public void updateTimeStamp() {
-		lastModifiedOn = new Date();
-	}
+    @PrePersist
+    public void prePersist() {
+        this.audit();
+    }
+
+    @PreUpdate
+    public void preUpdate() {
+        this.audit();
+    }
+    
+    private void audit() {
+        if (this.isNew()) {
+            this.createdOn = new Date();
+        }
+        this.lastModifiedOn = new Date();
+    }
 }

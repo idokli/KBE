@@ -8,6 +8,8 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
@@ -31,5 +33,10 @@ public class Ergebnis extends BaseEntity{
 	private Spielrunde spielrunde;
 
 	@ManyToMany
+    @JoinTable(
+            name = "ergebnis_spieler",
+            joinColumns = @JoinColumn(name = "ergebnis_id"),
+            inverseJoinColumns = @JoinColumn(name = "spieler_id")
+        )
 	private List<Spieler> spieler;
 };
