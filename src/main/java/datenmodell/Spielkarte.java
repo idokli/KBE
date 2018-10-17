@@ -7,7 +7,8 @@ package datenmodell;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -32,6 +33,7 @@ public class Spielkarte extends BaseEntity {
 	private Blattwert Blattwert;
 
 	@Column
+	 @Enumerated(EnumType.STRING)
 	private Blatttyp Blatttyp;
 
 	@OneToOne

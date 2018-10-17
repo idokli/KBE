@@ -37,13 +37,13 @@ public abstract class BaseEntity implements Serializable{
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "created")
 //	@Column(name = "created", nullable = false, insertable = false)
-//	@Generated(GenerationTime.INSERT)
+	@Generated(GenerationTime.INSERT)
 	private Date createdOn;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "updated")
 	//@Column(name = "updated", nullable = false, updatable = false, insertable = false)
-//	@Generated(GenerationTime.ALWAYS)
+	@Generated(GenerationTime.ALWAYS)
 	private Date lastModifiedOn;
 
 	@PrePersist
