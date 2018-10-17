@@ -33,7 +33,7 @@ public class Spielkarte extends BaseEntity {
 	private Blattwert Blattwert;
 
 	@Column
-	 @Enumerated(EnumType.STRING)
+	@Enumerated(EnumType.STRING)
 	private Blatttyp Blatttyp;
 
 	@OneToOne

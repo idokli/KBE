@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -24,25 +25,29 @@ public class Spiel extends BaseEntity{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@Column
 	private Date Datum;
 	
 	@Column
-	private long beginn;
+	private Date beginn;
 
 	@Column
-	private long ende;
+	private Date ende;
 	
 	@Column
 	private long dauer;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="spiel", orphanRemoval = true)
 	private List<Spieler> spielerListe;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="spiel", orphanRemoval = true)
+	private List<Spielrunde> spielrunden;
 	
 	
 	public Spiel() {
 		this.Datum = new Date();
+		this.beginn = new Date();
 	}
 	
 	public void registriereSpieler(Spieler spieler) {
@@ -50,9 +55,15 @@ public class Spiel extends BaseEntity{
 			this.spielerListe = new ArrayList<Spieler>();
 		}
 		this.spielerListe.add(spieler);
+		spieler.setSpiel(this);
 	}
 	
-	public Spielrunde erstelleRunde() {
-		return new Spielrunde();
+	public void erstelleRunde() {
+		if(spielrunden == null) {
+			spielrunden = new ArrayList<Spielrunde>();
+		}
+		Spielrunde spielrunde = new Spielrunde();
+		spielrunden.add(spielrunde);
+		spielrunde.setSpiel(this);
 	}
 };

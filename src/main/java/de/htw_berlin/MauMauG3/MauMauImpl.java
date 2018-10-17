@@ -23,7 +23,6 @@ public class MauMauImpl implements MauMau {
 
 		stopwatch.start();
 		log.info("Stopwatch started");
-		neuesSpiel.setBeginn(stopwatch.getTime());
 		
 		this.registriereSpieler();
 		this.starteRunde();
@@ -46,16 +45,16 @@ public class MauMauImpl implements MauMau {
 	}
 
 	public void starteRunde() {
-		runde = neuesSpiel.erstelleRunde();
+		neuesSpiel.erstelleRunde();
 		
 		
 
 	}
 
 	public void baueStapel() {
-		
-		 runde.baueStapel(true);
-		 stapel = runde.getStapel();
+		Spielrunde spielrunde = neuesSpiel.getSpielrunden().get(0);
+		spielrunde.baueStapel(true);
+		 stapel = spielrunde.getStapel();
 		 
 		
 

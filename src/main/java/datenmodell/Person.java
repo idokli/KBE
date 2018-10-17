@@ -6,6 +6,7 @@ package datenmodell;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -27,6 +28,6 @@ public class Person extends BaseEntity{
 	@Column
 	private String Name;
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.ALL, mappedBy="person", orphanRemoval = true)
 	private List<Spieler> spielerListe;
 };

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -26,6 +27,11 @@ public class Spieler extends BaseEntity{
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne
+	@JoinColumn(name="person_id")
+	private Person person;
+	
+	@ManyToOne
+	@JoinColumn(name="spiel_id")
 	private Spiel spiel;
 
 	@OneToMany
