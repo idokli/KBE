@@ -6,7 +6,7 @@ package de.htw_berlin.MauMauG3;
  *
  */
 
-public interface MauMau {
+public interface IMauMau {
 	
 	
 	void beginneSpiel();

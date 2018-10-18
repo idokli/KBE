@@ -11,7 +11,7 @@ import datenmodell.Spielrunde;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class MauMauImpl implements MauMau {
+public class MauMauImpl implements IMauMau {
 
 	private static Spiel neuesSpiel;
 	private static StopWatch stopwatch = new StopWatch();
