@@ -8,14 +8,14 @@
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-		<class>datenmodell.Ergebnis</class>
-		<class>datenmodell.Person</class>
-		<class>datenmodell.Regel</class>
-		<class>datenmodell.Spiel</class>
-		<class>datenmodell.Spieler</class>
-		<class>datenmodell.Spielkarte</class>
-		<class>datenmodell.Spielrunde</class>
-		<class>datenmodell.Zug</class>
+		<class>datenmodel.Ergebnis</class>
+
+		<class>datenmodel.Regel</class>
+		<class>datenmodel.Spiel</class>
+		<class>datenmodel.Spieler</class>
+		<class>datenmodel.Spielkarte</class>
+		<class>datenmodel.Spielrunde</class>
+
 
 		<properties>
 			<!-- database connection -->

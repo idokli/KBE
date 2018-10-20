@@ -3,14 +3,9 @@ package de.htw_berlin.MauMauG3;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import datenmodell.Spiel;
-import datenmodell.Spieler;
-import datenmodell.Spielkarte;
-import datenmodell.defaultData.createDefaultData;
-import util.HibernateUtil;
+import datenmodel.Spiel;
+import datenmodel.Spieler;
+import datenmodel.Spielkarte;
 
 import javax.persistence.Persistence;
 
@@ -39,25 +34,16 @@ public class Starter {
 //		Session session = sessionFactory.openSession();
 //		session.beginTransaction();
 
-		EntityManager entityManager = getEntityManager();
-		entityManager.getTransaction().begin();
-
-		for (Spielkarte spielkarte : createDefaultData.createDefaultSpielkarten()) {
-			entityManager.persist(spielkarte);
-		}
-
-		Spiel spiel = new Spiel();
-
-		for (int i = 0; i < 5; i++) {
-			spiel.erstelleRunde();
-			spiel.registriereSpieler(new Spieler());
-		}
-
-		entityManager.persist(spiel);
-		
-		entityManager.getTransaction().commit();
-
-		entityManager.clear();
+//		EntityManager entityManager = getEntityManager();
+//		entityManager.getTransaction().begin();
+//
+//
+//
+//		entityManager.persist();
+//
+//		entityManager.getTransaction().commit();
+//
+//		entityManager.clear();
 
 //		session.getTransaction().commit();
 //

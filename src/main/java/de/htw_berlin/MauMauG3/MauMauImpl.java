@@ -2,112 +2,49 @@ package de.htw_berlin.MauMauG3;
 
 import java.util.List;
 
-import org.apache.commons.lang3.time.StopWatch;
+import datenmodel.Spiel;
+import datenmodel.Spieler;
+import datenmodel.Spielrunde;
+import datenmodel.KartenStapel;
+import datenmodel.Spielkarte;
 
-import datenmodell.Spiel;
-import datenmodell.Spieler;
-import datenmodell.Spielkarte;
-import datenmodell.Spielrunde;
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 public class MauMauImpl implements IMauMau {
 
-	private static Spiel neuesSpiel;
-	private static StopWatch stopwatch = new StopWatch();
-	private static Spielrunde runde;
-	private static List<Spielkarte> stapel;
-	public void beginneSpiel() {
 
-		neuesSpiel = new Spiel();
+	public Spiel beginneSpiel() {
 
-		stopwatch.start();
-		log.info("Stopwatch started");
-		
-		this.registriereSpieler();
-		this.starteRunde();
-		this.baueStapel();
-		this.verteileInitialeKarten();
-		this.beendeSpiel();
+		return null;
+	}
+
+	public void registriereSpieler(Spieler spieler, Spiel spiel) {
 
 	}
 
-	public void registriereSpieler() {
+	public Spielrunde erstelleRunde(Spiel Spiel) {
+		return null;
+	}
 
-		Spieler spielerIdo = new Spieler();
-		neuesSpiel.registriereSpieler(spielerIdo);
+	public KartenStapel baueStapel(Spielrunde spielrunde) {
+		return null;
+	}
 
-		Spieler spielerVictor = new Spieler();
-		neuesSpiel.registriereSpieler(spielerVictor);
-		
-		
+	public void kartenverteilen(List<Spieler> spielerListe, KartenStapel kartenstapel) {
 
 	}
 
-	public void starteRunde() {
-		neuesSpiel.erstelleRunde();
-		
-		
+	public void waehleErsterSpieler(List<Spieler> spielerliste) {
 
 	}
 
-	public void baueStapel() {
-		Spielrunde spielrunde = neuesSpiel.getSpielrunden().get(0);
-		spielrunde.baueStapel(true);
-		 stapel = spielrunde.getStapel();
-		 
-		
+	public void spieleKarte(Spieler spieler, KartenStapel aufgelegterStapel) {
 
 	}
 
-	public void verteileInitialeKarten() {
-		
-		// Initialkarten verteilen, 7 karten pro Spieler?
-		for (Spieler spieler : neuesSpiel.getSpielerListe()) {
-			for (int i = 0; i < 7; i++) {
-				System.out.println("Listegroesse: " + stapel.size());
-				int random = (int) ((Math.random() * stapel.size()));
-				spieler.zieheSpielkarte(stapel.get(random));
-				stapel.remove(random);
-			}
-		}
-
-		for (Spieler spieler : neuesSpiel.getSpielerListe()) {
-			System.out.println("Spieler hat " + spieler.getHandKarten().size() + " Spielkarten:");
-			for (Spielkarte spielkarte : spieler.getHandKarten()) {
-				System.out.println(spielkarte.getBlatttyp().name() + "-" + spielkarte.getBlattwert().name());
-			}
-		}
-		
-		
-
+	public Spielkarte zieheKarteVomStapel(KartenStapel kartenstapel, Spieler spieler) {
+		return null;
 	}
 
-	public void legeKarteAuf() {
-		// TODO Auto-generated method stub
+	public void berechneErgebnisse(List<Spieler> spielerListe) {
 
 	}
-
-	public void zieheKartevonStapel() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void mischeKarten() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void berechneErgebnisPunkte() {
-		// TODO Auto-generated method stub
-
-	}
-
-	public void beendeSpiel() {
-
-		stopwatch.stop();
-		neuesSpiel.setDauer(stopwatch.getTime());
-		log.info("Stopwatch stopped");
-	}
-
 }

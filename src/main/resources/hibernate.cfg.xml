@@ -13,14 +13,12 @@
         <property name="connection.pool_size">1</property>
         <property name="hibernate.hbm2ddl.auto">create</property>
          
-        <mapping class="datenmodell.Spielkarte"></mapping>
-        <mapping class="datenmodell.Spieler"></mapping>
- 		<mapping class="datenmodell.Spiel"></mapping>
- 		<mapping class="datenmodell.Spielrunde"></mapping>
- 		<mapping class="datenmodell.Ergebnis"></mapping>
- 		<mapping class="datenmodell.Person"></mapping>
- 		<mapping class="datenmodell.Regel"></mapping>
- 		<mapping class="datenmodell.Zug"></mapping>
+        <mapping class="datenmodel.Spielkarte"></mapping>
+        <mapping class="datenmodel.Spieler"></mapping>
+ 		<mapping class="datenmodel.Spiel"></mapping>
+ 		<mapping class="datenmodel.Spielrunde"></mapping>
+ 		<mapping class="datenmodel.Ergebnis"></mapping>
+ 		<mapping class="datenmodel.Regel"></mapping>
  	
     </session-factory>
 </hibernate-configuration>
