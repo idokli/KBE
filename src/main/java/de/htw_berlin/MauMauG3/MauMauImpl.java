@@ -2,14 +2,14 @@ package de.htw_berlin.MauMauG3;
 
 import java.util.List;
 
-import datenmodel.Spiel;
-import datenmodel.Spieler;
-import datenmodel.Spielrunde;
-import datenmodel.KartenStapel;
-import datenmodel.Spielkarte;
+import datenmodel.*;
 
 public class MauMauImpl implements IMauMau {
 
+
+	public void konfiguriereRegel(Regel regel, Blattwert Blattwert) {
+
+	}
 
 	public Spiel beginneSpiel() {
 

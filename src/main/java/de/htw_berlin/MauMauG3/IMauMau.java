@@ -2,18 +2,22 @@ package de.htw_berlin.MauMauG3;
 
 import java.util.List;
 
-import datenmodel.Spiel;
-import datenmodel.Spieler;
-import datenmodel.Spielrunde;
-import datenmodel.KartenStapel;
-import datenmodel.Spielkarte;
+import datenmodel.*;
 
 public interface IMauMau {
 
 
 	/**
+	 * Sieler können die Regel konfigurieren (bzw. welche Regel überhaupt gibt
+	 * und welche Spielkarte welche Regel besitzt
+	 * @param regel
+	 * @param Blattwert
+	 */
+	void konfiguriereRegel(Regel regel, Blattwert Blattwert);
+
+	/**
 	 * Erstellt ein neues Spiel
-	 * 
+	 *
 	 * @return
 	 */
 	Spiel beginneSpiel();

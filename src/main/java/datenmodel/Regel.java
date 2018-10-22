@@ -28,5 +28,9 @@ public enum Regel {
         return this.blattwert;
     }
 
+    public void setBlattwert(Blattwert blattwert) {
+        this.setBlattwert(blattwert);
+    }
+
 
 }
