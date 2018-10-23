@@ -3,17 +3,19 @@ package datenmodel;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 public class Spieler extends BaseEntity {
-	
-	private KartenHand hand;
-	
+
+	private List<Spielkarte> hand;
 	private String name;
-	private boolean isPlaying;
+	private boolean spielend;
 	
 	public Spieler(String name) {
-		this.hand = new KartenHand();
+		this.hand = new ArrayList<Spielkarte>();
 		this.name = name;
 	}
 

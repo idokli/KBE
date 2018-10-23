@@ -4,11 +4,13 @@
 
 package datenmodel;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.collections4.CollectionUtils;
 
 @Getter
 @Setter
@@ -22,23 +24,36 @@ public class Spielrunde extends BaseEntity{
     private long dauer;
 
     // Stapel mit verdeckten karten
-    private KartenStapel stapel;
+    private KartenStapel verdeckteStapel;
 
     // Stapel mit aufgelegten Karten
     private KartenStapel stapelAufgelegt;
 
-    private Spieler spielerDaran;
-
     private List<Ergebnis> ergebnisListe;
 
-    private boolean richtungUhrzeit = true;
-
     private List<Spielkarte> erlaubteNaechsteKarte;
+
+    public List<Spieler> spielerListe;
 
     public Spielrunde() {
         this.start = new Date();
     }
 
+
+    public void registriereSpieler(final Spieler spieler) {
+        if(CollectionUtils.isEmpty(this.spielerListe)) {
+            spielerListe = new ArrayList<Spieler>();
+        }
+        this.spielerListe.add(spieler);
+    }
+
+    public void baueStapel() {
+        for (Blatttyp blatttyp : Blatttyp.values()) {
+            for (Blattwert blattwert : Blattwert.values()) {
+                this.verdeckteStapel.addeSpielkarte(new Spielkarte(blatttyp, blattwert));
+            }
+        }
+    }
 
     public void bestimmeErlaubteNaechsteKarten(final Spielkarte gespielteKarte) {
 
@@ -50,7 +65,7 @@ public class Spielrunde extends BaseEntity{
                         erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.ZWEI_ZIEHEN.getBlattwert()));
 
                         // Aber auch der Aussetzer darf gespielt werden
-                        erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.AUSSETZEN.getBlattwert()));
+                        erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.STOPPER.getBlattwert()));
                     }
                     break;
                 case WUENSCHER:
@@ -62,8 +77,6 @@ public class Spielrunde extends BaseEntity{
                     this.bestimmeStandardErlaubtenKarten(gespielteKarte);
                     break;
                 case STOPPER:
-                    this.bestimmeStandardErlaubtenKarten(gespielteKarte);
-                    break;
                 case ALLESLEGER:
                     this.bestimmeStandardErlaubtenKarten(gespielteKarte);
                     break;

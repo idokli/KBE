@@ -7,28 +7,23 @@ import datenmodel.*;
 public class MauMauImpl implements IMauMau {
 
 
-	public void konfiguriereRegel(Regel regel, Blattwert Blattwert) {
-
-	}
-
-	public Spiel beginneSpiel() {
-
+	public Spiel starteNeuesSpiel() {
 		return null;
 	}
 
-	public void registriereSpieler(Spieler spieler, Spiel spiel) {
+	public void erstelleRunde(Spiel Spiel) {
 
 	}
 
-	public Spielrunde erstelleRunde(Spiel Spiel) {
-		return null;
+	public void registriereSpieler(Spieler spieler, Spielrunde spielrunde) {
+
 	}
 
-	public KartenStapel baueStapel(Spielrunde spielrunde) {
-		return null;
+	public void baueStapel(Spielrunde spielrunde) {
+
 	}
 
-	public void kartenverteilen(List<Spieler> spielerListe, KartenStapel kartenstapel) {
+	public void kartenverteilen(List<Spieler> spielerListe, Spielrunde spielrunde) {
 
 	}
 
@@ -36,15 +31,19 @@ public class MauMauImpl implements IMauMau {
 
 	}
 
-	public void spieleKarte(Spieler spieler, KartenStapel aufgelegterStapel) {
+	public boolean spieleKarte(Spieler spieler, KartenStapel aufgelegterStapel) {
+		return false;
+	}
+
+	public void zieheKartenVomStapel(KartenStapel kartenstapel, Spieler spieler, int anzahlKarten) {
 
 	}
 
-	public Spielkarte zieheKarteVomStapel(KartenStapel kartenstapel, Spieler spieler) {
-		return null;
+	public void berechneErgebnisse(Spielrunde spielrunde) {
+
 	}
 
-	public void berechneErgebnisse(List<Spieler> spielerListe) {
+	public void beendeSpiel(Spiel spiel) {
 
 	}
 }

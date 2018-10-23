@@ -1,7 +1,6 @@
 
 package datenmodel;
 
-import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +17,5 @@ public class Ergebnis {
 	private Spielrunde spielrunde;
 
 
-	private List<Spieler> spieler;
+	private Spieler spieler;
 };

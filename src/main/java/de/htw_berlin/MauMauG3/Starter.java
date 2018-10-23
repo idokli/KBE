@@ -3,10 +3,6 @@ package de.htw_berlin.MauMauG3;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 
-import datenmodel.Spiel;
-import datenmodel.Spieler;
-import datenmodel.Spielkarte;
-
 import javax.persistence.Persistence;
 
 public class Starter {
@@ -28,7 +24,7 @@ public class Starter {
 
 	public static void main(String[] args) {
 
-		(new MauMauImpl()).beginneSpiel();
+		(new MauMauImpl()).starteNeuesSpiel();
 
 //		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 //		Session session = sessionFactory.openSession();

@@ -6,6 +6,7 @@ import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.collections4.CollectionUtils;
 
 @Getter
 @Setter
@@ -18,26 +19,15 @@ public class KartenStapel {
     }
 
 
-    public int getStapelSize() {
-
-        return this.stapel.size();
-    }
-
-    public boolean isEmpty() {
-
-        return this.stapel.size() == 0;
-    }
-
-
-    // Für aufgedeckten Stapel
     public void addeSpielkarte(Spielkarte spielkarte) {
-
-        this.stapel.add(spielkarte);
+        if (!CollectionUtils.isEmpty(this.stapel)) {
+            this.stapel.add(spielkarte);
+        }
     }
 
     // Für aufgedeckten Stapel
-    public Spielkarte getAufgelegteKarte() throws MauMauException {
-        if (this.isEmpty()) {
+    public Spielkarte getLetzteAufgelegteKarte() throws MauMauException {
+        if (!CollectionUtils.isEmpty(this.stapel)) {
             throw new MauMauException("Stapel ist leer");
         }
 
@@ -47,25 +37,13 @@ public class KartenStapel {
 
     // Für verdeckten Stapel
     public Spielkarte getNeueSpielkarte() throws MauMauException {
-        if (this.isEmpty()) {
+        if (!CollectionUtils.isEmpty(this.stapel)) {
             throw new MauMauException("Stapel ist leer");
         }
 
         Spielkarte spielkarte = this.stapel.get(this.stapel.size() - 1);
         this.stapel.remove(this.stapel.size() - 1);
         return spielkarte;
-    }
-
-    public void baueStapel() {
-        for (Blatttyp blatttyp : Blatttyp.values()) {
-            for (Blattwert blattwert : Blattwert.values()) {
-                this.stapel.add(new Spielkarte(blatttyp, blattwert));
-            }
-        }
-    }
-
-    public void entleereStapel() {
-        this.stapel.clear();
     }
 
 
