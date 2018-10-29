@@ -22,10 +22,10 @@
 			<property name="javax.persistence.jdbc.driver"
 				value="com.mysql.jdbc.Driver" />
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3306/maumauDB" />
-			<property name="javax.persistence.jdbc.user" value="root" />
+				value="jdbc:mysql://db.f4.htw-berlin.de:3306/_s0558332_maumauDB" />
+			<property name="javax.persistence.jdbc.user" value="s0558332" />
 			<property name="javax.persistence.jdbc.password"
-				value="Tzq6KJVTY160VOzX" />
+				value="mysql2018!" />
 
 			<property
 				name="javax.persistence.schema-generation.database.action"
