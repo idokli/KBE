@@ -1,9 +1,40 @@
 @startuml
 
-[Spielregeln]
+[SpielregelManagement] as srlm
 
-[Spielerverwalter]
+[SpielerZugMagnagement] as szm
 
-[Spielverwalter]
+[SpielManagement] as sm
+
+[BrettManagement] as bm
+
+[Frontend] as frontend
+
+database "maumauDB" {
+
+}
+
+
+ISpielRegelMgmt - srlm
+
+ISpielerZugMgmt - szm
+
+ISpielMgmt - sm
+
+IBrettMgmt - bm
+
+
+sm -down-> ISpielRegelMgmt
+
+sm --> maumauDB
+
+bm -right-> ISpielerZugMgmt
+
+
+frontend -right-> IBrettMgmt
+
+frontend --> ISpielMgmt
+
+bm --> ISpielMgmt
 
 @enduml
