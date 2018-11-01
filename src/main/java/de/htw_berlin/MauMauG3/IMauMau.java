@@ -56,7 +56,7 @@ public interface IMauMau {
 	 * @param aufgelegterStapel
 	 * @return boolean - ob die Spielkarte gespielt werden darf
 	 */
-	boolean spieleKarte(Spieler spieler, KartenStapel aufgelegterStapel);
+	boolean spieleKarte(Spieler spieler, KartenStapel aufgelegterStapel, Spielkarte spielkarte);
 
 
 	/**
@@ -67,6 +67,15 @@ public interface IMauMau {
 	 * @return -
 	 */
 	void zieheKartenVomStapel(KartenStapel kartenstapel, Spieler spieler, int anzahlKarten);
+
+
+	/**
+	 * Prüft ob eine Spielkarte abgelegt werden kann
+	 * @param spielkarte
+	 * @param aufgelegteKarten
+	 * @return
+	 */
+	boolean pruefeObKarteAblegbar(Spielkarte spielkarte, KartenStapel aufgelegteKarten);
 
 
 	/**

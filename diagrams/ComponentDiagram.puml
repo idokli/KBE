@@ -1,0 +1,37 @@
+@startuml
+
+[SpielregelKomponent] as srlk
+
+[SpielKomponent] as sk
+
+[KartenKomponent] as kk
+
+[SpielerKomponent] as serk
+
+[Frontend] as frontend
+
+database "maumauDB" {
+
+}
+
+ISpielerKomponent - serk
+
+ISpielregelKomponent - srlk
+
+ISpielKomponent - sk
+
+IKartenKomponent - kk
+
+sk -up-> maumauDB
+
+sk --> IKartenKomponent
+
+sk -down-> ISpielregelKomponent
+
+sk -right-> ISpielerKomponent
+
+
+frontend --> ISpielKomponent
+
+
+@enduml
