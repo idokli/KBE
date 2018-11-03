@@ -18,7 +18,6 @@
  		<mapping class="datenmodel.Spiel"></mapping>
  		<mapping class="datenmodel.Spielrunde"></mapping>
  		<mapping class="datenmodel.Ergebnis"></mapping>
- 		<mapping class="datenmodel.Regel"></mapping>
- 	
+
     </session-factory>
 </hibernate-configuration>

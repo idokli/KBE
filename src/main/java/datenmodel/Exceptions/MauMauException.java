@@ -1,4 +1,4 @@
-package datenmodel;
+package datenmodel.Exceptions;
 
 public class MauMauException extends Exception{
 

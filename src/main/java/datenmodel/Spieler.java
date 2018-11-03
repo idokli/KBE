@@ -1,5 +1,6 @@
 package datenmodel;
 
+import datenmodel.HilfKlassen.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 

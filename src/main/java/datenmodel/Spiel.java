@@ -1,5 +1,6 @@
 package datenmodel;
 
+import datenmodel.HilfKlassen.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class Spiel  extends  BaseEntity{
+public class Spiel  extends BaseEntity {
 
     private Date beginn;
 

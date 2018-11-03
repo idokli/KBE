@@ -1,4 +1,4 @@
-package datenmodel;
+package datenmodel.HilfKlassen;
 
 import lombok.AccessLevel;
 import lombok.Getter;

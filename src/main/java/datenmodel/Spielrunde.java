@@ -8,13 +8,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import datenmodel.Enum.Blatttyp;
+import datenmodel.Enum.Blattwert;
+import datenmodel.Enum.Regel;
+import datenmodel.HilfKlassen.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.collections4.CollectionUtils;
 
 @Getter
 @Setter
-public class Spielrunde extends BaseEntity{
+public class Spielrunde extends BaseEntity {
 
 
     private String gewinnerName;
@@ -33,7 +37,13 @@ public class Spielrunde extends BaseEntity{
 
     private List<Spielkarte> erlaubteNaechsteKarte;
 
-    public List<Spieler> spielerListe;
+    private List<Spieler> spielerListe;
+
+    private Blatttyp rundeFarbe;
+
+    private Integer zuZiehnKartenAnzahl;
+
+    private Regel aktivRegel;
 
     public Spielrunde() {
         this.start = new Date();
@@ -55,51 +65,51 @@ public class Spielrunde extends BaseEntity{
         }
     }
 
-    public void bestimmeErlaubteNaechsteKarten(final Spielkarte gespielteKarte) {
+//    public void bestimmeErlaubteNaechsteKarten(final Spielkarte gespielteKarte) {
+//
+//        // Erst mal Sonderregel prüfen
+//        if (gespielteKarte.getRegel() != null) {
+//            switch (gespielteKarte.getRegel()) {
+//                case ZWEI_ZIEHEN:
+//                    for (Blatttyp blatttyp : Blatttyp.values()) {
+//                        erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.ZWEI_ZIEHEN.getBlattwert()));
+//
+//                        // Aber auch der Aussetzer darf gespielt werden
+//                        erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.STOPPER.getBlattwert()));
+//                    }
+//                    break;
+//                case WUENSCHER:
+//
+//                    // TODO farbe wurde ausgesucht
+//                    break;
+//                case RICHTUNGSWECHSEL:
+//                    // TODO Richtung wird geändert
+//                    this.bestimmeStandardErlaubtenKarten(gespielteKarte);
+//                    break;
+//                case STOPPER:
+//                case ALLESLEGER:
+//                    this.bestimmeStandardErlaubtenKarten(gespielteKarte);
+//                    break;
+//                case AUSSETZEN:
+//                    this.erlaubteNaechsteKarte = null;
+//                    break;
+//            }
+//        }
+//
+//    }
 
-        // Erst mal Sonderregel prüfen
-        if (gespielteKarte.getRegel() != null) {
-            switch (gespielteKarte.getRegel()) {
-                case ZWEI_ZIEHEN:
-                    for (Blatttyp blatttyp : Blatttyp.values()) {
-                        erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.ZWEI_ZIEHEN.getBlattwert()));
-
-                        // Aber auch der Aussetzer darf gespielt werden
-                        erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, Regel.STOPPER.getBlattwert()));
-                    }
-                    break;
-                case WUENSCHER:
-
-                    // TODO farbe wurde ausgesucht
-                    break;
-                case RICHTUNGSWECHSEL:
-                    // TODO Richtung wird geändert
-                    this.bestimmeStandardErlaubtenKarten(gespielteKarte);
-                    break;
-                case STOPPER:
-                case ALLESLEGER:
-                    this.bestimmeStandardErlaubtenKarten(gespielteKarte);
-                    break;
-                case AUSSETZEN:
-                    this.erlaubteNaechsteKarte = null;
-                    break;
-            }
-        }
-
-    }
-
-    public void bestimmeStandardErlaubtenKarten(final Spielkarte gespielteKarte) {
-        // Standard erlaubte Karten
-        // Selber Blatttyp
-        for (Blattwert blattwert : Blattwert.values()) {
-            erlaubteNaechsteKarte.add(new Spielkarte(gespielteKarte.getBlatttyp(), blattwert));
-        }
-
-        // Selber Blattwert
-        for (Blatttyp blatttyp : Blatttyp.values()) {
-            erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, gespielteKarte.getBlattwert()));
-        }
-    }
+//    public void bestimmeStandardErlaubtenKarten(final Spielkarte gespielteKarte) {
+//        // Standard erlaubte Karten
+//        // Selber Blatttyp
+//        for (Blattwert blattwert : Blattwert.values()) {
+//            erlaubteNaechsteKarte.add(new Spielkarte(gespielteKarte.getBlatttyp(), blattwert));
+//        }
+//
+//        // Selber Blattwert
+//        for (Blatttyp blatttyp : Blatttyp.values()) {
+//            erlaubteNaechsteKarte.add(new Spielkarte(blatttyp, gespielteKarte.getBlattwert()));
+//        }
+//    }
 
 
-};
+}

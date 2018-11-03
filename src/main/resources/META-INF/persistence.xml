@@ -10,7 +10,6 @@
 
 		<class>datenmodel.Ergebnis</class>
 
-		<class>datenmodel.Regel</class>
 		<class>datenmodel.Spiel</class>
 		<class>datenmodel.Spieler</class>
 		<class>datenmodel.Spielkarte</class>

@@ -1,4 +1,4 @@
-package datenmodel;
+package datenmodel.Enum;
 
 public enum Blattwert {
 

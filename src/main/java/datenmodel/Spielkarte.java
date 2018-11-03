@@ -1,6 +1,9 @@
 
 package datenmodel;
 
+import datenmodel.Enum.Blatttyp;
+import datenmodel.Enum.Blattwert;
+import datenmodel.Enum.Regel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -8,9 +11,9 @@ import lombok.Setter;
 @Setter
 public class Spielkarte {
 
-    private Blattwert Blattwert;
+    private datenmodel.Enum.Blattwert Blattwert;
 
-    private Blatttyp Blatttyp;
+    private datenmodel.Enum.Blatttyp Blatttyp;
 
     private Regel regel;
 
@@ -18,17 +21,8 @@ public class Spielkarte {
 
         this.Blatttyp = blatttyp;
         this.Blattwert = blattwert;
-        this.regel = this.pruefeObRegel(blattwert);
     }
 
-    public Regel pruefeObRegel(Blattwert blattwert) {
-        for(Regel regel : Regel.values()) {
-            if(regel.getBlattwert().equals(blattwert)) {
-                return regel;
-            }
-        }
-        return null;
-    }
 
     // Um sicher zu gehen, dass das richtige Java-Object genommen wird
     @Override

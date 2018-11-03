@@ -24,8 +24,6 @@ public class Starter {
 
 	public static void main(String[] args) {
 
-		(new MauMauImpl()).starteNeuesSpiel();
-
 //		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 //		Session session = sessionFactory.openSession();
 //		session.beginTransaction();
