@@ -2,20 +2,17 @@
 package datenmodel;
 
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
-
+@Data
 public class Ergebnis {
 
 
-	private int Punkte;
+    private int Punkte;
 
 
-	private Spielrunde spielrunde;
+    private Spielrunde spielrunde;
 
 
-	private Spieler spieler;
-};
+    private Spieler spieler;
+}

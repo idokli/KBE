@@ -1,26 +1,19 @@
 package datenmodel;
 
 import datenmodel.HilfKlassen.BaseEntity;
-import lombok.Getter;
-import lombok.Setter;
-
+import lombok.Data;
 
 import java.util.Date;
 import java.util.List;
 
 
-@Getter
-@Setter
-public class Spiel  extends BaseEntity {
+@Data
+public class Spiel extends BaseEntity {
 
     private Date beginn;
 
     private long dauer;
 
     private List<Spielrunde> spielrunden;
-
-    public Spiel() {
-        this.beginn = new Date();
-    }
 
 }
