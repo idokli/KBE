@@ -10,13 +10,6 @@ import java.util.List;
 public interface ISpielSteuerung {
 
     /**
-     * Erstellt ein neues Spiel
-     *
-     * @return
-     */
-    Spiel starteNeuesSpiel(List<Spieler> spieler);
-
-    /**
      * SpielVerwaltung durch seine Hand spielt eine Karte auf dem aufgelegten Kartenstapel
      * @param spieler
      * @param spielkarte

@@ -1,20 +1,18 @@
 package Komponenten.SpielVerwaltung.export;
 
+import datenmodel.Enum.SpielTyp;
+import datenmodel.Enum.Spielregel;
+import datenmodel.Spiel;
 import datenmodel.Spieler;
+
+import java.util.List;
 
 public interface ISpielVerwaltung {
 
     /**
-     * register SpielVerwaltung in DB
-     * @param spieler
+     * Erstellt ein neues Spiel
+     *
      * @return
      */
-    boolean registerSpieler (Spieler spieler);
-
-    /**
-     * gibt ein SpielVerwaltung Objekt mit dem Namen zurück
-     * @param name
-     * @return
-     */
-    Spieler getSpieler(String name);
+    Spiel starteNeuesSpiel(List<Spieler> spieler, SpielTyp spielTyp, Spielregel spielregel);
 }
