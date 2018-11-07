@@ -1,4 +1,4 @@
-package Komponenten.SpielregelKomponent.export;
+package Komponenten.Spielregel.export;
 
 import datenmodel.Enum.Regel;
 import datenmodel.Spielkarte;

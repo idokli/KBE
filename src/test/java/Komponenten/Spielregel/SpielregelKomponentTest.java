@@ -1,4 +1,4 @@
-package Komponenten.SpielregelKomponent;
+package Komponenten.Spielregel;
 
 public class SpielregelKomponentTest {
 }

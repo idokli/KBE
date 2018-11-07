@@ -1,18 +1,18 @@
-package Komponenten.SpielerKomponent.export;
+package Komponenten.SpielVerwaltung.export;
 
 import datenmodel.Spieler;
 
-public interface ISpielerKomponent {
+public interface ISpielVerwaltung {
 
     /**
-     * register Spieler in DB
+     * register SpielVerwaltung in DB
      * @param spieler
      * @return
      */
     boolean registerSpieler (Spieler spieler);
 
     /**
-     * gibt ein Spieler Objekt mit dem Namen zurück
+     * gibt ein SpielVerwaltung Objekt mit dem Namen zurück
      * @param name
      * @return
      */

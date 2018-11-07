@@ -1,11 +1,11 @@
-package Komponenten.KartenKomponent.export;
+package Komponenten.Karten.export;
 
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Spielkarte;
 
 import java.util.List;
 
-public interface IKartenKomponent {
+public interface IKarten {
 
     /**
      * Gib zurück eine Kartenstapel zum ausgewählten Spiel

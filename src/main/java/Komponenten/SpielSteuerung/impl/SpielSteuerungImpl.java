@@ -1,11 +1,11 @@
-package Komponenten.SpielKomponent.impl;
+package Komponenten.SpielSteuerung.impl;
 
-import Komponenten.SpielKomponent.export.ISpielKomponent;
+import Komponenten.SpielSteuerung.export.ISpielSteuerung;
 import datenmodel.*;
 
 import java.util.List;
 
-public class SpielKomponentImpl implements ISpielKomponent {
+public class SpielSteuerungImpl implements ISpielSteuerung {
 
     public Spiel starteNeuesSpiel(List<Spieler> spieler) {
         return null;
@@ -41,7 +41,7 @@ public class SpielKomponentImpl implements ISpielKomponent {
     }
 
     /**
-     Registriert Spieler auf der Spielrunde
+     Registriert SpielVerwaltung auf der Spielrunde
      * @param spieler
      * @param spielrunde
      */
@@ -54,17 +54,17 @@ public class SpielKomponentImpl implements ISpielKomponent {
     }
 
     /**
-     * Verteilt initiale Spielkarten an den Spieler bzw. erstellt die Kartenhand
+     * Verteilt initiale Spielkarten an den SpielVerwaltung bzw. erstellt die Kartenhand
      * @param spielerListe
      * @param spielrunde
-     * @return List<Spieler>;
+     * @return List<SpielVerwaltung>;
      */
     private List<Spieler> kartenverteilen(List<Spieler> spielerListe, Spielrunde spielrunde){
         return null;
     }
 
     /**
-     * Sucht sich einen Spieler random aus. "spielend" wird auf true gesetzt
+     * Sucht sich einen SpielVerwaltung random aus. "spielend" wird auf true gesetzt
      * @param spielerliste
      */
     private Spieler waehleErsterSpieler(List<Spieler> spielerliste){

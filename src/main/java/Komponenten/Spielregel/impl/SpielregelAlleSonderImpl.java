@@ -1,10 +1,11 @@
-package Komponenten.SpielregelKomponent.impl;
+package Komponenten.Spielregel.impl;
 
-import Komponenten.SpielregelKomponent.export.ISpielregel;
+import Komponenten.Spielregel.export.ISpielregel;
 import datenmodel.Enum.Regel;
 import datenmodel.Spielkarte;
 
-public class SpielregelBasicSonderImpl implements ISpielregel {
+public class SpielregelAlleSonderImpl implements ISpielregel {
+
     public Regel getRegelFuerKarte(Spielkarte spielkarte) {
         switch (spielkarte.getBlattwert()){
             case Acht:
@@ -13,10 +14,15 @@ public class SpielregelBasicSonderImpl implements ISpielregel {
                 return Regel.ZWEI_ZIEHEN;
             case Bube:
                 return Regel.WUENSCHER;
+            case Neun:
+                return Regel.RICHTUNGSWECHSEL;
+            case Ass:
+                return Regel.STOPPER;
+            case Zehn:
+                return Regel.ALLESLEGER;
             default:
                 return Regel.KEIN;
-        }
-    }
+        }    }
 
     public boolean istKarteAuflegbar(Spielkarte vorherigeSpielkarte, Spielkarte aktuelleSpielkarte) {
         return false;

@@ -1,4 +1,4 @@
-package Komponenten.SpielKomponent;
+package Komponenten.SpielSteuerung;
 
 public class SpielKomponentTest {
 }

@@ -1,4 +1,4 @@
-package Komponenten.SpielKomponent.export;
+package Komponenten.SpielSteuerung.export;
 
 import datenmodel.Spiel;
 import datenmodel.Spieler;
@@ -7,7 +7,7 @@ import datenmodel.Spielrunde;
 
 import java.util.List;
 
-public interface ISpielKomponent {
+public interface ISpielSteuerung {
 
     /**
      * Erstellt ein neues Spiel
@@ -17,7 +17,7 @@ public interface ISpielKomponent {
     Spiel starteNeuesSpiel(List<Spieler> spieler);
 
     /**
-     * Spieler durch seine Hand spielt eine Karte auf dem aufgelegten Kartenstapel
+     * SpielVerwaltung durch seine Hand spielt eine Karte auf dem aufgelegten Kartenstapel
      * @param spieler
      * @param spielkarte
      * @return boolean - ob die Spielkarte gespielt werden darf
@@ -32,14 +32,14 @@ public interface ISpielKomponent {
     boolean checkZuziehndenKarten(Spielrunde spielrunde);
 
     /**
-     * check ob Mau aufgerufen werden soll, wenn der Spieler nur eine Karte noch hat
+     * check ob Mau aufgerufen werden soll, wenn der SpielVerwaltung nur eine Karte noch hat
      * @param spieler
      * @return
      */
     boolean sollMauAufgerufen (Spieler spieler);
 
     /**
-     * Spieler zieht eine Spielkart vom Kartenstapel
+     * SpielVerwaltung zieht eine Spielkart vom Kartenstapel
      * @param spieler
      * @param anzahlKarten
      * @return List<Spielkarte>

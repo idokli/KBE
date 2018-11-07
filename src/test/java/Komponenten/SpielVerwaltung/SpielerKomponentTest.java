@@ -1,4 +1,4 @@
-package Komponenten.SpielerKomponent;
+package Komponenten.SpielVerwaltung;
 
 public class SpielerKomponentTest {
 }

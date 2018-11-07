@@ -10,6 +10,8 @@
 
 [Frontend] as frontend
 
+[SpielverwaltungKomponent] as spk
+
 database "maumauDB" {
 
 }
