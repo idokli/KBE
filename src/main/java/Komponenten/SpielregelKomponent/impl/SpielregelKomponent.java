@@ -1,5 +1,6 @@
-package Komponenten.SpielregelKomponent;
+package Komponenten.SpielregelKomponent.impl;
 
+import Komponenten.SpielregelKomponent.export.ISpielregelKomponent;
 import datenmodel.Enum.Regel;
 import datenmodel.Spielkarte;
 
