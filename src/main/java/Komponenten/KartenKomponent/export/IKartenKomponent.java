@@ -1,4 +1,4 @@
-package Komponenten.KartenKomponent;
+package Komponenten.KartenKomponent.export;
 
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Spielkarte;

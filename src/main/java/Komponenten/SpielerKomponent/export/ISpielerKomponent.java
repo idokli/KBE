@@ -1,4 +1,4 @@
-package Komponenten.SpielerKomponent;
+package Komponenten.SpielerKomponent.export;
 
 import datenmodel.Spieler;
 

@@ -1,5 +1,6 @@
-package Komponenten.SpielKomponent;
+package Komponenten.SpielKomponent.impl;
 
+import Komponenten.SpielKomponent.export.ISpielKomponent;
 import datenmodel.*;
 
 import java.util.List;
