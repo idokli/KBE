@@ -1,37 +1,8 @@
-In Klammern private Methoden
-
-Benutzer registriert sich - SpielerKomponent, registerSpieler
-oder
-Benutzer wird gesucht - SpielerKomponent, getSpieler
-
-Es wird nach den Konfigurationen gefragt und konfiguriert - SpielregelKomponent, konfigurierRegelFuerSpiel
-
-Neues Spiel wird gestartet - SpielKomponent , starteNeuesSpiel
-(erstelleRunde)
-(registriereSpieler)
-(erstellverdeckteStapel) --> KartenKomponent, baueStapel
-(kartenverteilen)
-(waehleErsterSpieler)
-(legErsteKarteAuf)
-
-Vor jedem Zug - SpielKomponent , checkZuziehndenKarten & SpielKomponent , sollMauAufgerufen
-
-Wenn es Karten gibt kann der Spieler wählen ob er eine Karte ziehen oder eine weitere Karte auflegen möchte
-
-Wenn Mau aufgerufen soll und der Spieler es nicht gemacht hat, soll er Karten vom Stapel ziehen
-
-Spieler spielt - SpielKomponent , spieleKarte
-(pruefeObKarteAblegbar) --> SpielRegelKomponent (getRegelFuerKarte)
-oder
-SpielKomponent , zieheKartenVomStapel
-
-Wenn ein Regel auftritt:
-drei neue Attributen sollen benutzt werden :rundeFarbe, zuZiehnKartenAnzahl, aktivRegel
-
-Am Ende : SpielKomponent , beendeSpiel
-
-
-
+- Spielregelkomponente soll die Regel-Logik enthalten
+     - z.B. antworten mit wer daran ist
+- Spielregel kennt Personzug (nur 1 Person)
+- Spielsteuerung kennt nur eine Runde
+- Spielverwaltung kennt mehrere Runden
 
 
 

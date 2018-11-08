@@ -2,38 +2,43 @@
 
 [SpielregelKomponent] as srlk
 
-[SpielKomponent] as sk
+[SpielsteuerungKomponent] as ssk
 
 [KartenKomponent] as kk
 
-[SpielerKomponent] as serk
-
 [Frontend] as frontend
 
-[SpielverwaltungKomponent] as spk
+[SpielverwaltungKomponent] as svk
 
 database "maumauDB" {
 
 }
 
-ISpielerKomponent - serk
-
 ISpielregelKomponent - srlk
 
-ISpielKomponent - sk
+ISpielSteuerungKomponent - ssk
 
 IKartenKomponent - kk
 
-sk -up-> maumauDB
-
-sk --> IKartenKomponent
-
-sk -down-> ISpielregelKomponent
-
-sk -right-> ISpielerKomponent
+ISpielVerwaltungKomponent  - svk
 
 
-frontend --> ISpielKomponent
+frontend --> ISpielVerwaltungKomponent
+
+svk --> ISpielSteuerungKomponent
+
+ssk --> ISpielregelKomponent
+
+svk -right-> IKartenKomponent
+
+svk -up-> maumauDB
+
+ssk -right-> IKartenKomponent
+
+srlk -right-> IKartenKomponent
+
+
+
 
 
 @enduml

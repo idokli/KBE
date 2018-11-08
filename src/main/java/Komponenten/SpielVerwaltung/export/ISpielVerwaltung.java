@@ -3,7 +3,6 @@ package Komponenten.SpielVerwaltung.export;
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Spiel;
-import datenmodel.Spieler;
 
 import java.util.List;
 
@@ -14,7 +13,7 @@ public interface ISpielVerwaltung {
      *
      * @return
      */
-    Spiel starteNeuesSpiel(List<Spieler> spieler, SpielTyp spielTyp, RegelKompTyp regelKompTyp);
+    Spiel starteNeuesSpiel(List<String> spieler, SpielTyp spielTyp, RegelKompTyp regelKompTyp);
 
     /**
      * Berechnet Dauer des Spiels
