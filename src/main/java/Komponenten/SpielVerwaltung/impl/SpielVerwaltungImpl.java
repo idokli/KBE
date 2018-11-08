@@ -1,14 +1,20 @@
 package Komponenten.SpielVerwaltung.impl;
 
 import Komponenten.SpielVerwaltung.export.ISpielVerwaltung;
+import datenmodel.Enum.RegelKompTyp;
+import datenmodel.Enum.SpielTyp;
+import datenmodel.Spiel;
 import datenmodel.Spieler;
 
+import java.util.List;
+
 public class SpielVerwaltungImpl implements ISpielVerwaltung {
-    public boolean registerSpieler(Spieler spieler) {
-        return false;
+
+    public Spiel starteNeuesSpiel(List<Spieler> spieler, SpielTyp spielTyp, RegelKompTyp regelKompTyp) {
+        return null;
     }
 
-    public Spieler getSpieler(String name) {
+    public Spiel beendeSpiel(Spiel spiel) {
         return null;
     }
 }

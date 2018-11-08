@@ -1,6 +1,6 @@
 package datenmodel.Enum;
 
-public enum Spielregel {
+public enum RegelKompTyp {
 
     OHNE_SONDER_REGEL,
 

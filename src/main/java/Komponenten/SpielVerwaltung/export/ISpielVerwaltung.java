@@ -1,7 +1,7 @@
 package Komponenten.SpielVerwaltung.export;
 
 import datenmodel.Enum.SpielTyp;
-import datenmodel.Enum.Spielregel;
+import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Spiel;
 import datenmodel.Spieler;
 
@@ -14,5 +14,11 @@ public interface ISpielVerwaltung {
      *
      * @return
      */
-    Spiel starteNeuesSpiel(List<Spieler> spieler, SpielTyp spielTyp, Spielregel spielregel);
+    Spiel starteNeuesSpiel(List<Spieler> spieler, SpielTyp spielTyp, RegelKompTyp regelKompTyp);
+
+    /**
+     * Berechnet Dauer des Spiels
+     * @param spiel
+     */
+    Spiel beendeSpiel(Spiel spiel);
 }

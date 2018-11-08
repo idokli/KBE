@@ -27,10 +27,6 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return null;
     }
 
-    public Spiel beendeSpiel(Spiel spiel) {
-        return null;
-    }
-
     /**
      * Erstellt im Spiel eine Spielrunde
      *

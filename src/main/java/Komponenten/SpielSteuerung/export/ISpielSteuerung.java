@@ -39,10 +39,4 @@ public interface ISpielSteuerung {
      */
     List<Spielkarte> zieheKartenVomStapel(Spieler spieler, int anzahlKarten);
 
-    /**
-     * Berechnet Dauer des Spiels
-     * @param spiel
-     */
-    Spiel beendeSpiel(Spiel spiel);
-
 }
