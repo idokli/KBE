@@ -48,8 +48,7 @@ public interface ISpielSteuerung {
      * Der Spielerwünsch wird übergeben
      * @param blatttyp
      */
-    void bestimmeBlatttyp(Blatttyp blatttyp);
-
+    Spielrunde bestimmeBlatttyp(Blatttyp blatttyp);
 
     /**
      * Spielsteuerung zieht eine Spielkarte vom Kartenstapel
@@ -57,6 +56,6 @@ public interface ISpielSteuerung {
      * @param anzahlKarten
      * @return List<Spielkarte>
      */
-    List<Spielkarte> zieheKartenVomStapel(Spieler spieler, int anzahlKarten);
+    Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten);
 
 }

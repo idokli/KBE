@@ -35,15 +35,11 @@ public class Spielrunde extends BaseEntity {
 
     private List<Ergebnis> ergebnisListe;
 
-    private List<Spielkarte> erlaubteNaechsteKarte;
-
     private List<Spieler> spielerListe;
 
     private Blatttyp rundeFarbe;
 
     private Integer zuZiehnKartenAnzahl;
-
-    private Regel aktivRegel;
 
     public Spielrunde() {
         this.start = new Date();
