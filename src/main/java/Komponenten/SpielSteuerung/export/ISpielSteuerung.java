@@ -1,6 +1,6 @@
 package Komponenten.SpielSteuerung.export;
 
-import datenmodel.Spiel;
+import datenmodel.Enum.Blatttyp;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
@@ -10,29 +10,49 @@ import java.util.List;
 public interface ISpielSteuerung {
 
     /**
-     * SpielVerwaltung durch seine Hand spielt eine Karte auf dem aufgelegten Kartenstapel
+     * Um bei der Spielsteuerung zu fragen, welcher Spieler daran ist
+     * @return
+     */
+    Spieler fragWerDaranIst();
+
+    /**
+     * Prüft, ob der Spieler, der daran ist, Karten zu ziehen hat
+     * @param spielrunde
+     * @return
+     */
+    int checkZuziehendenKarten(Spielrunde spielrunde);
+
+    /**
+     * Prüft ob Spielkarte auflegbar ist
      * @param spieler
      * @param spielkarte
-     * @return boolean - ob die Spielkarte gespielt werden darf
+     * @return
      */
     boolean spieleKarte(Spieler spieler, Spielkarte spielkarte);
 
     /**
-     * checks ob es Karten gibt die man ziehen soll
-     * @param spielrunde
-     * @return boolean
-     */
-    boolean checkZuziehndenKarten(Spielrunde spielrunde);
-
-    /**
-     * check ob Mau aufgerufen werden soll, wenn der SpielVerwaltung nur eine Karte noch hat
+     * Prüft ob der Spieler, der daran ist, Mau Mau aufrufen sollte
      * @param spieler
      * @return
      */
-    boolean sollMauAufgerufen (Spieler spieler);
+    boolean sollMauMauAufrufen(Spieler spieler);
+
 
     /**
-     * SpielVerwaltung zieht eine Spielkart vom Kartenstapel
+     * Prüft, ob der Spieler, der daran ist, sich einen Blatttyp aussuchen kann (wegen Regel "Wünscher")
+     * @return
+     */
+    boolean pruefeObWuenscher(Spielkarte spielkarte);
+
+    /**
+     * Der Spielerwünsch wird übergeben
+     * @param blatttyp
+     */
+    void bestimmeBlatttyp(Blatttyp blatttyp);
+
+
+    /**
+     * Spielsteuerung zieht eine Spielkarte vom Kartenstapel
      * @param spieler
      * @param anzahlKarten
      * @return List<Spielkarte>

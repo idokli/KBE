@@ -2,18 +2,22 @@ package datenmodel.Enum;
 
 public enum Regel {
 
+
+    // BASIC
     ZWEI_ZIEHEN,
 
     AUSSETZEN,
 
     WUENSCHER,
 
+
+    // FULL
     RICHTUNGSWECHSEL,
 
     // Hebt die Funktion von ZWEI_ZIEHEN auf
     STOPPER,
 
-    // Darf auf jede Karte gelegt werden (aber nicht auf einem anderen Allesleger)
+    // Kann auf jede Nicht-Funktionskarte gelegt werden
     ALLESLEGER,
 
     KEIN;

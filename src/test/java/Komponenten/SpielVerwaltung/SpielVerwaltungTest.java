@@ -1,4 +1,4 @@
 package Komponenten.SpielVerwaltung;
 
-public class SpielerKomponentTest {
+public class SpielVerwaltungTest {
 }

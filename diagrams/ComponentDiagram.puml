@@ -6,7 +6,7 @@
 
 [KartenKomponent] as kk
 
-[Frontend] as frontend
+[Console] as Console
 
 [SpielverwaltungKomponent] as svk
 
@@ -23,9 +23,9 @@ IKartenKomponent - kk
 ISpielVerwaltungKomponent  - svk
 
 
-frontend --> ISpielVerwaltungKomponent
+Console -right-> ISpielVerwaltungKomponent
 
-svk --> ISpielSteuerungKomponent
+Console -down-> ISpielSteuerungKomponent
 
 ssk --> ISpielregelKomponent
 
@@ -33,9 +33,7 @@ svk -right-> IKartenKomponent
 
 svk -up-> maumauDB
 
-ssk -right-> IKartenKomponent
 
-srlk -right-> IKartenKomponent
 
 
 
