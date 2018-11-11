@@ -2,6 +2,7 @@ package Komponenten.Karten.impl;
 
 import Komponenten.Karten.export.IKarten;
 import datenmodel.Enum.SpielTyp;
+import datenmodel.Exceptions.MauMauException;
 import datenmodel.KartenStapel;
 
 /**
@@ -9,7 +10,7 @@ import datenmodel.KartenStapel;
  */
 public class KartenImpl implements IKarten {
 
-    public KartenStapel baueStapel(SpielTyp spielTyp) {
+    public KartenStapel baueStapel(SpielTyp spielTyp) throws MauMauException {
         return null;
     }
 }

@@ -1,8 +1,10 @@
 package Komponenten.SpielVerwaltung.impl;
 
+import Komponenten.Karten.export.IKarten;
 import Komponenten.SpielVerwaltung.export.ISpielVerwaltung;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
+import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spiel;
 import datenmodel.Spieler;
 import datenmodel.Spielrunde;
@@ -15,16 +17,24 @@ import java.util.List;
  */
 public class SpielVerwaltungImpl implements ISpielVerwaltung {
 
+    private IKarten kartenService;
 
-    public Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp) {
+    public SpielVerwaltungImpl(IKarten kartenService) {
+        super();
+        this.kartenService = kartenService;
+    }
+
+    public Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp) throws MauMauException {
         return null;
     }
 
-    public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) {
+    public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
         return null;
     }
 
-    public Spiel beendeSpiel(Spiel spiel) {
+    public Spiel beendeSpiel(Spiel spiel) throws MauMauException {
         return null;
     }
+
+
 }

@@ -2,6 +2,7 @@ package Komponenten.SpielVerwaltung.export;
 
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Enum.RegelKompTyp;
+import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spiel;
 import datenmodel.Spieler;
 import datenmodel.Spielrunde;
@@ -15,7 +16,7 @@ public interface ISpielVerwaltung {
      *
      * @return
      */
-    Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp);
+    Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp) throws MauMauException;
 
     /**
      * Erstelle eine Spielrunde und registriert die Spiele in der Runde
@@ -23,11 +24,11 @@ public interface ISpielVerwaltung {
      * @param spiel
      * @return
      */
-    Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel);
+    Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException;
 
     /**
      * Beende ein Spiel und berechnet Dauer des Spiels
      * @param spiel
      */
-    Spiel beendeSpiel(Spiel spiel);
+    Spiel beendeSpiel(Spiel spiel) throws MauMauException;
 }
