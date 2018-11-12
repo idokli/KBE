@@ -19,7 +19,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return null;
     } //V
 
-    public int checkZuziehendenKarten(Spielrunde spielrunde) {
+    public int checkZuZiehendenKarten(Spielrunde spielrunde) {
         return 0;
     } // V
 

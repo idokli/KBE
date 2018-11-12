@@ -15,7 +15,9 @@ public interface ISpielregel {
      * Blatttyp muss übergeben werden, für den Fall dass einen Blatttyp im Zug davor gewünscht wurde
      * @param vorherigeSpielkarte
      * @param aktuelleSpielkarte
+     * @param blatttyp
      * @return
+     * @throws MauMauException
      */
     boolean istKarteLegbar(Spielkarte vorherigeSpielkarte, Spielkarte aktuelleSpielkarte, Blatttyp blatttyp) throws MauMauException;
 
@@ -24,6 +26,7 @@ public interface ISpielregel {
      * @param aktuelleSpielkarte
      * @param spielerListe
      * @return
+     * @throws MauMauException
      */
     RegelComponentUtil holeAuswirkungVonKarte(Spielkarte aktuelleSpielkarte, List<Spieler> spielerListe)throws MauMauException;
 
@@ -32,6 +35,7 @@ public interface ISpielregel {
      * Prüft, ob die übergebene Spielkarte die Wünscher-Regel enthält
      * @param spielkarte
      * @return
+     * @throws MauMauException
      */
-    boolean pruefeObWuenscher(Spielkarte spielkarte);
+    boolean pruefeObWuenscher(Spielkarte spielkarte) throws MauMauException;
 }

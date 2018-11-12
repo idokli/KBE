@@ -81,7 +81,7 @@ public class SpielSteuerungTest {
 
         spielrunde.setZuZiehnKartenAnzahl(anzahlZuZiehendeKarten);
 
-        assertEquals(anzahlZuZiehendeKarten, spielSteuerung.checkZuziehendenKarten(spielrunde));
+        assertEquals(anzahlZuZiehendeKarten, spielSteuerung.checkZuZiehendenKarten(spielrunde));
     }
 
     @Test(expected = MauMauException.class)

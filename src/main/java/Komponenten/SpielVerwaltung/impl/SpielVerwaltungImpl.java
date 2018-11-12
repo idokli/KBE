@@ -4,6 +4,7 @@ import Komponenten.Karten.export.IKarten;
 import Komponenten.SpielVerwaltung.export.ISpielVerwaltung;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
+import datenmodel.Ergebnis;
 import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spiel;
 import datenmodel.Spieler;
@@ -29,6 +30,10 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
     }
 
     public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
+        return null;
+    }
+
+    public List<Ergebnis> beendeSpielrunde(Spielrunde spielrunde) throws MauMauException {
         return null;
     }
 
