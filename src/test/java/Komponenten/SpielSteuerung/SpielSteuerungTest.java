@@ -71,7 +71,7 @@ public class SpielSteuerungTest {
         //Checkt ob der Hand mehr als eine Karte hat
         Assert.assertTrue(spieler1.getHand().size() > 1);
 
-        Assert.assertTrue(spielSteuerung.sollMauMauAufrufen(spieler1));
+        Assert.assertFalse(spielSteuerung.sollMauMauAufrufen(spieler1));
     }
 
     @Test
@@ -126,7 +126,9 @@ public class SpielSteuerungTest {
 
         Assert.assertNotEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
 
-        Assert.assertEquals(gewuenschteBlatttyp, spielSteuerung.bestimmeBlatttyp(gewuenschteBlatttyp).getRundeFarbe());
+        spielSteuerung.bestimmeBlatttyp(gewuenschteBlatttyp);
+
+        Assert.assertEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
     }
 
     @Test
