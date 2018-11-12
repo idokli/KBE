@@ -59,7 +59,7 @@ public class SpielRegelOhneSonderTest {
         Spielkarte davor = beforeSpielkarte;
         Spielkarte danach = afterSpielkarte;
 
-        boolean antwort = spielRegelService.istKarteLegbar(davor, danach);
+        boolean antwort = spielRegelService.istKarteLegbar(davor, danach, null);
 
         assertTrue(antwort);
     }
@@ -74,7 +74,7 @@ public class SpielRegelOhneSonderTest {
         Spielkarte davor = new Spielkarte(Blattwert.Bube, Blatttyp.Herz);
         Spielkarte danach = null;
 
-        spielRegelService.istKarteLegbar(davor, danach);
+        spielRegelService.istKarteLegbar(davor, danach, null);
 
     }
 
