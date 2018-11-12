@@ -10,7 +10,6 @@ import datenmodel.KartenStapel;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -19,6 +18,8 @@ import org.mockito.Mockito;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class SpielSteuerungTest {
 
@@ -57,9 +58,9 @@ public class SpielSteuerungTest {
     public void testSollMauMauAufrufenLetzteKarte() {
 
         //Spieler hat nur noch eine Karte im Hand
-        Assert.assertEquals(1, spieler1.getHand().size());
+        assertEquals(1, spieler1.getHand().size());
 
-        Assert.assertTrue(spielSteuerung.sollMauMauAufrufen(spieler1));
+        assertTrue(spielSteuerung.sollMauMauAufrufen(spieler1));
     }
 
     @Test
@@ -69,9 +70,9 @@ public class SpielSteuerungTest {
         spieler1.getHand().add(new Spielkarte(Blattwert.Fuenf, Blatttyp.Herz));
 
         //Checkt ob der Hand mehr als eine Karte hat
-        Assert.assertTrue(spieler1.getHand().size() > 1);
+        assertTrue(spieler1.getHand().size() > 1);
 
-        Assert.assertFalse(spielSteuerung.sollMauMauAufrufen(spieler1));
+        assertFalse(spielSteuerung.sollMauMauAufrufen(spieler1));
     }
 
     @Test
@@ -80,7 +81,7 @@ public class SpielSteuerungTest {
 
         spielrunde.setZuZiehnKartenAnzahl(anzahlZuZiehendeKarten);
 
-        Assert.assertEquals(anzahlZuZiehendeKarten, spielSteuerung.checkZuziehendenKarten(spielrunde));
+        assertEquals(anzahlZuZiehendeKarten, spielSteuerung.checkZuziehendenKarten(spielrunde));
     }
 
     @Test(expected = MauMauException.class)
@@ -96,7 +97,7 @@ public class SpielSteuerungTest {
 
         spielrunde.getSpielerListe().add(spieler2);
 
-        Assert.assertEquals(spieler1, spielSteuerung.fragWerDaranIst());
+        assertEquals(spieler1, spielSteuerung.fragWerDaranIst());
     }
 
     @Test
@@ -106,7 +107,7 @@ public class SpielSteuerungTest {
 
         Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, Mockito.any(Blatttyp.class))).thenReturn(true);
 
-        Assert.assertTrue(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
+        assertTrue(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
     }
 
     @Test
@@ -116,7 +117,7 @@ public class SpielSteuerungTest {
 
         Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, Mockito.any(Blatttyp.class))).thenReturn(false);
 
-        Assert.assertFalse(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
+        assertFalse(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
     }
 
     @Test
@@ -124,11 +125,11 @@ public class SpielSteuerungTest {
 
         Blatttyp gewuenschteBlatttyp = Blatttyp.Herz;
 
-        Assert.assertNotEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
+        assertNotEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
 
         spielSteuerung.bestimmeBlatttyp(gewuenschteBlatttyp);
 
-        Assert.assertEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
+        assertEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
     }
 
     @Test
@@ -140,10 +141,10 @@ public class SpielSteuerungTest {
 
         int anzahlKartenImVerdeckteStapel = spielrunde.getVerdeckteStapel().getStapel().size();
 
-        Assert.assertEquals(anzahlKartenImHand + anzahlZuZiehendeKarten,
+        assertEquals(anzahlKartenImHand + anzahlZuZiehendeKarten,
                 spielSteuerung.zieheKartenVomStapel(spieler1, anzahlZuZiehendeKarten).getHand().size());
 
-        Assert.assertEquals(anzahlKartenImVerdeckteStapel-anzahlZuZiehendeKarten,
+        assertEquals(anzahlKartenImVerdeckteStapel-anzahlZuZiehendeKarten,
                 spielrunde.getVerdeckteStapel().getStapel().size());
     }
 
