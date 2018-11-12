@@ -54,7 +54,10 @@ public class SpielSteuerungTest {
 
     }
 
-
+    /**
+     * Wenn ein Spieler eine Karte im Hand hat soll MauMau aufgerufen werden
+     * @throws MauMauException
+     */
     @Test
     public void testSollMauMauAufrufenLetzteKarte() throws MauMauException {
 
@@ -64,6 +67,10 @@ public class SpielSteuerungTest {
         assertTrue(spielSteuerung.sollMauMauAufrufen(spieler1));
     }
 
+    /**
+     * Wenn ein Spieler mehr als eine Karte im Hand hat soll MauMau nicht aufgerufen werden
+     * @throws MauMauException
+     */
     @Test
     public void testSollMauMauAufrufenMehrAlsEineKarteImHand() throws MauMauException {
 
@@ -76,6 +83,10 @@ public class SpielSteuerungTest {
         assertFalse(spielSteuerung.sollMauMauAufrufen(spieler1));
     }
 
+    /**
+     * Check wie viele Karten soll vom verdeckten Stapel gezogen werden
+     * @throws MauMauException
+     */
     @Test
     public void testCheckZuziehendenKarten() throws MauMauException {
         int anzahlZuZiehendeKarten = 0;
@@ -85,12 +96,21 @@ public class SpielSteuerungTest {
         assertEquals(anzahlZuZiehendeKarten, spielSteuerung.checkZuZiehendenKarten(spielrunde));
     }
 
+    /**
+     * Wenn keiner oder nur ein Spieler in einer Spielrunde angemeldet ist, soll die Methode Exception werfen
+     * @throws MauMauException
+     */
     @Test(expected = MauMauException.class)
     public void testfragWerDaranIstNurEinSpieler() throws MauMauException {
 
         spielSteuerung.fragWerDaranIst();
     }
 
+    /**
+     * Wenn zwei Spieler oder mehr sind in einer Spielrunde angemeldet, soll den Spieler zurück gegeben werden,
+     * der gerade daran ist.
+     * @throws MauMauException
+     */
     @Test
     public void testfragWerDaranIstSpieler1Daran() throws MauMauException {
 
@@ -101,6 +121,10 @@ public class SpielSteuerungTest {
         assertEquals(spieler1, spielSteuerung.fragWerDaranIst());
     }
 
+    /**
+     * test ob die gespielte Karte anlegbar ist.
+     * @throws MauMauException
+     */
     @Test
     public void testSpieleKarteErlaubteKarte() throws MauMauException {
 
@@ -111,6 +135,10 @@ public class SpielSteuerungTest {
         assertTrue(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
     }
 
+    /**
+     * test ob die gespielte Karte anlegbar ist.
+     * @throws MauMauException
+     */
     @Test
     public void testSpieleKarteUnerlaubteKarte() throws MauMauException {
 
@@ -121,6 +149,10 @@ public class SpielSteuerungTest {
         assertFalse(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
     }
 
+    /**
+     * test ob eine gewuenschte Blatttyp in der Spielrunde aktualisiert ist
+     * @throws MauMauException
+     */
     @Test
     public void testBestimmeBlatttyp() throws MauMauException {
 
@@ -133,6 +165,10 @@ public class SpielSteuerungTest {
         assertEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
     }
 
+    /**
+     * test das Ziehen-Prozess vom verdeckten Stapel in den Hand
+     * @throws MauMauException
+     */
     @Test
     public void testZieheKartenVomStapel() throws MauMauException {
 
@@ -149,6 +185,10 @@ public class SpielSteuerungTest {
                 spielrunde.getVerdeckteStapel().getStapel().size());
     }
 
+    /**
+     * test ob eine Karte ein Wuenscher ist
+     * @throws MauMauException
+     */
     @Test
     public void testPruefeObWuenscher() throws MauMauException {
 
@@ -161,6 +201,10 @@ public class SpielSteuerungTest {
         assertTrue(isWuenscher);
     }
 
+    /**
+     * test ob eine Karte ein Wuenscher ist
+     * @throws MauMauException
+     */
     @Test
     public void testPruefeObWuenscherNotWuenscher() throws MauMauException {
 
