@@ -24,8 +24,7 @@ public interface ISpielSteuerung {
      * @return
      * @throws MauMauException
      */
-    int checkZuziehendenKarten(Spielrunde spielrunde) throws MauMauException;
-    int checkZuZiehendenKarten(Spielrunde spielrunde);
+    int checkZuZiehendenKarten(Spielrunde spielrunde) throws MauMauException;
 
     /**
      * Prüft ob Spielkarte auflegbar ist
