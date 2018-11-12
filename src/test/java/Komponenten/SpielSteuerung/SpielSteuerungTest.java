@@ -192,7 +192,7 @@ public class SpielSteuerungTest {
     @Test
     public void testPruefeObWuenscher() throws MauMauException {
 
-        Mockito.when(spielregel.pruefeObWuenscher(Mockito.any(Spielkarte.class))).thenReturn(true);
+        Mockito.when(spielregel.pruefeObWuenscher(new Spielkarte(Blattwert.Bube, Mockito.any(Blatttyp.class)))).thenReturn(true);
 
         Spielkarte spielkarte = new Spielkarte(Blattwert.Bube, Blatttyp.Karo);
 
