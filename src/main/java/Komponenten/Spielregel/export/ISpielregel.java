@@ -28,4 +28,10 @@ public interface ISpielregel {
     RegelComponentUtil holeAuswirkungVonKarte(Spielkarte aktuelleSpielkarte, List<Spieler> spielerListe)throws MauMauException;
 
 
+    /**
+     * Prüft, ob die übergebene Spielkarte die Wünscher-Regel enthält
+     * @param spielkarte
+     * @return
+     */
+    boolean pruefeObWuenscher(Spielkarte spielkarte);
 }

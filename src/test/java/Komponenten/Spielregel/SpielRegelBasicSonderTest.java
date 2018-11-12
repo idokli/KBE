@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class SpielRegelBasicSonderTest {
@@ -30,8 +30,15 @@ public class SpielRegelBasicSonderTest {
 
     @Parameters
     public static Collection<Object[]> data() {
-        // Kombination ALLES_ZIEHEN --> true
-        Object[][] data = {{new Spielkarte(Blattwert.Sieben, Blatttyp.Herz), new Spielkarte(Blattwert.Sieben, Blatttyp.Herz), true, null},
+                // STANDARD REGEL
+        Object[][] data = {{new Spielkarte(Blattwert.Acht, Blatttyp.Herz), new Spielkarte(Blattwert.Bube, Blatttyp.Herz), true},
+                {new Spielkarte(Blattwert.Acht, Blatttyp.Herz), new Spielkarte(Blattwert.Acht, Blatttyp.Pik), true},
+                {new Spielkarte(Blattwert.Acht, Blatttyp.Herz), new Spielkarte(Blattwert.Sieben, Blatttyp.Karo), false},
+                {new Spielkarte(Blattwert.Zehn, Blatttyp.Kreuz), new Spielkarte(Blattwert.Dame, Blatttyp.Herz), false},
+
+                // BASIC SONDERREGEL
+                // Kombination ALLES_ZIEHEN --> true
+                {new Spielkarte(Blattwert.Sieben, Blatttyp.Herz), new Spielkarte(Blattwert.Sieben, Blatttyp.Herz), true, null},
                 // Kombination ZWEI_ZIEHEN --> false
                 {new Spielkarte(Blattwert.Sieben, Blatttyp.Herz), new Spielkarte(Blattwert.Acht, Blatttyp.Herz), false, null},
                 // Kombination ZWEI_ZIEHEN --> true
@@ -72,7 +79,7 @@ public class SpielRegelBasicSonderTest {
 
         boolean antwort = spielRegelService.istKarteLegbar(davor, danach, gewuenschterBlatttyp);
 
-        assertTrue(antwort);
+        assertEquals(istAuflegbar, antwort);
     }
 
     /**

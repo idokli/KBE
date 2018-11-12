@@ -20,4 +20,8 @@ public class SpielregelOhneSonderImpl implements ISpielregel {
     public RegelComponentUtil holeAuswirkungVonKarte(Spielkarte aktuelleSpielkarte, List<Spieler> spielerListe) throws MauMauException {
         return null;
     }
+
+    public boolean pruefeObWuenscher(Spielkarte spielkarte) {
+        return false;
+    }
 }

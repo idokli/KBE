@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 @RunWith(Parameterized.class)
 public class SpielRegelOhneSonderTest {
@@ -61,7 +61,7 @@ public class SpielRegelOhneSonderTest {
 
         boolean antwort = spielRegelService.istKarteLegbar(davor, danach, null);
 
-        assertTrue(antwort);
+        assertEquals(istAuflegbar, antwort);
     }
 
     /**

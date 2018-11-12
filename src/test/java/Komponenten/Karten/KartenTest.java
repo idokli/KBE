@@ -36,7 +36,7 @@ public class KartenTest {
         assertNotNull(kartenStapel);
 
         // Der Stapel sollte 52 Spielkarten haben
-        assertEquals(kartenStapel.getStapel().size(), 52);
+        assertEquals( 52, kartenStapel.getStapel().size());
 
     }
 

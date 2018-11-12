@@ -53,9 +53,9 @@ public class SpielVerwaltungTest {
         // Das Feld "Beginn" soll gesetzt sein
         assertNotNull(spiel.getBeginn());
         // Das Spiel sollte den richtign Spieltyp haben
-        assertEquals(spiel.getSpielTyp(), spielTyp);
+        assertEquals(spielTyp, spiel.getSpielTyp());
         // Das Spiel sollte den richtigen RegelKompTyp haben
-        assertEquals(spiel.getRegelKompTyp(), regelKompTyp);
+        assertEquals(regelKompTyp, spiel.getRegelKompTyp());
 
     }
 
@@ -107,7 +107,7 @@ public class SpielVerwaltungTest {
         assertNotNull(spielrunde.getVerdeckteStapel());
 
         // Stapel sollte 52 Karten haben
-        assertEquals(spielrunde.getVerdeckteStapel().getStapel().size(), 52);
+        assertEquals( 52, spielrunde.getVerdeckteStapel().getStapel().size());
 
         // Kartenservice muss einmal aufgerufen worden sein
         Mockito.verify(kartenService,Mockito.times(1)).baueStapel(spielTyp);
