@@ -51,11 +51,12 @@ public class SpielSteuerungTest {
 
         spielrunde.setVerdeckteStapel(verdeckterStapel);
 
+
     }
 
 
     @Test
-    public void testSollMauMauAufrufenLetzteKarte() {
+    public void testSollMauMauAufrufenLetzteKarte() throws MauMauException {
 
         //Spieler hat nur noch eine Karte im Hand
         assertEquals(1, spieler1.getHand().size());
@@ -64,7 +65,7 @@ public class SpielSteuerungTest {
     }
 
     @Test
-    public void testSollMauMauAufrufenMehrAlsEineKarteImHand() {
+    public void testSollMauMauAufrufenMehrAlsEineKarteImHand() throws MauMauException {
 
         //Fügt eine neue Karte zum Hand
         spieler1.getHand().add(new Spielkarte(Blattwert.Fuenf, Blatttyp.Herz));
@@ -76,7 +77,7 @@ public class SpielSteuerungTest {
     }
 
     @Test
-    public void testCheckZuziehendenKarten() {
+    public void testCheckZuziehendenKarten() throws MauMauException {
         int anzahlZuZiehendeKarten = 0;
 
         spielrunde.setZuZiehnKartenAnzahl(anzahlZuZiehendeKarten);
@@ -85,13 +86,13 @@ public class SpielSteuerungTest {
     }
 
     @Test(expected = MauMauException.class)
-    public void testfragWerDaranIstNurEinSpieler() {
+    public void testfragWerDaranIstNurEinSpieler() throws MauMauException {
 
         spielSteuerung.fragWerDaranIst();
     }
 
     @Test
-    public void testfragWerDaranIstSpieler1Daran() {
+    public void testfragWerDaranIstSpieler1Daran() throws MauMauException {
 
         Spieler spieler2 = new Spieler(Collections.<Spielkarte>emptyList() , "spieler2", false);
 
@@ -121,7 +122,7 @@ public class SpielSteuerungTest {
     }
 
     @Test
-    public void testBestimmeBlatttyp() {
+    public void testBestimmeBlatttyp() throws MauMauException {
 
         Blatttyp gewuenschteBlatttyp = Blatttyp.Herz;
 
@@ -133,7 +134,7 @@ public class SpielSteuerungTest {
     }
 
     @Test
-    public void testZieheKartenVomStapel() {
+    public void testZieheKartenVomStapel() throws MauMauException {
 
         int anzahlZuZiehendeKarten = 2;
 
@@ -146,6 +147,30 @@ public class SpielSteuerungTest {
 
         assertEquals(anzahlKartenImVerdeckteStapel-anzahlZuZiehendeKarten,
                 spielrunde.getVerdeckteStapel().getStapel().size());
+    }
+
+    @Test
+    public void testPruefeObWuenscher() throws MauMauException {
+
+        Mockito.when(spielregel.pruefeObWuenscher(Mockito.any(Spielkarte.class))).thenReturn(true);
+
+        Spielkarte spielkarte = new Spielkarte(Blattwert.Bube, Blatttyp.Karo);
+
+        boolean isWuenscher = spielSteuerung.pruefeObWuenscher(spielkarte);
+
+        assertTrue(isWuenscher);
+    }
+
+    @Test
+    public void testPruefeObWuenscherNotWuenscher() throws MauMauException {
+
+        Mockito.when(spielregel.pruefeObWuenscher(Mockito.any(Spielkarte.class))).thenReturn(false);
+
+        Spielkarte spielkarte = new Spielkarte(Blattwert.Acht, Blatttyp.Karo);
+
+        boolean isWuenscher = spielSteuerung.pruefeObWuenscher(spielkarte);
+
+        assertFalse(isWuenscher);
     }
 
 
