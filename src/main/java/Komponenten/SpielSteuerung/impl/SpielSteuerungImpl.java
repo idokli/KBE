@@ -17,29 +17,27 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
 
     public Spieler fragWerDaranIst() {
         return null;
-    } //V
+    }
 
     public int checkZuZiehendenKarten(Spielrunde spielrunde) {
         return 0;
-    } // V
+    }
 
     public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte) {
         return false;
-    } //V
+    }
 
     public boolean sollMauMauAufrufen(Spieler spieler) {
         return false;
-    }  // V
+    }
 
-    //eine neue Methode in Spielregel ist nötig
     public boolean pruefeObWuenscher(Spielkarte spielkarte) {
         return false;
     }
 
-    //Signatur geändert
-    public void bestimmeBlatttyp(Blatttyp blatttyp) { } // V
+    public void bestimmeBlatttyp(Blatttyp blatttyp) { }
 
-    public Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten) { //V
+    public Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten) {
         return null;
     }
 }
