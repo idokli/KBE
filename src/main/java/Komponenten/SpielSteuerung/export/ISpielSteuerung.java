@@ -6,27 +6,29 @@ import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
 
-import java.util.List;
 
 public interface ISpielSteuerung {
 
     /**
-     * Um bei der Spielsteuerung zu fragen, welcher Spieler daran ist
+     * Gibt den Spieler, der in der Spielrunde daran ist
+     *
      * @return
      * @throws MauMauException
      */
     Spieler fragWerDaranIst() throws MauMauException;
 
     /**
-     * Prüft, ob der Spieler, der daran ist, Karten zu ziehen hat
+     * Prüft, ob der Spieler, der daran ist, Karten zu ziehen hat (wenn im Zug davor ein ZWEI_ZIEHEN gespielt wurde)
+     *
      * @param spielrunde
      * @return
      * @throws MauMauException
      */
-    int checkZuziehendenKarten(Spielrunde spielrunde) throws MauMauException;
+    int checkZuZiehendenKarten(Spielrunde spielrunde) throws MauMauException;
 
     /**
      * Prüft ob Spielkarte auflegbar ist
+     *
      * @param spieler
      * @param spielkarte
      * @return
@@ -35,7 +37,8 @@ public interface ISpielSteuerung {
     boolean spieleKarte(Spieler spieler, Spielkarte spielkarte) throws MauMauException;
 
     /**
-     * Prüft ob der Spieler, der daran ist, Mau Mau aufrufen sollte
+     * Prüft ob der Spieler, der daran ist, MauMau aufrufen sollte
+     *
      * @param spieler
      * @return
      * @throws MauMauException
@@ -44,25 +47,28 @@ public interface ISpielSteuerung {
 
 
     /**
-     * Prüft, ob der Spieler, der daran ist, sich einen Blatttyp aussuchen kann (wegen Regel "Wünscher")
+     * Prüft ob die übergebene Spielkarte die Wünscher-Funktion besitzt
+     *
      * @return
      * @throws MauMauException
      */
     boolean pruefeObWuenscher(Spielkarte spielkarte) throws MauMauException;
 
     /**
-     * Der Spielerwünsch wird übergeben
+     * Der Spieler wählt einen Blatttyp und wird in der Spielrunde festgelegt
+     *
      * @param blatttyp
      * @throws MauMauException
      */
     void bestimmeBlatttyp(Blatttyp blatttyp) throws MauMauException;
 
     /**
-     * Spielsteuerung zieht eine Spielkarte vom Kartenstapel
+     * Der Spieler zieht Karten vom Stapel
      * @param spieler
      * @param anzahlKarten
      * @return List<Spielkarte>
      * @throws MauMauException
+     * @return
      */
     Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten) throws MauMauException;
 

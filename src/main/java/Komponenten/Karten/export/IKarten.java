@@ -8,7 +8,7 @@ import datenmodel.KartenStapel;
 public interface IKarten {
 
     /**
-     * Gib zurück eine Kartenstapel zum ausgewählten Spiel
+     * Gib zurück einen Kartenstapel zum ausgewählten Spieltyp
      * @param spielTyp
      * @return
      * @throws MauMauException
