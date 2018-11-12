@@ -37,7 +37,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     //Signatur geändert
-    public Spielrunde bestimmeBlatttyp(Blatttyp blatttyp) { return null; } // V
+    public void bestimmeBlatttyp(Blatttyp blatttyp) { } // V
 
     public Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten) {
         return null;
