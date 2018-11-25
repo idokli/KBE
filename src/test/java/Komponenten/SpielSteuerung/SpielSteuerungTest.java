@@ -1,8 +1,8 @@
-package Komponenten.SpielSteuerung;
+package komponenten.SpielSteuerung;
 
-import Komponenten.SpielSteuerung.export.ISpielSteuerung;
-import Komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
-import Komponenten.Spielregel.export.ISpielregel;
+import komponenten.SpielSteuerung.export.ISpielSteuerung;
+import komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
+import komponenten.Spielregel.export.ISpielregel;
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
 import datenmodel.Exceptions.MauMauException;
@@ -34,7 +34,7 @@ public class SpielSteuerungTest {
 
     @BeforeClass
     public static void initialize() {
-        spielSteuerung = new SpielSteuerungImpl(spielrunde);
+        spielSteuerung = new SpielSteuerungImpl();
 
         List<Spielkarte> hand = Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz));
         spieler1 = new Spieler(hand, "spieler1", true);
