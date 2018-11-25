@@ -1,9 +1,6 @@
 package komponenten.SpielSteuerung.impl;
 
 import komponenten.SpielSteuerung.export.ISpielSteuerung;
-import Komponenten.SpielSteuerung.export.ISpielSteuerung;
-import Komponenten.Spielregel.export.ISpielregel;
-import Komponenten.Spielregel.impl.SpielregelAlleSonderImpl;
 import datenmodel.*;
 import datenmodel.Enum.Blatttyp;
 import komponenten.Spielregel.export.ISpielregel;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Service;
 import datenmodel.Exceptions.MauMauException;
 
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -22,14 +18,18 @@ import java.util.stream.Collectors;
 @Service
 public class SpielSteuerungImpl implements ISpielSteuerung {
 
-    //TODO: replace with injection
-    private ISpielregel spielregel = new SpielregelAlleSonderImpl();
+    // Die spezifische Implementierung muss definiert werden
+    @Autowired
+    @Qualifier("ohneSonder")
+    private ISpielregel spielregel;
 
     private Spielrunde spielrunde;
 
-    public SpielSteuerungImpl(Spielrunde spielrunde){
-        this.spielrunde = spielrunde;
-    }
+    // Konstruktor kann noch keine Entity haben, da JPA noch nicht konfiguriert
+//    public SpielSteuerungImpl(Spielrunde spielrunde){
+//
+//        this.spielrunde = spielrunde;
+//    }
 
     public Spieler fragWerDaranIst() throws MauMauException {
         List<Spieler> spielerMitSpielend = spielrunde.getSpielerListe().stream()

@@ -13,7 +13,6 @@ public class MainApp {
 
     public static void main(String[] args) throws MauMauException {
 
-
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
 
         SpielVerwaltungImpl spielVerwaltung = context.getBean(SpielVerwaltungImpl.class);
@@ -22,7 +21,6 @@ public class MainApp {
 
         SpielSteuerungImpl spielSteuerung = context.getBean(SpielSteuerungImpl.class);
 
-        spielSteuerung.fragWerDaranIst();
 
     }
 }
