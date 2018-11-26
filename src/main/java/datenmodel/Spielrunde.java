@@ -4,61 +4,64 @@
 
 package datenmodel;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import datenmodel.Enum.Blatttyp;
-import datenmodel.Enum.Blattwert;
-import datenmodel.Enum.Regel;
 import datenmodel.HilfKlassen.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.commons.collections4.CollectionUtils;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
+@Entity
 public class Spielrunde extends BaseEntity {
 
-
+    @Column
     private String gewinnerName;
 
+    @Column
     private Date start;
 
+    @Column
     private long dauer;
 
     // Stapel mit verdeckten karten
+    @Embedded
     private KartenStapel verdeckteStapel;
 
     // Stapel mit aufgelegten Karten
+    @Embedded
     private KartenStapel stapelAufgelegt;
 
+    @OneToMany
     private List<Ergebnis> ergebnisListe;
 
+    @OneToMany
     private List<Spieler> spielerListe;
 
+    @Column
+    @Enumerated(EnumType.STRING)
     private Blatttyp rundeFarbe;
 
+    @Column
     private Integer zuZiehnKartenAnzahl;
 
-    public Spielrunde() {
-        this.start = new Date();
-    }
 
-
-    public void registriereSpieler(final Spieler spieler) {
-        if(CollectionUtils.isEmpty(this.spielerListe)) {
-            spielerListe = new ArrayList<Spieler>();
-        }
-        this.spielerListe.add(spieler);
-    }
-
-    public void baueStapel() {
-        for (Blatttyp blatttyp : Blatttyp.values()) {
-            for (Blattwert blattwert : Blattwert.values()) {
-//                this.verdeckteStapel.addeSpielkarte(new Spielkarte(blatttyp, blattwert));
-            }
-        }
-    }
+//    public void registriereSpieler(final Spieler spieler) {
+//        if(CollectionUtils.isEmpty(this.spielerListe)) {
+//            spielerListe = new ArrayList<Spieler>();
+//        }
+//        this.spielerListe.add(spieler);
+//    }
+//
+//    public void baueStapel() {
+//        for (Blatttyp blatttyp : Blatttyp.values()) {
+//            for (Blattwert blattwert : Blattwert.values()) {
+////                this.verdeckteStapel.addeSpielkarte(new Spielkarte(blatttyp, blattwert));
+//            }
+//        }
+//    }
 
 }

@@ -4,6 +4,7 @@ import komponenten.SpielSteuerung.export.ISpielSteuerung;
 import datenmodel.*;
 import datenmodel.Enum.Blatttyp;
 import komponenten.Spielregel.export.ISpielregel;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
  * Komponent, der eine Spielrunde steuert
  */
 @Service
+// NoArgsConstructor needed for spring container initiation
+@NoArgsConstructor
 public class SpielSteuerungImpl implements ISpielSteuerung {
 
     // Die spezifische Implementierung muss definiert werden
@@ -25,11 +28,10 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
 
     private Spielrunde spielrunde;
 
-    // Konstruktor kann noch keine Entity haben, da JPA noch nicht konfiguriert
-//    public SpielSteuerungImpl(Spielrunde spielrunde){
-//
-//        this.spielrunde = spielrunde;
-//    }
+    public SpielSteuerungImpl(Spielrunde spielrunde){
+
+        this.spielrunde = spielrunde;
+    }
 
     public Spieler fragWerDaranIst() throws MauMauException {
         List<Spieler> spielerMitSpielend = spielrunde.getSpielerListe().stream()

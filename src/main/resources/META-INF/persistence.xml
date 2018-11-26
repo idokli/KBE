@@ -17,10 +17,10 @@
 
         <properties>
             <!-- database connection -->
-            <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/maumauDB"/>
-            <property name="javax.persistence.jdbc.user" value="root"/>
-            <property name="javax.persistence.jdbc.password" value=""/>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://db.f4.htw-berlin.de:3306/_s0558332__maumauDB"/>
+            <property name="javax.persistence.jdbc.user" value="s0558332"/>
+            <property name="javax.persistence.jdbc.password" value="Mysql2018!"/>
 
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="true"/>

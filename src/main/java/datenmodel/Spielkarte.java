@@ -6,8 +6,11 @@ import datenmodel.Enum.Blattwert;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import javax.persistence.Embeddable;
+
 @Data
 @AllArgsConstructor
+@Embeddable
 public class Spielkarte {
 
     private Blattwert Blattwert;
@@ -15,5 +18,6 @@ public class Spielkarte {
     private Blatttyp Blatttyp;
 
 
-
+    public Spielkarte() {
+    }
 }
