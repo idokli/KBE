@@ -33,7 +33,7 @@ public class Spielrunde extends BaseEntity {
 
     // Stapel mit aufgelegten Karten
     @Embedded
-    private KartenStapel stapelAufgelegt;
+    private KartenStapel aufgelegtStapel;
 
     @OneToMany
     private List<Ergebnis> ergebnisListe;
@@ -47,21 +47,5 @@ public class Spielrunde extends BaseEntity {
 
     @Column
     private Integer zuZiehnKartenAnzahl;
-
-
-//    public void registriereSpieler(final Spieler spieler) {
-//        if(CollectionUtils.isEmpty(this.spielerListe)) {
-//            spielerListe = new ArrayList<Spieler>();
-//        }
-//        this.spielerListe.add(spieler);
-//    }
-//
-//    public void baueStapel() {
-//        for (Blatttyp blatttyp : Blatttyp.values()) {
-//            for (Blattwert blattwert : Blattwert.values()) {
-////                this.verdeckteStapel.addeSpielkarte(new Spielkarte(blatttyp, blattwert));
-//            }
-//        }
-//    }
 
 }
