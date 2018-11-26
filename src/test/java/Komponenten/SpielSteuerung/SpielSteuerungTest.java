@@ -34,7 +34,7 @@ public class SpielSteuerungTest {
 
     @BeforeClass
     public static void initialize() {
-        spielSteuerung = new SpielSteuerungImpl();
+        spielSteuerung = new SpielSteuerungImpl(spielrunde);
 
         List<Spielkarte> hand = Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz));
         spieler1 = new Spieler(hand, "spieler1", true);

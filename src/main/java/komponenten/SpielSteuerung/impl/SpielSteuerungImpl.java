@@ -24,7 +24,17 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     // Die spezifische Implementierung muss definiert werden
     @Autowired
     @Qualifier("ohneSonder")
-    private ISpielregel spielregel;
+    private ISpielregel spielregelohneSonder;
+
+    @Autowired
+    @Qualifier("basicSonder")
+    private ISpielregel spielregelBasicSonder;
+
+    @Autowired
+    @Qualifier("alleSonder")
+    private ISpielregel spielregelAlleSonder;
+
+    private ISpielregel selectedSpielRegel;
 
     private Spielrunde spielrunde;
 
@@ -61,7 +71,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     public boolean pruefeObWuenscher(Spielkarte spielkarte) throws MauMauException {
-        return spielregel.pruefeObWuenscher(spielkarte);
+        return selectedSpielRegel.pruefeObWuenscher(spielkarte);
     }
 
     public void bestimmeBlatttyp(Blatttyp blatttyp) throws MauMauException {
