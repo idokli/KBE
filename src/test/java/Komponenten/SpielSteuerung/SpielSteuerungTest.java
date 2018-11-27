@@ -6,7 +6,6 @@ import komponenten.Spielregel.export.ISpielregel;
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
 import datenmodel.Exceptions.MauMauException;
-import datenmodel.KartenStapel;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
@@ -15,6 +14,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -45,8 +45,8 @@ public class SpielSteuerungTest {
 
         vorherigeKarte = new Spielkarte(Blattwert.Fuenf, Blatttyp.Herz);
 
-        KartenStapel verdeckterStapel = new KartenStapel();
-        verdeckterStapel.setStapel(Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz),
+        List<Spielkarte> verdeckterStapel = new ArrayList<>();
+        verdeckterStapel.addAll(Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz),
                 new Spielkarte(Blattwert.Fuenf, Blatttyp.Karo), new Spielkarte(Blattwert.Dame, Blatttyp.Karo)));
 
         spielrunde.setVerdeckteStapel(verdeckterStapel);
@@ -176,13 +176,13 @@ public class SpielSteuerungTest {
 
         int anzahlKartenImHand = spieler1.getHand().size();
 
-        int anzahlKartenImVerdeckteStapel = spielrunde.getVerdeckteStapel().getStapel().size();
+        int anzahlKartenImVerdeckteStapel = spielrunde.getVerdeckteStapel().size();
 
         assertEquals(anzahlKartenImHand + anzahlZuZiehendeKarten,
                 spielSteuerung.zieheKartenVomStapel(spieler1, anzahlZuZiehendeKarten).getHand().size());
 
         assertEquals(anzahlKartenImVerdeckteStapel-anzahlZuZiehendeKarten,
-                spielrunde.getVerdeckteStapel().getStapel().size());
+                spielrunde.getVerdeckteStapel().size());
     }
 
     /**

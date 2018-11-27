@@ -29,11 +29,11 @@ public class Spielrunde extends BaseEntity {
 
     // Stapel mit verdeckten karten
     @Embedded
-    private KartenStapel verdeckteStapel;
+    private List<Spielkarte> verdeckteStapel;
 
     // Stapel mit aufgelegten Karten
     @Embedded
-    private KartenStapel aufgelegtStapel;
+    private List<Spielkarte> aufgelegtStapel;
 
     @OneToMany
     private List<Ergebnis> ergebnisListe;

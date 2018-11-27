@@ -104,15 +104,15 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     private void addeSpielkarteZumAufgelegtStapel(Spielkarte spielkarte) throws MauMauException {
-        if (CollectionUtils.isEmpty(spielrunde.getAufgelegtStapel().getStapel())) {
+        if (CollectionUtils.isEmpty(spielrunde.getAufgelegtStapel())) {
             throw new MauMauException("AufgelegtStapel ist leer");
         }
-        spielrunde.getAufgelegtStapel().getStapel().add(spielkarte);
+        spielrunde.getAufgelegtStapel().add(spielkarte);
     }
 
     // Für aufgedeckten Stapel
     private Spielkarte getLetzteAufgelegteKarte() throws MauMauException {
-        List<Spielkarte> aufgelegtStapel = spielrunde.getAufgelegtStapel().getStapel();
+        List<Spielkarte> aufgelegtStapel = spielrunde.getAufgelegtStapel();
         if (CollectionUtils.isEmpty(aufgelegtStapel)) {
             throw new MauMauException("AufgelegtStapel ist leer");
         }
@@ -121,25 +121,25 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
 
     // Für verdeckten Stapel
     private List<Spielkarte> getNeueKartenVomVerdecktenStapelUndRemove(int anzahl) throws MauMauException {
-        if(spielrunde.getVerdeckteStapel().getStapel().size() < anzahl){
+        if(spielrunde.getVerdeckteStapel().size() < anzahl){
             reloadVerdecktenStapel();
         }
         List<Spielkarte> returnedKarte = new ArrayList<>(anzahl);
         for (int i=0; i < anzahl; i++){
-            int letzteIndex = spielrunde.getVerdeckteStapel().getStapel().size()-1;
-            returnedKarte.add(spielrunde.getVerdeckteStapel().getStapel().get(letzteIndex));
-            spielrunde.getVerdeckteStapel().getStapel().remove(letzteIndex);
+            int letzteIndex = spielrunde.getVerdeckteStapel().size()-1;
+            returnedKarte.add(spielrunde.getVerdeckteStapel().get(letzteIndex));
+            spielrunde.getVerdeckteStapel().remove(letzteIndex);
         }
         return returnedKarte;
     }
 
     //TODO add logger comment
     private void reloadVerdecktenStapel(){
-        List<Spielkarte> originalAufgeleteStapel = spielrunde.getAufgelegtStapel().getStapel();
+        List<Spielkarte> originalAufgeleteStapel = spielrunde.getAufgelegtStapel();
         // nimmt die letzte aufgelegte Karte, erzeug davon ein neuer Stapel und setzt er als der neue aufgelegte Stapel in der Spielrunde
         Spielkarte letzteAufgelegteSpielKarte = originalAufgeleteStapel.get(originalAufgeleteStapel.size() - 1);
-        KartenStapel neuAufgelegteStapel = new KartenStapel();
-        neuAufgelegteStapel.setStapel(Arrays.asList(letzteAufgelegteSpielKarte));
+        List<Spielkarte> neuAufgelegteStapel = new ArrayList<>();
+        neuAufgelegteStapel.addAll(Arrays.asList(letzteAufgelegteSpielKarte));
         spielrunde.setAufgelegtStapel(neuAufgelegteStapel);
 
         //Entfernung von der letzte aufgelegte Karte und durchmischen
@@ -147,12 +147,12 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         List<Spielkarte> gemischteNeuerAufgedeckterStapel = mischeKarten(originalAufgeleteStapel);
 
         //hinzufügen von den vorherigen Karten vom verdeckten Stapel
-        List<Spielkarte> originalVerdeckteStapel = spielrunde.getVerdeckteStapel().getStapel();
+        List<Spielkarte> originalVerdeckteStapel = spielrunde.getVerdeckteStapel();
         gemischteNeuerAufgedeckterStapel.addAll(originalVerdeckteStapel);
 
         //Aktualisierung vom verdeckten Stapel in der Spielrunde
-        KartenStapel neuVerdeckterStapel = new KartenStapel();
-        neuVerdeckterStapel.setStapel(gemischteNeuerAufgedeckterStapel);
+        List<Spielkarte> neuVerdeckterStapel = new ArrayList<>();
+        neuVerdeckterStapel.addAll(gemischteNeuerAufgedeckterStapel);
         spielrunde.setVerdeckteStapel(neuVerdeckterStapel);
     }
 

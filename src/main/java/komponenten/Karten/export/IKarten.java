@@ -2,7 +2,9 @@ package komponenten.Karten.export;
 
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Exceptions.MauMauException;
-import datenmodel.KartenStapel;
+import datenmodel.Spielkarte;
+
+import java.util.List;
 
 
 public interface IKarten {
@@ -13,6 +15,6 @@ public interface IKarten {
      * @return
      * @throws MauMauException
      */
-    KartenStapel baueStapel(SpielTyp spielTyp) throws MauMauException;
+    List<Spielkarte> baueStapel(SpielTyp spielTyp) throws MauMauException;
 
 }

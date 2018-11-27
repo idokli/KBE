@@ -1,10 +1,15 @@
 package komponenten.Karten.impl;
 
-import komponenten.Karten.export.IKarten;
+import datenmodel.Enum.Blatttyp;
+import datenmodel.Enum.Blattwert;
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Exceptions.MauMauException;
-import datenmodel.KartenStapel;
+import datenmodel.Spielkarte;
+import komponenten.Karten.export.IKarten;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Komponent, der je nach Spieltyp, den Kartenstapel baut
@@ -12,7 +17,22 @@ import org.springframework.stereotype.Service;
 @Service
 public class KartenImpl implements IKarten {
 
-    public KartenStapel baueStapel(SpielTyp spielTyp) throws MauMauException {
-        return null;
+    public List<Spielkarte> baueStapel(SpielTyp spielTyp) throws MauMauException {
+
+        List<Spielkarte> stapel = new ArrayList<>();
+        switch(spielTyp) {
+            case MauMau:
+                // 56 Karten, inklusive 4 Jokers
+                for(Blatttyp blatttyp : Blatttyp.values()) {
+                    for(Blattwert blattwert : Blattwert.values()) {
+                        stapel.add(new Spielkarte(blattwert, blatttyp));
+                    }
+                }
+                break;
+
+            // TODO was bei default?
+            default:
+        }
+        return stapel;
     }
 }

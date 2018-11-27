@@ -111,7 +111,7 @@ public class SpielVerwaltungTest {
         assertNotNull(spielrunde.getVerdeckteStapel());
 
         // Stapel sollte 52 Karten haben
-        assertEquals(52, spielrunde.getVerdeckteStapel().getStapel().size());
+        assertEquals(52, spielrunde.getVerdeckteStapel().size());
 
         // Kartenservice muss einmal aufgerufen worden sein
         Mockito.verify(kartenService, Mockito.times(1)).baueStapel(spielTyp);

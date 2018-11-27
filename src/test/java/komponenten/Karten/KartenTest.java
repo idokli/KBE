@@ -1,12 +1,14 @@
 package komponenten.Karten;
 
+import datenmodel.Spielkarte;
 import komponenten.Karten.export.IKarten;
 import komponenten.Karten.impl.KartenImpl;
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Exceptions.MauMauException;
-import datenmodel.KartenStapel;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -30,13 +32,13 @@ public class KartenTest {
         // MauMau-Typ
         SpielTyp spielTyp = SpielTyp.MauMau;
 
-        KartenStapel kartenStapel = kartenService.baueStapel(spielTyp);
+        List<Spielkarte> kartenStapel = kartenService.baueStapel(spielTyp);
 
         // Der Stapel sollte nicht null sein
         assertNotNull(kartenStapel);
 
-        // Der Stapel sollte 52 Spielkarten haben
-        assertEquals( 52, kartenStapel.getStapel().size());
+        // Der Stapel sollte 56 Spielkarten haben (also inklusive 4 Joker)
+        assertEquals( 56, kartenStapel.size());
 
     }
 
