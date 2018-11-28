@@ -22,10 +22,12 @@ public class KartenImpl implements IKarten {
         List<Spielkarte> stapel = new ArrayList<>();
         switch(spielTyp) {
             case MauMau:
-                // 56 Karten, inklusive 4 Jokers
+                // 52 Karten, ohne 4 Jokers
                 for(Blatttyp blatttyp : Blatttyp.values()) {
                     for(Blattwert blattwert : Blattwert.values()) {
-                        stapel.add(new Spielkarte(blattwert, blatttyp));
+                        if(blattwert != Blattwert.Joker) {
+                            stapel.add(new Spielkarte(blattwert, blatttyp));
+                        }
                     }
                 }
                 break;

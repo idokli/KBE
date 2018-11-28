@@ -68,6 +68,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
 
     public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte) throws MauMauException {
         if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(), spielkarte, spielrunde.getRundeFarbe())){
+
             return true;
         } else {
             return false;

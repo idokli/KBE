@@ -22,5 +22,6 @@ public class MainApp {
         SpielSteuerungImpl spielSteuerung = context.getBean(SpielSteuerungImpl.class);
 
 
+
     }
 }
