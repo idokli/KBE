@@ -32,7 +32,7 @@ public class SpielVerwaltungTest {
 
     @Before
     public void initialize() {
-        spielVerwaltungService = new SpielVerwaltungImpl(kartenService);
+        spielVerwaltungService = new SpielVerwaltungImpl();
     }
 
     /**

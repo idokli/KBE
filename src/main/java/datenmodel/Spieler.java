@@ -1,22 +1,19 @@
 package datenmodel;
 
 import datenmodel.HilfKlassen.BaseEntity;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
-@AllArgsConstructor
+@NoArgsConstructor
 public class Spieler extends BaseEntity {
+
+	@ManyToOne
+	private Spielrunde spielrunde;
 
 	@Embedded
 	private List<Spielkarte> hand;
@@ -27,11 +24,14 @@ public class Spieler extends BaseEntity {
 	@Column
 	private boolean spielend;
 	
+	public Spieler(List<Spielkarte> hand, String name, boolean spielend) {
+		this.hand = hand;
+		this.name = name;
+		this.spielend = spielend;
+	}
+
 	public Spieler(String name) {
-		this.hand = new ArrayList<Spielkarte>();
 		this.name = name;
 	}
 
-	public Spieler() {
-	}
 }

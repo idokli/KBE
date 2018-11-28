@@ -1,18 +1,18 @@
 package komponenten.SpielVerwaltung.impl;
 
-import komponenten.Karten.export.IKarten;
-import komponenten.SpielVerwaltung.export.ISpielVerwaltung;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
-import datenmodel.Ergebnis;
+import datenmodel.*;
 import datenmodel.Exceptions.MauMauException;
-import datenmodel.Spiel;
-import datenmodel.Spieler;
-import datenmodel.Spielrunde;
+import komponenten.Karten.export.IKarten;
+import komponenten.SpielVerwaltung.export.ISpielVerwaltung;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import repositories.SpielRepository;
+import repositories.SpielrundeRepository;
 
-
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 /**
@@ -24,25 +24,58 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
     @Autowired
     private IKarten kartenService;
 
-    public SpielVerwaltungImpl(IKarten kartenService) {
-        super();
-        this.kartenService = kartenService;
-    }
+    @Autowired
+    private SpielRepository spielRepository;
+
+    @Autowired
+    private SpielrundeRepository spielrundeRepository;
+
 
     public Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp) throws MauMauException {
-        return null;
+        Spiel spiel = new Spiel(spielTyp, regelKompTyp);
+//        this.spielRepository.save(spiel);
+        return spiel;
     }
 
     public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
-        return null;
+        Spielrunde spielrunde = new Spielrunde(spiel);
+        spielrunde.setSpielerListe(spielerListe);
+        spielrunde.setVerdeckteStapel(this.kartenService.baueStapel(spiel.getSpielTyp()));
+        spiel.getSpielrunden().add(spielrunde);
+
+     //   this.spielrundeRepository.save(spielrunde);
+        return spielrunde;
     }
 
     public List<Ergebnis> beendeSpielrunde(Spielrunde spielrunde) throws MauMauException {
-        return null;
+//        spielrunde = this.spielrundeRepository.findById(spielrunde.getId());
+        // Dauer
+        Duration duration = Duration.between(spielrunde.getStart().toInstant(), Instant.now());
+        spielrunde.setDauer(duration.toMinutes());
+
+        // Ergebnisse
+        for(Spieler spieler : spielrunde.getSpielerListe()) {
+
+            int punkte = 0;
+            for(Spielkarte spielkarte : spieler.getHand()) {
+                punkte += spielkarte.getBlattwert().getIntWert();
+            }
+            Ergebnis ergebnis = new Ergebnis(punkte, spielrunde, spieler);
+            spielrunde.getErgebnisListe().add(ergebnis);
+
+        }
+        this.spielrundeRepository.save(spielrunde);
+        return spielrunde.getErgebnisListe();
     }
 
     public Spiel beendeSpiel(Spiel spiel) throws MauMauException {
-        return null;
+//        spiel = this.spielRepository.findById(spiel.getId());
+        // Dauer
+        Duration duration = Duration.between(spiel.getBeginn().toInstant(), Instant.now());
+        spiel.setDauer(duration.toMinutes());
+
+        this.spielRepository.save(spiel);
+        return spiel;
     }
 
 

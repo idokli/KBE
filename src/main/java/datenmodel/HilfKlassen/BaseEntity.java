@@ -15,7 +15,7 @@ public abstract class BaseEntity {
 
 	@Setter(value = AccessLevel.NONE)
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Temporal(TemporalType.TIMESTAMP)
