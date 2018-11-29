@@ -1,6 +1,7 @@
 package komponenten.Karten.export;
 
-import datenmodel.Enum.SpielTyp;
+import datenmodel.Enum.Blatttyp;
+import datenmodel.Enum.Blattwert;
 import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spielkarte;
 
@@ -11,10 +12,11 @@ public interface IKarten {
 
     /**
      * Gib zurück einen Kartenstapel zum ausgewählten Spieltyp
-     * @param spielTyp
-     * @return
+     * @param blatttypen - die Liste von Blatttypen, die nicht verwendet werden sollen. Kann null sein
+     * @param blattwerten - die Liste von Blattwerten, die nicht verwendet werden sollen. Kann null sein
+     * @return List<Spielkarte> - der gebaute Stapel
      * @throws MauMauException
      */
-    List<Spielkarte> baueStapel(SpielTyp spielTyp) throws MauMauException;
+    List<Spielkarte> baueStapel(List<Blatttyp> blatttypen, List<Blattwert> blattwerten) throws MauMauException;
 
 }

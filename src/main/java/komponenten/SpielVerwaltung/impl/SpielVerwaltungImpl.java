@@ -1,5 +1,6 @@
 package komponenten.SpielVerwaltung.impl;
 
+import datenmodel.Enum.Blattwert;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
 import datenmodel.*;
@@ -13,7 +14,9 @@ import repositories.SpielrundeRepository;
 
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Komponent, der ein Spiel verwaltet bzw. einzelne Spielrunde erstellt
@@ -33,16 +36,30 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
 
     public Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp) throws MauMauException {
         Spiel spiel = new Spiel(spielTyp, regelKompTyp);
-//        this.spielRepository.save(spiel);
+        // Falls mehrere Nutzer auf verschiedenen Rechner ein Spiel spielen würde, müsste das Spiel bei der
+        // Erstellung persistiert werden, damit der 2. Spieler das 1. erstellte Spiel nutzt
+        // this.spielRepository.save(spiel);
         return spiel;
     }
 
     public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
         Spielrunde spielrunde = new Spielrunde(spiel);
         spielrunde.setSpielerListe(spielerListe);
-        spielrunde.setVerdeckteStapel(this.kartenService.baueStapel(spiel.getSpielTyp()));
-        spiel.getSpielrunden().add(spielrunde);
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        blattwertNicht.add(Blattwert.Joker);
+        spielrunde.setVerdeckteStapel(this.kartenService.baueStapel(null, blattwertNicht));
+        for(Spieler spieler : spielrunde.getSpielerListe()) {
+            for(int i = 0; i<6; i++) {
+                Random r = new Random();
+                int low = 0;
+                int high = spielrunde.getVerdeckteStapel().size();
+                int result = r.nextInt(high-low) + low;
+                spieler.getHand().add(spielrunde.getVerdeckteStapel().get(result));
+                spielrunde.getVerdeckteStapel().remove(result);
+            }
 
+        }
+        spiel.getSpielrunden().add(spielrunde);
      //   this.spielrundeRepository.save(spielrunde);
         return spielrunde;
     }

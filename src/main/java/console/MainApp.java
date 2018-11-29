@@ -31,12 +31,8 @@ public class MainApp {
 
         Spielrunde spielrunde = spielVerwaltung.starteSpielrunde(spielerListe, spiel);
 
-
         SpielSteuerungImpl spielSteuerung = context.getBean(SpielSteuerungImpl.class);
 
-        for(Spieler spieler : spielerListe) {
-            spielSteuerung.zieheKartenVomStapel(spieler, 6);
-        }
 
         spielVerwaltung.beendeSpielrunde(spielrunde);
 

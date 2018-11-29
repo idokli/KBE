@@ -6,6 +6,8 @@ import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
 
+import java.util.List;
+
 
 public interface ISpielSteuerung {
 
@@ -15,7 +17,7 @@ public interface ISpielSteuerung {
      * @return
      * @throws MauMauException
      */
-    Spieler fragWerDaranIst() throws MauMauException;
+    Spieler fragWerDaranIst(List<Spieler> spielerListe) throws MauMauException;
 
     /**
      * Prüft, ob der Spieler, der daran ist, Karten zu ziehen hat (wenn im Zug davor ein ZWEI_ZIEHEN gespielt wurde)
@@ -34,7 +36,7 @@ public interface ISpielSteuerung {
      * @return
      * @throws MauMauException
      */
-    boolean spieleKarte(Spieler spieler, Spielkarte spielkarte) throws MauMauException;
+    boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde) throws MauMauException;
 
     /**
      * Prüft ob der Spieler, der daran ist, MauMau aufrufen sollte
@@ -60,7 +62,7 @@ public interface ISpielSteuerung {
      * @param blatttyp
      * @throws MauMauException
      */
-    void bestimmeBlatttyp(Blatttyp blatttyp) throws MauMauException;
+    void bestimmeBlatttyp(Blatttyp blatttyp, Spielrunde spielrunde) throws MauMauException;
 
     /**
      * Der Spieler zieht Karten vom Stapel
@@ -70,6 +72,6 @@ public interface ISpielSteuerung {
      * @throws MauMauException
      * @return
      */
-    Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten) throws MauMauException;
+    Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten, Spielrunde spielrunde) throws MauMauException;
 
 }

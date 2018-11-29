@@ -32,6 +32,7 @@ public class Spieler extends BaseEntity {
 
 	public Spieler(String name) {
 		this.name = name;
+		this.hand = new ArrayList<>();
 	}
 
 }

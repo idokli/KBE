@@ -41,14 +41,9 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     //TODO add to interface setting of selected spiel regel
     private ISpielregel selectedSpielRegel;
 
-    private Spielrunde spielrunde;
 
-    public SpielSteuerungImpl(Spielrunde spielrunde){
-        this.spielrunde = spielrunde;
-    }
-
-    public Spieler fragWerDaranIst() throws MauMauException {
-        List<Spieler> spielerMitSpielend = spielrunde.getSpielerListe().stream()
+    public Spieler fragWerDaranIst(List<Spieler> spielerListe) throws MauMauException {
+        List<Spieler> spielerMitSpielend = spielerListe.stream()
                 .filter(Spieler::isSpielend).collect(Collectors.toList());
 
         if(spielerMitSpielend.size() != 1){
@@ -66,8 +61,8 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return spielrunde.getZuZiehnKartenAnzahl();
     }
 
-    public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte) throws MauMauException {
-        if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(), spielkarte, spielrunde.getRundeFarbe())){
+    public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde) throws MauMauException {
+        if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(spielrunde), spielkarte, spielrunde.getRundeFarbe())){
 
             return true;
         } else {
@@ -86,25 +81,25 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return selectedSpielRegel.pruefeObWuenscher(spielkarte);
     }
 
-    public void bestimmeBlatttyp(Blatttyp blatttyp) throws MauMauException {
+    public void bestimmeBlatttyp(Blatttyp blatttyp, Spielrunde spielrunde) throws MauMauException {
         if (blatttyp == null){
             throw new MauMauException("Blatttyp ist null");
         }
         spielrunde.setRundeFarbe(blatttyp);
     }
 
-    public Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten) throws MauMauException {
+    public Spieler zieheKartenVomStapel(Spieler spieler, int anzahlKarten, Spielrunde spielrunde) throws MauMauException {
         if(spieler == null){
             throw new MauMauException("Spieler ist null");
         }
 
-        List<Spielkarte> neueKarten = getNeueKartenVomVerdecktenStapelUndRemove(anzahlKarten);
+        List<Spielkarte> neueKarten = getNeueKartenVomVerdecktenStapelUndRemove(anzahlKarten, spielrunde);
         spieler.getHand().addAll(neueKarten);
 
         return spieler;
     }
 
-    private void addeSpielkarteZumAufgelegtStapel(Spielkarte spielkarte) throws MauMauException {
+    private void addeSpielkarteZumAufgelegtStapel(Spielkarte spielkarte, Spielrunde spielrunde) throws MauMauException {
         if (CollectionUtils.isEmpty(spielrunde.getAufgelegtStapel())) {
             throw new MauMauException("AufgelegtStapel ist leer");
         }
@@ -112,7 +107,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     // Für aufgedeckten Stapel
-    private Spielkarte getLetzteAufgelegteKarte() throws MauMauException {
+    private Spielkarte getLetzteAufgelegteKarte(Spielrunde spielrunde) throws MauMauException {
         List<Spielkarte> aufgelegtStapel = spielrunde.getAufgelegtStapel();
         if (CollectionUtils.isEmpty(aufgelegtStapel)) {
             throw new MauMauException("AufgelegtStapel ist leer");
@@ -121,9 +116,9 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     // Für verdeckten Stapel
-    private List<Spielkarte> getNeueKartenVomVerdecktenStapelUndRemove(int anzahl) throws MauMauException {
+    private List<Spielkarte> getNeueKartenVomVerdecktenStapelUndRemove(int anzahl, Spielrunde spielrunde) throws MauMauException {
         if(spielrunde.getVerdeckteStapel().size() < anzahl){
-            reloadVerdecktenStapel();
+            reloadVerdecktenStapel(spielrunde);
         }
         List<Spielkarte> returnedKarte = new ArrayList<>(anzahl);
         for (int i=0; i < anzahl; i++){
@@ -135,7 +130,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     //TODO add logger comment
-    private void reloadVerdecktenStapel(){
+    private void reloadVerdecktenStapel(Spielrunde spielrunde){
         List<Spielkarte> originalAufgeleteStapel = spielrunde.getAufgelegtStapel();
         // nimmt die letzte aufgelegte Karte, erzeug davon ein neuer Stapel und setzt er als der neue aufgelegte Stapel in der Spielrunde
         Spielkarte letzteAufgelegteSpielKarte = originalAufgeleteStapel.get(originalAufgeleteStapel.size() - 1);
