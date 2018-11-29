@@ -114,7 +114,7 @@ public class SpielSteuerungTest {
     @Test
     public void testfragWerDaranIstSpieler1Daran() throws MauMauException {
 
-        Spieler spieler2 = new Spieler(Collections.<Spielkarte>emptyList() , "spieler2", false);
+        Spieler spieler2 = new Spieler(new ArrayList<>(0), "spieler2", false);
 
         spielrunde.getSpielerListe().add(spieler2);
 
