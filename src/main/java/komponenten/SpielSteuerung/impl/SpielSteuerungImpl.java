@@ -1,5 +1,6 @@
 package komponenten.SpielSteuerung.impl;
 
+import datenmodel.HilfKlassen.RegelComponentUtil;
 import komponenten.SpielSteuerung.export.ISpielSteuerung;
 import datenmodel.*;
 import datenmodel.Enum.Blatttyp;
@@ -68,11 +69,22 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
 
     public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte) throws MauMauException {
         if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(), spielkarte, spielrunde.getRundeFarbe())){
+            setztKarteVomHandAufDemAufgelegteStapel(spieler, spielkarte);
+            RegelComponentUtil regelComponentUtil = selectedSpielRegel.holeAuswirkungVonKarte(spielkarte, spielrunde.getSpielerListe());
+            spielrunde.setSpielerListe(regelComponentUtil.getSpielerListe());
+            spielrunde.setZuZiehnKartenAnzahl(regelComponentUtil.getAnzahlKartenZuZiehen() + spielrunde.getZuZiehnKartenAnzahl());
 
             return true;
         } else {
             return false;
         }
+    }
+
+    private void setztKarteVomHandAufDemAufgelegteStapel(Spieler spieler, Spielkarte spielkarte) {
+        int i = spielrunde.getSpielerListe().indexOf(spieler);
+        spieler.getHand().remove(spielkarte);
+        spielrunde.getSpielerListe().get(i).setHand(spieler.getHand());
+        spielrunde.getAufgelegtStapel().add(spielkarte);
     }
 
     public boolean sollMauMauAufrufen(Spieler spieler) throws MauMauException {
