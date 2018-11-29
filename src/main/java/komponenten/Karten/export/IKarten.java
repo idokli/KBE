@@ -12,8 +12,8 @@ public interface IKarten {
 
     /**
      * Gib zurück einen Kartenstapel zum ausgewählten Spieltyp
-     * @param blatttypen - die Liste von Blatttypen, die nicht verwendet werden sollen. Kann null sein
-     * @param blattwerten - die Liste von Blattwerten, die nicht verwendet werden sollen. Kann null sein
+     * @param blatttypen - die Liste von Blatttypen, die nicht verwendet werden sollen.
+     * @param blattwerten - die Liste von Blattwerten, die nicht verwendet werden sollen.
      * @return List<Spielkarte> - der gebaute Stapel
      * @throws MauMauException
      */

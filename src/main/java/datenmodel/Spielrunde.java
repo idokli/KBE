@@ -56,10 +56,10 @@ public class Spielrunde extends BaseEntity {
     @Column
     private Integer zuZiehnKartenAnzahl;
 
-    public Spielrunde(Spiel spiel) {
+    public Spielrunde(Spiel spiel, List<Spieler> spielerliste) {
         this.spiel = spiel;
         this.start = new Date();
-        this.spielerListe = new ArrayList<>();
+        this.spielerListe = spielerliste;
         this.ergebnisListe = new ArrayList<>();
     }
 

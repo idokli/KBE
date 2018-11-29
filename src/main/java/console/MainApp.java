@@ -33,7 +33,6 @@ public class MainApp {
 
         SpielSteuerungImpl spielSteuerung = context.getBean(SpielSteuerungImpl.class);
 
-
         spielVerwaltung.beendeSpielrunde(spielrunde);
 
         spielVerwaltung.beendeSpiel(spiel);

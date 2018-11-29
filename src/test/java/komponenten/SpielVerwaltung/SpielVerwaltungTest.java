@@ -118,7 +118,8 @@ public class SpielVerwaltungTest {
         // Kartenservice muss einmal aufgerufen worden sein
         List<Blattwert> blattwertNicht = new ArrayList<>();
         blattwertNicht.add(Blattwert.Joker);
-        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(null, blattwertNicht);
+        List<Blatttyp> blatttypNicht = new ArrayList<>();
+        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(blatttypNicht, blattwertNicht);
 
     }
 
@@ -142,7 +143,9 @@ public class SpielVerwaltungTest {
         spielVerwaltungService.starteSpielrunde(spielerListe, spiel);
 
         // Kartenservice soll nicht aufgerufen worden sein
-        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(null, null);
+        List<Blatttyp> blatttypNicht = new ArrayList<>();
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(blatttypNicht, blattwertNicht);
     }
 
     /**
@@ -165,7 +168,9 @@ public class SpielVerwaltungTest {
         spielVerwaltungService.starteSpielrunde(spielerListe, spiel);
 
         // Kartenservice soll nicht aufgerufen worden sein
-        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(null, null);
+        List<Blatttyp> blatttypNicht = new ArrayList<>();
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(blatttypNicht, blattwertNicht);
     }
 
     /**

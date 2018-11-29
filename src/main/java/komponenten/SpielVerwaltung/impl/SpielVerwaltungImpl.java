@@ -1,5 +1,6 @@
 package komponenten.SpielVerwaltung.impl;
 
+import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
@@ -15,6 +16,7 @@ import repositories.SpielrundeRepository;
 import java.time.Duration;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -38,17 +40,21 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
         Spiel spiel = new Spiel(spielTyp, regelKompTyp);
         // Falls mehrere Nutzer auf verschiedenen Rechner ein Spiel spielen würde, müsste das Spiel bei der
         // Erstellung persistiert werden, damit der 2. Spieler das 1. erstellte Spiel nutzt
-        // this.spielRepository.save(spiel);
+//        this.spielRepository.save(spiel);
         return spiel;
     }
 
     public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
-        Spielrunde spielrunde = new Spielrunde(spiel);
-        spielrunde.setSpielerListe(spielerListe);
+        Spielrunde spielrunde = new Spielrunde(spiel, spielerListe);
         List<Blattwert> blattwertNicht = new ArrayList<>();
-        blattwertNicht.add(Blattwert.Joker);
-        spielrunde.setVerdeckteStapel(this.kartenService.baueStapel(null, blattwertNicht));
+        if(spiel.getSpielTyp() == SpielTyp.MauMau) {
+            blattwertNicht.add(Blattwert.Joker);
+        }
+        List<Blatttyp> blatttypNicht = new ArrayList<>();
+        spielrunde.setVerdeckteStapel(this.kartenService.baueStapel(blatttypNicht, blattwertNicht));
+        // Verteile Initialkarten 6
         for(Spieler spieler : spielrunde.getSpielerListe()) {
+            spieler.setSpielrunde(spielrunde);
             for(int i = 0; i<6; i++) {
                 Random r = new Random();
                 int low = 0;
@@ -60,36 +66,58 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
 
         }
         spiel.getSpielrunden().add(spielrunde);
-     //   this.spielrundeRepository.save(spielrunde);
         return spielrunde;
     }
 
     public List<Ergebnis> beendeSpielrunde(Spielrunde spielrunde) throws MauMauException {
-//        spielrunde = this.spielrundeRepository.findById(spielrunde.getId());
         // Dauer
         Duration duration = Duration.between(spielrunde.getStart().toInstant(), Instant.now());
-        spielrunde.setDauer(duration.toMinutes());
+        // TODO transform to minutes
+        spielrunde.setDauer(duration.getSeconds());
 
+        HashMap<Blattwert, Integer> punkteKarten = new HashMap<>();
         // Ergebnisse
+        if(spielrunde.getSpiel().getSpielTyp() == SpielTyp.MauMau) {
+            punkteKarten.put(Blattwert.Joker, 30);
+            punkteKarten.put(Blattwert.Ass, 11);
+            punkteKarten.put(Blattwert.Zwei, 2);
+            punkteKarten.put(Blattwert.Drei, 3);
+            punkteKarten.put(Blattwert.Vier, 4);
+            punkteKarten.put(Blattwert.Fuenf, 5);
+            punkteKarten.put(Blattwert.Sechs, 6);
+            punkteKarten.put(Blattwert.Sieben, 7);
+            punkteKarten.put(Blattwert.Acht, 8);
+            punkteKarten.put(Blattwert.Neun, 9);
+            punkteKarten.put(Blattwert.Zehn, 10);
+            punkteKarten.put(Blattwert.Bube, 20);
+            punkteKarten.put(Blattwert.Dame, 10);
+            punkteKarten.put(Blattwert.Koenig, 10);
+        }
         for(Spieler spieler : spielrunde.getSpielerListe()) {
 
+            // Gewinner
+            if(spieler.getHand().size() == 0) {
+                spielrunde.setGewinnerName(spieler.getName());
+            }
+            // Punkte Rest
             int punkte = 0;
             for(Spielkarte spielkarte : spieler.getHand()) {
-                punkte += spielkarte.getBlattwert().getIntWert();
+                punkte += punkteKarten.get(spielkarte.getBlattwert());
             }
             Ergebnis ergebnis = new Ergebnis(punkte, spielrunde, spieler);
             spielrunde.getErgebnisListe().add(ergebnis);
 
         }
-        this.spielrundeRepository.save(spielrunde);
+
         return spielrunde.getErgebnisListe();
     }
 
     public Spiel beendeSpiel(Spiel spiel) throws MauMauException {
-//        spiel = this.spielRepository.findById(spiel.getId());
+//        spiel = this.spielRepository.findById(spiel.getId()) .orElse(null);
         // Dauer
         Duration duration = Duration.between(spiel.getBeginn().toInstant(), Instant.now());
-        spiel.setDauer(duration.toMinutes());
+        // TODO Soll zu Minutes angepasst werden
+        spiel.setDauer(duration.getSeconds());
 
         this.spielRepository.save(spiel);
         return spiel;

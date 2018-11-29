@@ -7,6 +7,7 @@ import datenmodel.Spielkarte;
 import komponenten.Karten.export.IKarten;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,7 +19,18 @@ public class KartenImpl implements IKarten {
 
     @Override
     public List<Spielkarte> baueStapel(List<Blatttyp> blatttypen, List<Blattwert> blattwerten) throws MauMauException {
-        return null;
+
+        List<Spielkarte> stapel = new ArrayList<>();
+        for(Blatttyp blatttyp : Blatttyp.values()) {
+            if(!blatttypen.contains(blatttyp)) {
+                for(Blattwert blattwert : Blattwert.values()) {
+                    if(!blattwerten.contains(blattwert)) {
+                        stapel.add(new Spielkarte(blattwert, blatttyp));
+                    }
+                }
+            }
+        }
+        return stapel;
     }
 
 }

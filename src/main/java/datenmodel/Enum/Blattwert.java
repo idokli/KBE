@@ -2,43 +2,34 @@ package datenmodel.Enum;
 
 public enum Blattwert {
 
-    Joker(30),
+    Joker,
 
-    Ass(11),
+    Ass,
 
-    Zwei(2),
+    Zwei,
 
-    Drei(3),
+    Drei,
 
-    Vier(4),
+    Vier,
 
-    Fuenf(5),
+    Fuenf,
 
-    Sechs(6),
+    Sechs,
 
-    Sieben(7),
+    Sieben,
 
-    Acht(8),
+    Acht,
 
-    Neun(9),
+    Neun,
 
-    Zehn(10),
+    Zehn,
 
-    Bube(20),
+    Bube,
 
-    Dame(10),
+    Dame,
 
-    Koenig(10);
+    Koenig;
 
-    private final int blattWertZahl;
 
-    Blattwert(int blattWertZahl) {
-
-        this.blattWertZahl = blattWertZahl;
-    }
-
-    public int getIntWert() {
-        return this.blattWertZahl;
-    }
 
 }

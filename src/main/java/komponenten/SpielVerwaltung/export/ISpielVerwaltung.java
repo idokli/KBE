@@ -1,5 +1,6 @@
 package komponenten.SpielVerwaltung.export;
 
+import datenmodel.Enum.Blattwert;
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Ergebnis;
@@ -8,6 +9,7 @@ import datenmodel.Spiel;
 import datenmodel.Spieler;
 import datenmodel.Spielrunde;
 
+import java.util.HashMap;
 import java.util.List;
 
 public interface ISpielVerwaltung {
