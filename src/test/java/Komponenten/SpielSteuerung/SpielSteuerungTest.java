@@ -34,7 +34,7 @@ public class SpielSteuerungTest {
 
     @BeforeClass
     public static void initialize() {
-        spielSteuerung = new SpielSteuerungImpl(spielrunde);
+        spielSteuerung = new SpielSteuerungImpl();
 
         List<Spielkarte> hand = Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz));
         spieler1 = new Spieler(hand, "spieler1", true);
@@ -102,8 +102,11 @@ public class SpielSteuerungTest {
      */
     @Test(expected = MauMauException.class)
     public void testfragWerDaranIstNurEinSpieler() throws MauMauException {
-
-        spielSteuerung.fragWerDaranIst();
+        List<Spieler> spielerListe = new ArrayList<Spieler>();
+        spielerListe.add(new Spieler("Ido"));
+        spielerListe.add(new Spieler("Victor"));
+        spielerListe.add(new Spieler("Lucas"));
+        spielSteuerung.fragWerDaranIst(spielerListe);
     }
 
     /**

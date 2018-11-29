@@ -1,5 +1,7 @@
 package komponenten.SpielVerwaltung;
 
+import datenmodel.Enum.Blatttyp;
+import datenmodel.Enum.Blattwert;
 import komponenten.Karten.export.IKarten;
 import komponenten.SpielVerwaltung.export.ISpielVerwaltung;
 import komponenten.SpielVerwaltung.impl.SpielVerwaltungImpl;
@@ -114,7 +116,9 @@ public class SpielVerwaltungTest {
         assertEquals(52, spielrunde.getVerdeckteStapel().size());
 
         // Kartenservice muss einmal aufgerufen worden sein
-        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(spielTyp);
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        blattwertNicht.add(Blattwert.Joker);
+        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(null, blattwertNicht);
 
     }
 
@@ -138,7 +142,7 @@ public class SpielVerwaltungTest {
         spielVerwaltungService.starteSpielrunde(spielerListe, spiel);
 
         // Kartenservice soll nicht aufgerufen worden sein
-        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(null);
+        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(null, null);
     }
 
     /**
@@ -161,7 +165,7 @@ public class SpielVerwaltungTest {
         spielVerwaltungService.starteSpielrunde(spielerListe, spiel);
 
         // Kartenservice soll nicht aufgerufen worden sein
-        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(null);
+        Mockito.verify(kartenService, Mockito.times(0)).baueStapel(null, null);
     }
 
     /**
@@ -199,7 +203,9 @@ public class SpielVerwaltungTest {
         assertEquals(ergebnisse.size(), spielerListe.size());
 
         // Kartenservice muss einmal aufgerufen worden sein
-        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(spielTyp);
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        blattwertNicht.add(Blattwert.Joker);
+        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(null, blattwertNicht);
 
     }
 
