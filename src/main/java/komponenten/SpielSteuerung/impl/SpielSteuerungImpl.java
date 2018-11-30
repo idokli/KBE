@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class SpielSteuerungImpl implements ISpielSteuerung {
 
-    public Spieler fragWerDaranIst(List<Spieler> spielerListe) throws MauMauException {
+    public Spieler fragWerDranIst(List<Spieler> spielerListe) throws MauMauException {
         if(spielerListe.size() < 2){
             throw new MauMauException("Spielerliste muss mehr als einen Spieler enthalten");
         }

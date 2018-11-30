@@ -120,7 +120,7 @@ public class SpielSteuerungTest {
         spielerListe.add(new Spieler("Ido"));
         spielerListe.add(new Spieler("Victor"));
         spielerListe.add(new Spieler("Lucas"));
-        spielSteuerung.fragWerDaranIst(spielerListe);
+        spielSteuerung.fragWerDranIst(spielerListe);
     }
 
     /**
@@ -131,7 +131,7 @@ public class SpielSteuerungTest {
     public void testfragWerDaranIstNurEinSpieler() throws MauMauException {
         List<Spieler> spielerListe = new ArrayList<Spieler>();
         spielerListe.add(new Spieler(new ArrayList<>(0),"Ido", true));
-        spielSteuerung.fragWerDaranIst(spielerListe);
+        spielSteuerung.fragWerDranIst(spielerListe);
     }
 
     /**
@@ -146,7 +146,7 @@ public class SpielSteuerungTest {
 
         spielrunde.getSpielerListe().add(spieler2);
 
-        assertEquals(spieler1, spielSteuerung.fragWerDaranIst(spielrunde.getSpielerListe()));
+        assertEquals(spieler1, spielSteuerung.fragWerDranIst(spielrunde.getSpielerListe()));
     }
 
     /**
