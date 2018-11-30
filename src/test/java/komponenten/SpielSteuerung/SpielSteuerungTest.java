@@ -28,19 +28,24 @@ public class SpielSteuerungTest {
     private static Spielrunde spielrunde;
     private static Spielkarte vorherigeKarte;
 
-    @Mock
-    private ISpielregel spielregel;
+//    @Mock
+//    private ISpielregel spielregel;
+
+    private ISpielregel spielregel = Mockito.mock(ISpielregel.class);
 
 
     @BeforeClass
     public static void initialize() {
         spielSteuerung = new SpielSteuerungImpl();
 
-        List<Spielkarte> hand = Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz));
+        List<Spielkarte> hand = new ArrayList<>(1);
+        hand.add(new Spielkarte(Blattwert.Drei, Blatttyp.Herz));
         spieler1 = new Spieler(hand, "spieler1", true);
 
         spielrunde = new Spielrunde();
-        spielrunde.setSpielerListe(Arrays.asList(spieler1));
+        ArrayList<Spieler> spielerliste = new ArrayList<>(0);
+        spielerliste.add(spieler1);
+        spielrunde.setSpielerListe(spielerliste);
         spielrunde.setRundeFarbe(Blatttyp.Pik);
 
         vorherigeKarte = new Spielkarte(Blattwert.Fuenf, Blatttyp.Herz);
@@ -101,11 +106,22 @@ public class SpielSteuerungTest {
      * @throws MauMauException
      */
     @Test(expected = MauMauException.class)
-    public void testfragWerDaranIstNurEinSpieler() throws MauMauException {
+    public void testfragWerDaranIstSpielendIstNichtGesetzt() throws MauMauException {
         List<Spieler> spielerListe = new ArrayList<Spieler>();
         spielerListe.add(new Spieler("Ido"));
         spielerListe.add(new Spieler("Victor"));
         spielerListe.add(new Spieler("Lucas"));
+        spielSteuerung.fragWerDaranIst(spielerListe);
+    }
+
+    /**
+     * Wenn keiner oder nur ein Spieler in einer Spielrunde angemeldet ist, soll die Methode Exception werfen
+     * @throws MauMauException
+     */
+    @Test(expected = MauMauException.class)
+    public void testfragWerDaranIstNurEinSpieler() throws MauMauException {
+        List<Spieler> spielerListe = new ArrayList<Spieler>();
+        spielerListe.add(new Spieler(new ArrayList<>(0),"Ido", true));
         spielSteuerung.fragWerDaranIst(spielerListe);
     }
 
@@ -121,7 +137,7 @@ public class SpielSteuerungTest {
 
         spielrunde.getSpielerListe().add(spieler2);
 
-        assertEquals(spieler1, spielSteuerung.fragWerDaranIst());
+        assertEquals(spieler1, spielSteuerung.fragWerDaranIst(spielrunde.getSpielerListe()));
     }
 
     /**
@@ -133,9 +149,9 @@ public class SpielSteuerungTest {
 
         Spielkarte aktuelleKarte = new Spielkarte(Blattwert.Fuenf, Blatttyp.Karo);
 
-        Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, Mockito.any(Blatttyp.class))).thenReturn(true);
+        Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, vorherigeKarte.getBlatttyp())).thenReturn(true);
 
-        assertTrue(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
+        assertTrue(spielSteuerung.spieleKarte(spieler1, aktuelleKarte, spielrunde, spielregel));
     }
 
     /**
@@ -149,7 +165,7 @@ public class SpielSteuerungTest {
 
         Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, Mockito.any(Blatttyp.class))).thenReturn(false);
 
-        assertFalse(spielSteuerung.spieleKarte(spieler1, aktuelleKarte));
+        assertFalse(spielSteuerung.spieleKarte(spieler1, aktuelleKarte, spielrunde,spielregel));
     }
 
     /**
@@ -163,7 +179,7 @@ public class SpielSteuerungTest {
 
         assertNotEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
 
-        spielSteuerung.bestimmeBlatttyp(gewuenschteBlatttyp);
+        spielSteuerung.bestimmeBlatttyp(gewuenschteBlatttyp, spielrunde);
 
         assertEquals(gewuenschteBlatttyp, spielrunde.getRundeFarbe());
     }
@@ -182,7 +198,7 @@ public class SpielSteuerungTest {
         int anzahlKartenImVerdeckteStapel = spielrunde.getVerdeckteStapel().size();
 
         assertEquals(anzahlKartenImHand + anzahlZuZiehendeKarten,
-                spielSteuerung.zieheKartenVomStapel(spieler1, anzahlZuZiehendeKarten).getHand().size());
+                spielSteuerung.zieheKartenVomStapel(spieler1, anzahlZuZiehendeKarten, spielrunde).getHand().size());
 
         assertEquals(anzahlKartenImVerdeckteStapel-anzahlZuZiehendeKarten,
                 spielrunde.getVerdeckteStapel().size());
@@ -195,11 +211,11 @@ public class SpielSteuerungTest {
     @Test
     public void testPruefeObWuenscher() throws MauMauException {
 
-        Mockito.when(spielregel.pruefeObWuenscher(new Spielkarte(Blattwert.Bube, Mockito.any(Blatttyp.class)))).thenReturn(true);
+        Mockito.when(spielregel.pruefeObWuenscher(Mockito.any(Spielkarte.class))).thenReturn(true);
 
         Spielkarte spielkarte = new Spielkarte(Blattwert.Bube, Blatttyp.Karo);
 
-        boolean isWuenscher = spielSteuerung.pruefeObWuenscher(spielkarte);
+        boolean isWuenscher = spielSteuerung.pruefeObWuenscher(spielkarte, spielregel);
 
         assertTrue(isWuenscher);
     }
@@ -215,7 +231,7 @@ public class SpielSteuerungTest {
 
         Spielkarte spielkarte = new Spielkarte(Blattwert.Acht, Blatttyp.Karo);
 
-        boolean isWuenscher = spielSteuerung.pruefeObWuenscher(spielkarte);
+        boolean isWuenscher = spielSteuerung.pruefeObWuenscher(spielkarte, spielregel);
 
         assertFalse(isWuenscher);
     }

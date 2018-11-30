@@ -7,8 +7,6 @@ import datenmodel.Enum.Blatttyp;
 import komponenten.Spielregel.export.ISpielregel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.collections4.CollectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import datenmodel.Exceptions.MauMauException;
 
@@ -26,34 +24,17 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class SpielSteuerungImpl implements ISpielSteuerung {
 
-    // Die spezifische Implementierung muss definiert werden
-    @Autowired
-    @Qualifier("ohneSonder")
-    private ISpielregel spielregelohneSonder;
-
-    @Autowired
-    @Qualifier("basicSonder")
-    private ISpielregel spielregelBasicSonder;
-
-    @Autowired
-    @Qualifier("alleSonder")
-    private ISpielregel spielregelAlleSonder;
-
-    //TODO add to interface setting of selected spiel regel
-    private ISpielregel selectedSpielRegel;
-
-
-
     public Spieler fragWerDaranIst(List<Spieler> spielerListe) throws MauMauException {
+        if(spielerListe.size() < 2){
+            throw new MauMauException("Spielerliste muss mehr als einen Spieler enthalten");
+        }
         List<Spieler> spielerMitSpielend =spielerListe.stream()
                 .filter(Spieler::isSpielend).collect(Collectors.toList());
 
         if(spielerMitSpielend.size() != 1){
             throw new MauMauException("Keine oder mehrere Spieler mit spielend true gesetzt");
         }
-
         return spielerMitSpielend.get(0);
-
     }
 
     public int checkZuZiehendenKarten(Spielrunde spielrunde) {
@@ -63,24 +44,16 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return spielrunde.getZuZiehnKartenAnzahl();
     }
 
-    public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde) throws MauMauException {
-        if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(spielrunde), spielkarte, spielrunde.getRundeFarbe())){
+    public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde, ISpielregel selectedSpielRegel) throws MauMauException {
+        if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(spielrunde.getAufgelegtStapel()), spielkarte, spielrunde.getRundeFarbe())){
             setztKarteVomHandAufDemAufgelegteStapel(spieler, spielkarte, spielrunde);
             RegelComponentUtil regelComponentUtil = selectedSpielRegel.holeAuswirkungVonKarte(spielkarte, spielrunde.getSpielerListe());
             spielrunde.setSpielerListe(regelComponentUtil.getSpielerListe());
             spielrunde.setZuZiehnKartenAnzahl(regelComponentUtil.getAnzahlKartenZuZiehen() + spielrunde.getZuZiehnKartenAnzahl());
-
             return true;
         } else {
             return false;
         }
-    }
-
-    private void setztKarteVomHandAufDemAufgelegteStapel(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde) {
-        int i = spielrunde.getSpielerListe().indexOf(spieler);
-        spieler.getHand().remove(spielkarte);
-        spielrunde.getSpielerListe().get(i).setHand(spieler.getHand());
-        spielrunde.getAufgelegtStapel().add(spielkarte);
     }
 
     public boolean sollMauMauAufrufen(Spieler spieler) throws MauMauException {
@@ -90,7 +63,7 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return spieler.getHand().size() == 1;
     }
 
-    public boolean pruefeObWuenscher(Spielkarte spielkarte) throws MauMauException {
+    public boolean pruefeObWuenscher(Spielkarte spielkarte, ISpielregel selectedSpielRegel) throws MauMauException {
         return selectedSpielRegel.pruefeObWuenscher(spielkarte);
     }
 
@@ -105,6 +78,9 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         if(spieler == null){
             throw new MauMauException("Spieler ist null");
         }
+        if(spielrunde == null){
+            throw new MauMauException("Spielrunde ist null");
+        }
 
         List<Spielkarte> neueKarten = getNeueKartenVomVerdecktenStapelUndRemove(anzahlKarten, spielrunde);
         spieler.getHand().addAll(neueKarten);
@@ -112,20 +88,19 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return spieler;
     }
 
-    private void addeSpielkarteZumAufgelegtStapel(Spielkarte spielkarte, Spielrunde spielrunde) throws MauMauException {
-        if (CollectionUtils.isEmpty(spielrunde.getAufgelegtStapel())) {
-            throw new MauMauException("AufgelegtStapel ist leer");
-        }
+    private void setztKarteVomHandAufDemAufgelegteStapel(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde) {
+        int i = spielrunde.getSpielerListe().indexOf(spieler);
+        spieler.getHand().remove(spielkarte);
+        spielrunde.getSpielerListe().get(i).setHand(spieler.getHand());
         spielrunde.getAufgelegtStapel().add(spielkarte);
     }
 
     // Für aufgedeckten Stapel
-    private Spielkarte getLetzteAufgelegteKarte(Spielrunde spielrunde) throws MauMauException {
-        List<Spielkarte> aufgelegtStapel = spielrunde.getAufgelegtStapel();
-        if (CollectionUtils.isEmpty(aufgelegtStapel)) {
+    private Spielkarte getLetzteAufgelegteKarte(List<Spielkarte> aufgelegterStapel) throws MauMauException {
+        if (CollectionUtils.isEmpty(aufgelegterStapel)) {
             throw new MauMauException("AufgelegtStapel ist leer");
         }
-        return aufgelegtStapel.get(aufgelegtStapel.size() - 1);
+        return aufgelegterStapel.get(aufgelegterStapel.size() - 1);
     }
 
     // Für verdeckten Stapel

@@ -5,11 +5,14 @@ import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
+import komponenten.Spielregel.export.ISpielregel;
 
 import java.util.List;
 
 
 public interface ISpielSteuerung {
+
+    //TODO change Java Doc
 
     /**
      * Gibt den Spieler, der in der Spielrunde daran ist
@@ -36,7 +39,7 @@ public interface ISpielSteuerung {
      * @return
      * @throws MauMauException
      */
-    boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde) throws MauMauException;
+    boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde, ISpielregel selectedSpielRegel) throws MauMauException;
 
     /**
      * Prüft ob der Spieler, der daran ist, MauMau aufrufen sollte
@@ -54,7 +57,7 @@ public interface ISpielSteuerung {
      * @return
      * @throws MauMauException
      */
-    boolean pruefeObWuenscher(Spielkarte spielkarte) throws MauMauException;
+    boolean pruefeObWuenscher(Spielkarte spielkarte, ISpielregel selectedSpielRegel) throws MauMauException;
 
     /**
      * Der Spieler wählt einen Blatttyp und wird in der Spielrunde festgelegt
