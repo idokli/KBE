@@ -37,7 +37,10 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         return spielerMitSpielend.get(0);
     }
 
-    public int checkZuZiehendenKarten(Spielrunde spielrunde) {
+    public int checkZuZiehendenKarten(Spielrunde spielrunde) throws MauMauException {
+        if(spielrunde == null){
+            throw new MauMauException("Spielrunde ist null");
+        }
         if( spielrunde.getZuZiehnKartenAnzahl() == null){
             spielrunde.setZuZiehnKartenAnzahl(0);
         }
@@ -45,13 +48,34 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
     }
 
     public boolean spieleKarte(Spieler spieler, Spielkarte spielkarte, Spielrunde spielrunde, ISpielregel selectedSpielRegel) throws MauMauException {
+        if(spieler == null){
+            throw new MauMauException("Spieler ist null");
+        }
+        if(spieler.getHand() == null){
+            throw new MauMauException("Spielershand ist null");
+        }
+        if(spielkarte == null){
+            throw new MauMauException("Spielkarte ist null");
+        }
+        if(spielrunde == null){
+            throw new MauMauException("Spielrunde ist null");
+        }
+        if(spielrunde.getRundeFarbe() == null){
+            throw new MauMauException("Spielrundesfarbe ist null");
+        }
+        if(spielrunde.getAufgelegtStapel() == null || spielrunde.getAufgelegtStapel().isEmpty()){
+            throw new MauMauException("Aufgelegter Stapel ist null oder leer");
+        }
+        if(selectedSpielRegel == null){
+            throw new MauMauException("Spielregel Komponente ist nicht gesetzt");
+        }
+        if(spielrunde.getZuZiehnKartenAnzahl() == null){
+            spielrunde.setZuZiehnKartenAnzahl(0);
+        }
         if(selectedSpielRegel.istKarteLegbar(getLetzteAufgelegteKarte(spielrunde.getAufgelegtStapel()), spielkarte, spielrunde.getRundeFarbe())){
             setztKarteVomHandAufDemAufgelegteStapel(spieler, spielkarte, spielrunde);
             RegelComponentUtil regelComponentUtil = selectedSpielRegel.holeAuswirkungVonKarte(spielkarte, spielrunde.getSpielerListe());
             spielrunde.setSpielerListe(regelComponentUtil.getSpielerListe());
-            if(spielrunde.getZuZiehnKartenAnzahl() == null){
-                spielrunde.setZuZiehnKartenAnzahl(0);
-            }
             spielrunde.setZuZiehnKartenAnzahl(regelComponentUtil.getAnzahlKartenZuZiehen() + spielrunde.getZuZiehnKartenAnzahl());
             spielrunde.setRundeFarbe(spielkarte.getBlatttyp());
             return true;
@@ -64,16 +88,31 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         if(spieler == null){
             throw new MauMauException("Spieler ist null");
         }
+        if(spieler.getHand() == null){
+            throw new MauMauException("Spielershand ist null");
+        }
+        if(spieler.getHand().isEmpty()){
+            throw new MauMauException("Spielershand ist leer, Spiel sollte schon beendet werden");
+        }
         return spieler.getHand().size() == 1;
     }
 
     public boolean pruefeObWuenscher(Spielkarte spielkarte, ISpielregel selectedSpielRegel) throws MauMauException {
+        if(spielkarte == null){
+            throw new MauMauException("Spielkarte ist null");
+        }
+        if(selectedSpielRegel == null){
+            throw new MauMauException("Spielregel Komponente ist nicht gesetzt");
+        }
         return selectedSpielRegel.pruefeObWuenscher(spielkarte);
     }
 
     public void bestimmeBlatttyp(Blatttyp blatttyp, Spielrunde spielrunde) throws MauMauException {
         if (blatttyp == null){
             throw new MauMauException("Blatttyp ist null");
+        }
+        if (spielrunde == null){
+            throw new MauMauException("Spielrunde ist null");
         }
         spielrunde.setRundeFarbe(blatttyp);
     }
@@ -82,8 +121,17 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
         if(spieler == null){
             throw new MauMauException("Spieler ist null");
         }
+        if(spieler.getHand() == null){
+            throw new MauMauException("Spielershand ist null");
+        }
         if(spielrunde == null){
             throw new MauMauException("Spielrunde ist null");
+        }
+        if(spielrunde.getVerdeckteStapel() == null){
+            throw new MauMauException("Verdeckter Stapel ist null");
+        }
+        if(spielrunde.getAufgelegtStapel() == null || spielrunde.getAufgelegtStapel().isEmpty() ){
+            throw new MauMauException("Aufgelegter Stapel ist null oder leer");
         }
 
         List<Spielkarte> neueKarten = getNeueKartenVomVerdecktenStapelUndRemove(anzahlKarten, spielrunde);
