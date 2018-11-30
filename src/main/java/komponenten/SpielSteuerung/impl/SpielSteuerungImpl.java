@@ -49,7 +49,11 @@ public class SpielSteuerungImpl implements ISpielSteuerung {
             setztKarteVomHandAufDemAufgelegteStapel(spieler, spielkarte, spielrunde);
             RegelComponentUtil regelComponentUtil = selectedSpielRegel.holeAuswirkungVonKarte(spielkarte, spielrunde.getSpielerListe());
             spielrunde.setSpielerListe(regelComponentUtil.getSpielerListe());
+            if(spielrunde.getZuZiehnKartenAnzahl() == null){
+                spielrunde.setZuZiehnKartenAnzahl(0);
+            }
             spielrunde.setZuZiehnKartenAnzahl(regelComponentUtil.getAnzahlKartenZuZiehen() + spielrunde.getZuZiehnKartenAnzahl());
+            spielrunde.setRundeFarbe(spielkarte.getBlatttyp());
             return true;
         } else {
             return false;
