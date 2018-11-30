@@ -1,22 +1,21 @@
 package komponenten.SpielSteuerung;
 
-import komponenten.SpielSteuerung.export.ISpielSteuerung;
-import komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
-import komponenten.Spielregel.export.ISpielregel;
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
 import datenmodel.Exceptions.MauMauException;
+import datenmodel.HilfKlassen.RegelComponentUtil;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
+import komponenten.SpielSteuerung.export.ISpielSteuerung;
+import komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
+import komponenten.Spielregel.export.ISpielregel;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -32,6 +31,8 @@ public class SpielSteuerungTest {
 //    private ISpielregel spielregel;
 
     private ISpielregel spielregel = Mockito.mock(ISpielregel.class);
+
+    private static RegelComponentUtil regelComponentUtil;
 
 
     @BeforeClass
@@ -51,12 +52,20 @@ public class SpielSteuerungTest {
         vorherigeKarte = new Spielkarte(Blattwert.Fuenf, Blatttyp.Herz);
 
         List<Spielkarte> verdeckterStapel = new ArrayList<>();
-        verdeckterStapel.addAll(Arrays.asList(new Spielkarte(Blattwert.Drei, Blatttyp.Herz),
+        verdeckterStapel.addAll(Arrays.asList(new Spielkarte(Blattwert.Sieben, Blatttyp.Herz),
                 new Spielkarte(Blattwert.Fuenf, Blatttyp.Karo), new Spielkarte(Blattwert.Dame, Blatttyp.Karo)));
 
         spielrunde.setVerdeckteStapel(verdeckterStapel);
 
+        List<Spielkarte> aufgelegterStapel = new ArrayList<>();
+        aufgelegterStapel.addAll(Arrays.asList(new Spielkarte(Blattwert.Vier, Blatttyp.Herz),
+                new Spielkarte(Blattwert.Fuenf, Blatttyp.Pik), new Spielkarte(Blattwert.Dame, Blatttyp.Pik)));
 
+        spielrunde.setAufgelegtStapel(aufgelegterStapel);
+
+        spielrunde.setZuZiehnKartenAnzahl(0);
+
+        regelComponentUtil= new RegelComponentUtil(spielrunde.getSpielerListe(), 0);
     }
 
     /**
@@ -149,7 +158,13 @@ public class SpielSteuerungTest {
 
         Spielkarte aktuelleKarte = new Spielkarte(Blattwert.Fuenf, Blatttyp.Karo);
 
-        Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, vorherigeKarte.getBlatttyp())).thenReturn(true);
+        Spielkarte letzteAufgelegteKarte = spielrunde.getAufgelegtStapel().get(spielrunde.getAufgelegtStapel().size() - 1);
+
+        spielrunde.setRundeFarbe(letzteAufgelegteKarte.getBlatttyp());
+
+        Mockito.when(spielregel.istKarteLegbar(letzteAufgelegteKarte,aktuelleKarte,letzteAufgelegteKarte.getBlatttyp())).thenReturn(true);
+
+        Mockito.when(spielregel.holeAuswirkungVonKarte(aktuelleKarte, spielrunde.getSpielerListe())).thenReturn(regelComponentUtil);
 
         assertTrue(spielSteuerung.spieleKarte(spieler1, aktuelleKarte, spielrunde, spielregel));
     }
@@ -163,7 +178,7 @@ public class SpielSteuerungTest {
 
         Spielkarte aktuelleKarte = new Spielkarte(Blattwert.Sieben, Blatttyp.Karo);
 
-        Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, Mockito.any(Blatttyp.class))).thenReturn(false);
+        Mockito.when(spielregel.istKarteLegbar(vorherigeKarte,aktuelleKarte, vorherigeKarte.getBlatttyp())).thenReturn(false);
 
         assertFalse(spielSteuerung.spieleKarte(spieler1, aktuelleKarte, spielrunde,spielregel));
     }
