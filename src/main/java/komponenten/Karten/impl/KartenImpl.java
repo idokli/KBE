@@ -20,6 +20,10 @@ public class KartenImpl implements IKarten {
     @Override
     public List<Spielkarte> baueStapel(List<Blatttyp> blatttypen, List<Blattwert> blattwerten) throws MauMauException {
 
+        if(blatttypen==null || blatttypen == null) {
+            throw new MauMauException("Fehler");
+        }
+
         List<Spielkarte> stapel = new ArrayList<>();
         for(Blatttyp blatttyp : Blatttyp.values()) {
             if(!blatttypen.contains(blatttyp)) {

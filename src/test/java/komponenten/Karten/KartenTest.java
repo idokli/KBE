@@ -61,18 +61,19 @@ public class KartenTest {
 
     }
 
-//    /**
-//     * Test für den gescheiterten Bau des Kartenstapels
-//     * @throws MauMauException
-//     */
-//    @Test(expected = MauMauException.class)
-//    public void testBaueStapelFailed() throws MauMauException {
-//
-//        // Leerer Typ
-//        SpielTyp spielTyp = null;
-//
-//        // Sollte MauMauException werfen
-//        kartenService.baueStapel(spielTyp);
-//
-//    }
+    /**
+     * Test für den gescheiterten Bau des Kartenstapels
+     * @throws MauMauException
+     */
+    @Test(expected = MauMauException.class)
+    public void testBaueStapelFailed() throws MauMauException {
+
+        // Beide Listen null
+        List<Blattwert> blattwertNicht = null;
+        List<Blatttyp> blatttypNicht = null;
+
+        // Sollte MauMauException werfen
+        kartenService.baueStapel(blatttypNicht, blattwertNicht);
+
+    }
 }
