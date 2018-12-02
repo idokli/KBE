@@ -62,10 +62,9 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
         for(Spieler spieler : spielrunde.getSpielerListe()) {
             spieler.setSpielrunde(spielrunde);
             for(int i = 0; i<6; i++) {
-                Random r = new Random();
                 int low = 0;
                 int high = spielrunde.getVerdeckteStapel().size();
-                int result = r.nextInt(high-low) + low;
+                int result = (int)(Math.random()*(high-low) + low);
                 spieler.getHand().add(spielrunde.getVerdeckteStapel().get(result));
                 spielrunde.getVerdeckteStapel().remove(result);
             }

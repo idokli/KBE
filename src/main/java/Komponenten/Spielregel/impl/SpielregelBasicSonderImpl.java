@@ -31,13 +31,22 @@ public class SpielregelBasicSonderImpl extends SpielregelOhneSonderImpl implemen
         boolean istLegbar = super.istKarteLegbar(vorherigeSpielkarte, aktuelleSpielkarte, blatttyp);
         // Wenn Blatttyp im Zug davor gewählt, dann kann man nur Blattyp spielen aber nicht noch eine Bube
         if (blatttyp != null) {
-            if (aktuelleSpielkarte.getBlatttyp() == blatttyp && aktuelleSpielkarte.getBlattwert() == Blattwert.Bube) {
+            if (aktuelleSpielkarte.getBlattwert() == Blattwert.Bube) {
                 istLegbar = false;
+            } else if(aktuelleSpielkarte.getBlatttyp() == blatttyp) {
+                istLegbar = true;
             }
         } else {
             // Sonderprüfung wegen Zwei_ziehen
-            if (vorherigeSpielkarte.getBlattwert() == Blattwert.Sieben && aktuelleSpielkarte.getBlattwert() != Blattwert.Sieben) {
-                istLegbar = false;
+            switch (vorherigeSpielkarte.getBlattwert()) {
+                case Sieben:
+                    if(aktuelleSpielkarte.getBlattwert() != Blattwert.Sieben) {
+                        istLegbar = false;
+                    }
+                    break;
+                case Ass:
+                    istLegbar = false;
+                    break;
             }
         }
         return istLegbar;
