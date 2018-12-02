@@ -3,10 +3,12 @@ package console;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
 import datenmodel.Spieler;
+import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
 import komponenten.Spielregel.export.ISpielregel;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class ConsoleUtil {
@@ -14,11 +16,18 @@ public class ConsoleUtil {
     public ArrayList<Spieler> spielerEingabe(Scanner sc){
         ArrayList<Spieler> spielerList = new ArrayList<>(0);
         boolean nochSpieler = true;
+        sc.nextLine();
         System.out.println("Bitte geben Sie die Namen der Spieler:");
         do {
             System.out.println("Bitte geben Sie den "+(spielerList.size()+1)+"er Namen:");
             String name = sc.nextLine();
-            spielerList.add(new Spieler(name));
+            //TODO remove if else after clearing how is setting the first player
+            if(spielerList.isEmpty()){
+                spielerList.add(new Spieler(new ArrayList<>(0),name, true));
+            } else {
+                spielerList.add(new Spieler(name));
+            }
+//            spielerList.add(new Spieler(name));
 
             System.out.println("Wollen Sie noch einen Spieler ins Spiel eintragen? (y|n)");
             String antwort = sc.nextLine();
@@ -89,16 +98,36 @@ public class ConsoleUtil {
 
     private <T> void printChoices(T[] values, String msg) {
         int counter = 0;
-        System.out.println(msg);
+        if (msg != null) {
+            System.out.println(msg);
+        }
         for (T typ : values) {
             System.out.println("Wählen Sie " +counter+ " für " + typ.toString());
             counter++;
         }
     }
 
-    public void spielZug(Spielrunde spielrunde, Spieler spieler) {
+    public void spielZug(Scanner sc, Spielrunde spielrunde, Spieler spieler) {
         System.out.println("Der jetzige Spieler ist " + spieler.getName());
-        System.out.println("Der jetzige Spieler ist " + spieler.getName());
+        //TODO uncooment when the issue will be resolved
+//        System.out.println("Die aufgelegte Karte ist " + spielrunde.getAufgelegtStapel().get(spielrunde.getAufgelegtStapel().size()-1).toString());
+        printHand(spieler);
+        System.out.println(wahleKarte(sc, spieler.getHand()));
 
+    }
+
+    private Spielkarte wahleKarte(Scanner sc, List<Spielkarte> hand) {
+        System.out.println("Mit welcher Karte wollen Sie spielen? (Waehlen Sie ein Index)");
+        int i = sc.nextInt();
+        return hand.get(i);
+    }
+
+    private void printHand(Spieler spieler){
+        System.out.println(spieler.getName()+"shand enthaelt die folgenden karten:");
+        int counter = 0;
+        for (Spielkarte spielkarte : spieler.getHand()) {
+            System.out.println("["+counter + "] "+spielkarte.toString());
+            counter++;
+        }
     }
 }

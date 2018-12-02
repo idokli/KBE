@@ -19,4 +19,8 @@ public class Spielkarte {
 
     private Blatttyp blatttyp;
 
+    @Override
+    public String toString() {
+        return blattwert + " " + blatttyp;
+    }
 }

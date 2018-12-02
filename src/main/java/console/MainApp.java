@@ -58,7 +58,7 @@ public class MainApp {
 
         Spieler spieler = spielSteuerung.fragWerDranIst(spielrunde.getSpielerListe());
 
-        consoleUtil.spielZug(spielrunde, spieler);
+        consoleUtil.spielZug(sc, spielrunde, spieler);
 
 //        spielVerwaltung.beendeSpielrunde(spielrunde);
 //
