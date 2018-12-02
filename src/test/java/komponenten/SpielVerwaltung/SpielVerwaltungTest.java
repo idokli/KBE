@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
+import repositories.SpielRepository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,10 @@ public class SpielVerwaltungTest {
 
     @MockBean
     private IKarten kartenService;
+
+    @MockBean
+    private SpielRepository spielRepository;
+
 
     private List<Spielkarte> stapel;
 
@@ -265,6 +270,7 @@ public class SpielVerwaltungTest {
         Spiel spiel = spielVerwaltungService.starteNeuesSpiel(spielTyp, regelKompTyp);
 
         // Spiel beenden
+        Mockito.when(spielRepository.save(spiel)).thenReturn(null);
         spielVerwaltungService.beendeSpiel(spiel);
 
         // Dauer des Spiels soll berechnet worden sein
