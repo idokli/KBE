@@ -1,4 +1,4 @@
-package komponenten.SpielSteuerung;
+package komponenten.spielSteuerung;
 
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
