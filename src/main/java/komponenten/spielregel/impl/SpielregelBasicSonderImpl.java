@@ -1,4 +1,4 @@
-package komponenten.Spielregel.impl;
+package komponenten.spielregel.impl;
 
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
@@ -6,19 +6,19 @@ import datenmodel.Exceptions.MauMauException;
 import datenmodel.HilfKlassen.RegelComponentUtil;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
-import komponenten.Spielregel.export.ISpielregel;
+import komponenten.spielregel.export.ISpielregel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+
 /**
- * Implementierung von Spielregel-Komponent mit Zwei_ziehen(7), Aussetzen(Ass) und Wünscher(Bube)
- * Richtungswechsel(9), Stopper(8) und Allesleger(10)
+ * Implementierung von spielregel-Komponent mit Zwei_ziehen(7), Aussetzen(Ass) und Wünscher(Bube)
  */
 @Service
-@Qualifier("alleSonder")
-public class SpielregelAlleSonderImpl extends SpielregelBasicSonderImpl implements ISpielregel {
+@Qualifier("basicSonder")
+public class SpielregelBasicSonderImpl extends SpielregelOhneSonderImpl implements ISpielregel {
 
 
     @Override
@@ -27,20 +27,27 @@ public class SpielregelAlleSonderImpl extends SpielregelBasicSonderImpl implemen
         if (vorherigeSpielkarte == null || aktuelleSpielkarte == null) {
             throw new MauMauException("Fehler");
         }
-        // Prüfung von BasicSonderRegel
+        // Basic-Prüfung ohne SonderRegel
         boolean istLegbar = super.istKarteLegbar(vorherigeSpielkarte, aktuelleSpielkarte, blatttyp);
-        // Stopper
-        if (vorherigeSpielkarte.getBlattwert() == Blattwert.Sieben && aktuelleSpielkarte.getBlattwert() == Blattwert.Acht) {
-            istLegbar = true;
-        }
-        // Allesleger (10) darf nur auf nicht Funktionskarte gelegt werden
-        if ((vorherigeSpielkarte.getBlattwert() == Blattwert.Sieben ||
-                vorherigeSpielkarte.getBlattwert() == Blattwert.Bube ||
-                vorherigeSpielkarte.getBlattwert() == Blattwert.Neun ||
-                vorherigeSpielkarte.getBlattwert() == Blattwert.Acht ||
-                vorherigeSpielkarte.getBlattwert() == Blattwert.Zehn)
-                && aktuelleSpielkarte.getBlattwert() == Blattwert.Zehn) {
-            istLegbar = false;
+        // Wenn Blatttyp im Zug davor gewählt, dann kann man nur Blattyp spielen aber nicht noch eine Bube
+        if (blatttyp != null) {
+            if (aktuelleSpielkarte.getBlattwert() == Blattwert.Bube) {
+                istLegbar = false;
+            } else if(aktuelleSpielkarte.getBlatttyp() == blatttyp) {
+                istLegbar = true;
+            }
+        } else {
+            // Sonderprüfung wegen Zwei_ziehen
+            switch (vorherigeSpielkarte.getBlattwert()) {
+                case Sieben:
+                    if(aktuelleSpielkarte.getBlattwert() != Blattwert.Sieben) {
+                        istLegbar = false;
+                    }
+                    break;
+                case Ass:
+                    istLegbar = false;
+                    break;
+            }
         }
         return istLegbar;
     }
@@ -52,16 +59,20 @@ public class SpielregelAlleSonderImpl extends SpielregelBasicSonderImpl implemen
             throw new MauMauException("Fehler");
         }
         RegelComponentUtil util = super.holeAuswirkungVonKarte(aktuelleSpielkarte, spielerListe);
-
         switch (aktuelleSpielkarte.getBlattwert()) {
-            case Neun:
+            case Sieben:
+                util.setAnzahlKartenZuZiehen(2);
+                break;
+            case Ass:
                 for (Spieler spieler : spielerListe) {
                     if (spieler.isSpielend()) {
                         int indexSpielend = spielerListe.indexOf(spieler);
-                        if (indexSpielend == 0) {
-                            spielerListe.get(spielerListe.size() - 1).setSpielend(true);
+                        if (indexSpielend == spielerListe.size() - 1) {
+                            spielerListe.get(1).setSpielend(true);
+                        } else if (indexSpielend == spielerListe.size() - 2) {
+                            spielerListe.get(0).setSpielend(true);
                         } else {
-                            spielerListe.get(indexSpielend - 1).setSpielend(true);
+                            spielerListe.get(indexSpielend + 2).setSpielend(true);
                         }
                         break;
                     }

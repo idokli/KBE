@@ -1,4 +1,4 @@
-package komponenten.spielregel.impl;
+package komponenten.Spielregel.impl;
 
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
@@ -6,7 +6,7 @@ import datenmodel.Exceptions.MauMauException;
 import datenmodel.HilfKlassen.RegelComponentUtil;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
-import komponenten.spielregel.export.ISpielregel;
+import komponenten.Spielregel.export.ISpielregel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 

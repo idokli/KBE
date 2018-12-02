@@ -5,7 +5,7 @@ import datenmodel.Enum.SpielTyp;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
 import datenmodel.Spielrunde;
-import komponenten.Spielregel.export.ISpielregel;
+import komponenten.spielregel.export.ISpielregel;
 
 import java.util.ArrayList;
 import java.util.List;

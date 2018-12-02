@@ -7,15 +7,12 @@ import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spiel;
 import datenmodel.Spieler;
 import datenmodel.Spielrunde;
-import komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
-import komponenten.SpielVerwaltung.impl.SpielVerwaltungImpl;
-import komponenten.Spielregel.export.ISpielregel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import komponenten.spielSteuerung.impl.SpielSteuerungImpl;
+import komponenten.spielVerwaltung.impl.SpielVerwaltungImpl;
+import komponenten.spielregel.export.ISpielregel;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MainApp {
