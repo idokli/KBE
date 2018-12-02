@@ -1,4 +1,4 @@
-package komponenten.Spielregel.impl;
+package komponenten.spielregel.impl;
 
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
@@ -6,7 +6,7 @@ import datenmodel.Exceptions.MauMauException;
 import datenmodel.HilfKlassen.RegelComponentUtil;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
-import komponenten.Spielregel.export.ISpielregel;
+import komponenten.spielregel.export.ISpielregel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 
 /**
- * Implementierung von Spielregel-Komponent mit Zwei_ziehen(7), Aussetzen(Ass) und Wünscher(Bube)
+ * Implementierung von spielregel-Komponent mit Zwei_ziehen(7), Aussetzen(Ass) und Wünscher(Bube)
  */
 @Service
 @Qualifier("basicSonder")
@@ -72,7 +72,7 @@ public class SpielregelBasicSonderImpl extends SpielregelOhneSonderImpl implemen
                         } else if (indexSpielend == spielerListe.size() - 2) {
                             spielerListe.get(0).setSpielend(true);
                         } else {
-                            spielerListe.get(indexSpielend + 1).setSpielend(true);
+                            spielerListe.get(indexSpielend + 2).setSpielend(true);
                         }
                         break;
                     }
