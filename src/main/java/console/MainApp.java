@@ -7,9 +7,9 @@ import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spiel;
 import datenmodel.Spieler;
 import datenmodel.Spielrunde;
-import komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
-import komponenten.SpielVerwaltung.impl.SpielVerwaltungImpl;
-import komponenten.Spielregel.export.ISpielregel;
+import komponenten.spielSteuerung.impl.SpielSteuerungImpl;
+import komponenten.spielVerwaltung.impl.SpielVerwaltungImpl;
+import komponenten.spielregel.export.ISpielregel;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
