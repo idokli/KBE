@@ -1,30 +1,28 @@
 package komponenten.Karten;
 
+import config.AppConfig;
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
+import datenmodel.Exceptions.MauMauException;
 import datenmodel.Spielkarte;
 import komponenten.Karten.export.IKarten;
-import komponenten.Karten.impl.KartenImpl;
-import datenmodel.Enum.SpielTyp;
-import datenmodel.Exceptions.MauMauException;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = AppConfig.class)
 public class KartenTest {
 
-    private static IKarten kartenService;
-
-    @BeforeClass
-    public static void initialize() {
-        kartenService = new KartenImpl();
-    }
+    @Autowired
+    private IKarten kartenService;
 
     /**
      * Test für den erfolgreichen Bau des Kartenstapels
@@ -34,8 +32,7 @@ public class KartenTest {
     @Test
     public void testBaueStapelSuccess() throws MauMauException {
 
-        // MauMau-Typ
-        SpielTyp spielTyp = SpielTyp.MauMau;
+        // Stapel bauen
         List<Blattwert> blattwertNicht = new ArrayList<>();
         blattwertNicht.add(Blattwert.Joker);
         List<Blatttyp> blatttypNicht = new ArrayList<>();
@@ -61,18 +58,20 @@ public class KartenTest {
 
     }
 
-//    /**
-//     * Test für den gescheiterten Bau des Kartenstapels
-//     * @throws MauMauException
-//     */
-//    @Test(expected = MauMauException.class)
-//    public void testBaueStapelFailed() throws MauMauException {
-//
-//        // Leerer Typ
-//        SpielTyp spielTyp = null;
-//
-//        // Sollte MauMauException werfen
-//        kartenService.baueStapel(spielTyp);
-//
-//    }
+    /**
+     * Test für den gescheiterten Bau des Kartenstapels
+     *
+     * @throws MauMauException
+     */
+    @Test(expected = MauMauException.class)
+    public void testBaueStapelFailed() throws MauMauException {
+
+        // Beide Listen null
+        List<Blattwert> blattwertNicht = null;
+        List<Blatttyp> blatttypNicht = null;
+
+        // Sollte MauMauException werfen
+        kartenService.baueStapel(blatttypNicht, blattwertNicht);
+
+    }
 }

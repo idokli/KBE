@@ -1,40 +1,55 @@
 package komponenten.SpielVerwaltung;
 
+import config.AppConfig;
 import datenmodel.Enum.Blatttyp;
 import datenmodel.Enum.Blattwert;
-import komponenten.Karten.export.IKarten;
-import komponenten.SpielVerwaltung.export.ISpielVerwaltung;
-import komponenten.SpielVerwaltung.impl.SpielVerwaltungImpl;
 import datenmodel.Enum.RegelKompTyp;
 import datenmodel.Enum.SpielTyp;
-import datenmodel.Ergebnis;
+import datenmodel.*;
 import datenmodel.Exceptions.MauMauException;
-import datenmodel.Spiel;
-import datenmodel.Spieler;
-import datenmodel.Spielrunde;
+import komponenten.Karten.export.IKarten;
+import komponenten.SpielVerwaltung.export.ISpielVerwaltung;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.junit4.SpringRunner;
+import repositories.SpielRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = AppConfig.class)
 public class SpielVerwaltungTest {
 
+    @Autowired
     private ISpielVerwaltung spielVerwaltungService;
 
-    @Mock
+    @MockBean
     private IKarten kartenService;
+
+    @MockBean
+    private SpielRepository spielRepository;
+
+
+    private List<Spielkarte> stapel;
 
     @Before
     public void initialize() {
-        spielVerwaltungService = new SpielVerwaltungImpl();
+        stapel = new ArrayList<>();
+        for (Blatttyp blatttyp : Blatttyp.values()) {
+            for (Blattwert blattwert : Blattwert.values()) {
+                if (blattwert != Blattwert.Joker) {
+                    stapel.add(new Spielkarte(blattwert, blatttyp));
+                }
+            }
+        }
     }
 
     /**
@@ -96,6 +111,12 @@ public class SpielVerwaltungTest {
         spielerListe.add(new Spieler("Lucas"));
 
         // Spielrunde erstellen
+        List<Blatttyp> blatttypNicht = new ArrayList<>();
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        if (spiel.getSpielTyp() == SpielTyp.MauMau) {
+            blattwertNicht.add(Blattwert.Joker);
+        }
+        Mockito.when(kartenService.baueStapel(blatttypNicht, blattwertNicht)).thenReturn(stapel);
         Spielrunde spielrunde = spielVerwaltungService.starteSpielrunde(spielerListe, spiel);
 
         // Spielrunde sollte nicht null sein
@@ -108,17 +129,13 @@ public class SpielVerwaltungTest {
         for (Spieler spieler : spielerListe) {
             assertTrue(spielrunde.getSpielerListe().contains(spieler));
         }
-
         // Die Spielrunde sollte einen Kartenstapel haben
         assertNotNull(spielrunde.getVerdeckteStapel());
 
         // Stapel sollte 52 Karten haben
-        assertEquals(52, spielrunde.getVerdeckteStapel().size());
+        assertEquals(34, spielrunde.getVerdeckteStapel().size());
 
         // Kartenservice muss einmal aufgerufen worden sein
-        List<Blattwert> blattwertNicht = new ArrayList<>();
-        blattwertNicht.add(Blattwert.Joker);
-        List<Blatttyp> blatttypNicht = new ArrayList<>();
         Mockito.verify(kartenService, Mockito.times(1)).baueStapel(blatttypNicht, blattwertNicht);
 
     }
@@ -129,7 +146,7 @@ public class SpielVerwaltungTest {
      * @throws MauMauException
      */
     @Test(expected = MauMauException.class)
-    public void testStarteSpielRundeSpielUnbekanntFailed() throws MauMauException {
+    public void testStarteSpielRundeSpielerUnbekanntFailed() throws MauMauException {
 
         // Spiel anlegen
         SpielTyp spielTyp = SpielTyp.MauMau;
@@ -154,7 +171,7 @@ public class SpielVerwaltungTest {
      * @throws MauMauException
      */
     @Test(expected = MauMauException.class)
-    public void testStarteSpielRundeSpielerUnbekanntFailed() throws MauMauException {
+    public void testStarteSpielRundeSpielUnbekanntFailed() throws MauMauException {
         // Spiel unbekannt
         Spiel spiel = null;
 
@@ -193,6 +210,12 @@ public class SpielVerwaltungTest {
         spielerListe.add(new Spieler("Antonio"));
 
         // Spielrunde erstellen
+        List<Blatttyp> blatttypNicht = new ArrayList<>();
+        List<Blattwert> blattwertNicht = new ArrayList<>();
+        if (spiel.getSpielTyp() == SpielTyp.MauMau) {
+            blattwertNicht.add(Blattwert.Joker);
+        }
+        Mockito.when(kartenService.baueStapel(blatttypNicht, blattwertNicht)).thenReturn(stapel);
         Spielrunde spielrunde = spielVerwaltungService.starteSpielrunde(spielerListe, spiel);
 
         // Spielrunde beenden
@@ -207,10 +230,10 @@ public class SpielVerwaltungTest {
         // Ein Ergebnis pro Spieler
         assertEquals(ergebnisse.size(), spielerListe.size());
 
+        // TODO berechnete Punkte prüfen?
+
         // Kartenservice muss einmal aufgerufen worden sein
-        List<Blattwert> blattwertNicht = new ArrayList<>();
-        blattwertNicht.add(Blattwert.Joker);
-        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(null, blattwertNicht);
+        Mockito.verify(kartenService, Mockito.times(1)).baueStapel(blatttypNicht, blattwertNicht);
 
     }
 
@@ -247,6 +270,7 @@ public class SpielVerwaltungTest {
         Spiel spiel = spielVerwaltungService.starteNeuesSpiel(spielTyp, regelKompTyp);
 
         // Spiel beenden
+        Mockito.when(spielRepository.save(spiel)).thenReturn(null);
         spielVerwaltungService.beendeSpiel(spiel);
 
         // Dauer des Spiels soll berechnet worden sein

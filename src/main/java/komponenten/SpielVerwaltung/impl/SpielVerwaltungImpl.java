@@ -37,6 +37,9 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
 
 
     public Spiel starteNeuesSpiel(SpielTyp spielTyp, RegelKompTyp regelKompTyp) throws MauMauException {
+        if(spielTyp == null || regelKompTyp == null) {
+            throw new MauMauException("Fehler");
+        }
         Spiel spiel = new Spiel(spielTyp, regelKompTyp);
         // Falls mehrere Nutzer auf verschiedenen Rechner ein Spiel spielen würde, müsste das Spiel bei der
         // Erstellung persistiert werden, damit der 2. Spieler das 1. erstellte Spiel nutzt
@@ -46,21 +49,23 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
 
     //TODO ask Vic where the first player is setted
     public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
+        if(spielerListe.size() < 3 || spiel == null) {
+            throw new MauMauException("Fehler");
+        }
         Spielrunde spielrunde = new Spielrunde(spiel, spielerListe);
         List<Blattwert> blattwertNicht = new ArrayList<>();
         if(spiel.getSpielTyp() == SpielTyp.MauMau) {
             blattwertNicht.add(Blattwert.Joker);
         }
         List<Blatttyp> blatttypNicht = new ArrayList<>();
-        spielrunde.setVerdeckteStapel(this.kartenService.baueStapel(blatttypNicht, blattwertNicht));
+        spielrunde.setVerdeckteStapel(kartenService.baueStapel(blatttypNicht, blattwertNicht));
         // Verteile Initialkarten 6
         for(Spieler spieler : spielrunde.getSpielerListe()) {
             spieler.setSpielrunde(spielrunde);
             for(int i = 0; i<6; i++) {
-                Random r = new Random();
                 int low = 0;
                 int high = spielrunde.getVerdeckteStapel().size();
-                int result = r.nextInt(high-low) + low;
+                int result = (int)(Math.random()*(high-low) + low);
                 spieler.getHand().add(spielrunde.getVerdeckteStapel().get(result));
                 spielrunde.getVerdeckteStapel().remove(result);
             }
@@ -71,6 +76,9 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
     }
 
     public List<Ergebnis> beendeSpielrunde(Spielrunde spielrunde) throws MauMauException {
+        if(spielrunde == null) {
+            throw new MauMauException("Fehler");
+        }
         // Dauer
         Duration duration = Duration.between(spielrunde.getStart().toInstant(), Instant.now());
         // TODO transform to minutes
@@ -114,6 +122,9 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
     }
 
     public Spiel beendeSpiel(Spiel spiel) throws MauMauException {
+        if(spiel == null) {
+            throw new MauMauException("Fehler");
+        }
 //        spiel = this.spielRepository.findById(spiel.getId()) .orElse(null);
         // Dauer
         Duration duration = Duration.between(spiel.getBeginn().toInstant(), Instant.now());

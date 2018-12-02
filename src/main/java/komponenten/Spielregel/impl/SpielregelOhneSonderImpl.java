@@ -1,31 +1,65 @@
 package komponenten.Spielregel.impl;
 
-import komponenten.Spielregel.export.ISpielregel;
 import datenmodel.Enum.Blatttyp;
+import datenmodel.Enum.Blattwert;
 import datenmodel.Exceptions.MauMauException;
 import datenmodel.HilfKlassen.RegelComponentUtil;
 import datenmodel.Spieler;
 import datenmodel.Spielkarte;
-import org.springframework.beans.factory.annotation.Autowired;
+import komponenten.Spielregel.export.ISpielregel;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * Implementierung vom Spielregel-Komponent ohne Sonderregel
+ */
 @Service
 @Qualifier("ohneSonder")
 public class SpielregelOhneSonderImpl implements ISpielregel {
 
 
     public boolean istKarteLegbar(Spielkarte vorherigeSpielkarte, Spielkarte aktuelleSpielkarte, Blatttyp blatttyp) throws MauMauException {
-        return false;
+        // TODO wie behandeln wir exceptions?
+        if (vorherigeSpielkarte == null || aktuelleSpielkarte == null) {
+            throw new MauMauException("Fehler");
+        }
+        boolean istLegbar = false;
+        if (aktuelleSpielkarte.getBlatttyp() == vorherigeSpielkarte.getBlatttyp() ||
+                aktuelleSpielkarte.getBlattwert() == vorherigeSpielkarte.getBlattwert()) {
+            istLegbar = true;
+
+        }
+        return istLegbar;
     }
+
 
     public RegelComponentUtil holeAuswirkungVonKarte(Spielkarte aktuelleSpielkarte, List<Spieler> spielerListe) throws MauMauException {
-        return null;
+        // TODO wie behandeln wir Exceptions?
+        if (aktuelleSpielkarte == null || spielerListe == null) {
+            throw new MauMauException("Fehler");
+        }
+        for (Spieler spieler : spielerListe) {
+            if (spieler.isSpielend()) {
+                int indexSpielend = spielerListe.indexOf(spieler);
+                if (indexSpielend == spielerListe.size() - 1) {
+                    spielerListe.get(0).setSpielend(true);
+                } else {
+                    spielerListe.get(indexSpielend + 1).setSpielend(true);
+                }
+                break;
+            }
+        }
+        return new RegelComponentUtil(spielerListe, 0);
     }
 
-    public boolean pruefeObWuenscher(Spielkarte spielkarte) {
-        return false;
+
+    public boolean pruefeObWuenscher(Spielkarte spielkarte) throws MauMauException {
+        // TODO wie behandeln wie exceptions
+        if (spielkarte == null) {
+            throw new MauMauException("Fehler");
+        }
+        return spielkarte.getBlattwert() == Blattwert.Bube;
     }
 }
