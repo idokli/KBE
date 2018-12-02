@@ -10,12 +10,9 @@ import datenmodel.Spielrunde;
 import komponenten.SpielSteuerung.impl.SpielSteuerungImpl;
 import komponenten.SpielVerwaltung.impl.SpielVerwaltungImpl;
 import komponenten.Spielregel.export.ISpielregel;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 public class MainApp {
@@ -58,7 +55,17 @@ public class MainApp {
 
         Spieler spieler = spielSteuerung.fragWerDranIst(spielrunde.getSpielerListe());
 
-        consoleUtil.spielZug(sc, spielrunde, spieler);
+        consoleUtil.printZugDetails(spielrunde, spieler);
+
+        String wahl = sc.nextLine();
+
+        if(wahl.toLowerCase().equals("m")){
+            spielSteuerung.sollMauMauAufrufen(spieler);
+        } else if (wahl.toLowerCase().equals("z")){
+
+        } else {
+
+        }
 
 //        spielVerwaltung.beendeSpielrunde(spielrunde);
 //

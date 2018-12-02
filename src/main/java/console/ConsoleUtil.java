@@ -107,13 +107,14 @@ public class ConsoleUtil {
         }
     }
 
-    public void spielZug(Scanner sc, Spielrunde spielrunde, Spieler spieler) {
+    public void printZugDetails(Spielrunde spielrunde, Spieler spieler) {
         System.out.println("Der jetzige Spieler ist " + spieler.getName());
         //TODO uncooment when the issue will be resolved
 //        System.out.println("Die aufgelegte Karte ist " + spielrunde.getAufgelegtStapel().get(spielrunde.getAufgelegtStapel().size()-1).toString());
+        System.out.println(spielrunde.getZuZiehnKartenAnzahl() + " Karten sollen gezugen werden");
         printHand(spieler);
-        System.out.println(wahleKarte(sc, spieler.getHand()));
-
+        System.out.println("Wenn Sie MauMau aufrufen wollen, geben Sie 'm' ein");
+        System.out.println("Wenn Sie Karten ziehen wollen, geben Sie 'z' ein");
     }
 
     private Spielkarte wahleKarte(Scanner sc, List<Spielkarte> hand) {
