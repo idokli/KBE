@@ -44,6 +44,7 @@ public class SpielVerwaltungImpl implements ISpielVerwaltung {
         return spiel;
     }
 
+    //TODO ask Vic where the first player is setted
     public Spielrunde starteSpielrunde(List<Spieler> spielerListe, Spiel spiel) throws MauMauException {
         Spielrunde spielrunde = new Spielrunde(spiel, spielerListe);
         List<Blattwert> blattwertNicht = new ArrayList<>();

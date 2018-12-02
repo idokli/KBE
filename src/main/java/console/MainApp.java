@@ -16,21 +16,26 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class MainApp {
 
-    // Die spezifische Implementierung muss definiert werden
-    @Autowired
-    @Qualifier("ohneSonder")
-    private ISpielregel spielregelohneSonder;
+//    // Die spezifische Implementierung muss definiert werden
+//    @Autowired
+//    @Qualifier("ohneSonder")
+    private static ISpielregel spielregelohneSonder;
+//
+//    @Autowired
+//    @Qualifier("basicSonder")
+    private static ISpielregel spielregelBasicSonder;
+//
+//    @Autowired
+//    @Qualifier("alleSonder")
+    private static ISpielregel spielregelAlleSonder;
 
-    @Autowired
-    @Qualifier("basicSonder")
-    private ISpielregel spielregelBasicSonder;
+    static Scanner sc = new Scanner(System.in);
 
-    @Autowired
-    @Qualifier("alleSonder")
-    private ISpielregel spielregelAlleSonder;
+    static ConsoleUtil consoleUtil = new ConsoleUtil();
 
     public static void main(String[] args) throws MauMauException {
 
@@ -38,22 +43,32 @@ public class MainApp {
 
         SpielVerwaltungImpl spielVerwaltung = context.getBean(SpielVerwaltungImpl.class);
 
-        Spiel spiel = spielVerwaltung.starteNeuesSpiel(SpielTyp.MauMau, RegelKompTyp.OHNE_SONDER_REGEL);
+        SpielSteuerungImpl spielSteuerung = context.getBean(SpielSteuerungImpl.class);
 
-        List<Spieler> spielerListe = new ArrayList<Spieler>();
-        spielerListe.add(new Spieler("Ido"));
-        spielerListe.add(new Spieler("Victor"));
-        spielerListe.add(new Spieler("Lucas"));
+        SpielTyp spielTyp = consoleUtil.spielTypWahl(sc);
+
+        RegelKompTyp gewaehlteSpielegel = consoleUtil.regelWahl
+                (sc, spielregelohneSonder, spielregelBasicSonder, spielregelAlleSonder);
+
+        Spiel spiel = spielVerwaltung.starteNeuesSpiel(spielTyp, gewaehlteSpielegel);
+
+        ArrayList<Spieler> spielerListe = consoleUtil.spielerEingabe(sc);
 
         Spielrunde spielrunde = spielVerwaltung.starteSpielrunde(spielerListe, spiel);
 
-        SpielSteuerungImpl spielSteuerung = context.getBean(SpielSteuerungImpl.class);
+        Spieler spieler = spielSteuerung.fragWerDranIst(spielrunde.getSpielerListe());
 
-        spielVerwaltung.beendeSpielrunde(spielrunde);
+        consoleUtil.spielZug(spielrunde, spieler);
 
-        spielVerwaltung.beendeSpiel(spiel);
+//        spielVerwaltung.beendeSpielrunde(spielrunde);
+//
+//        spielVerwaltung.beendeSpiel(spiel);
+
+
+
 
 
 
     }
+
 }
